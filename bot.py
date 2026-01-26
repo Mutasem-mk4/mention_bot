@@ -629,15 +629,11 @@ async def count_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"👥 عدد الأعضاء المحفوظين: {count}")
 
 
-def main():
-    """تشغيل البوت"""
+def create_app():
+    """إنشاء وتجهيز تطبيق البوت"""
     if not BOT_TOKEN:
         print("❌ خطأ: لم يتم العثور على BOT_TOKEN!")
-        print("💡 قم بإضافة التوكن في ملف .env")
-        return
-    
-    print("🚀 جاري تشغيل البوت...")
-    print(f"📊 تم تحميل بيانات {len(group_members)} مجموعة")
+        return None
     
     # إنشاء التطبيق
     application = Application.builder().token(BOT_TOKEN).build()
@@ -654,8 +650,20 @@ def main():
     application.add_handler(CommandHandler("list", list_members))
     application.add_handler(CommandHandler("count", count_members))
     
-    # معالج الرسائل (كل الأنواع ما عدا الأوامر)
+    # معالج الرسائل
     application.add_handler(MessageHandler(~filters.COMMAND, handle_message))
+    
+    return application
+
+
+def main():
+    """تشغيل البوت بنظام Polling (محلياً أو Render)"""
+    application = create_app()
+    if not application:
+        return
+
+    print("🚀 جاري تشغيل البوت...")
+    print(f"📊 تم تحميل بيانات {len(group_members)} مجموعة")
     
     print("✅ البوت يعمل الآن!")
     print("📌 الأوامر: /add, /remove, /list, /count, /clear, @all")
