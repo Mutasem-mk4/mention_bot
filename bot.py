@@ -19,6 +19,7 @@ from flask import Flask
 from threading import Thread
 import sys
 from dotenv import load_dotenv
+import certifi
 
 # إعداد Flask (عشان Render ما يطفي البوت)
 app = Flask('')
@@ -69,7 +70,8 @@ settings_collection = None
 if MONGO_URI:
     try:
         from pymongo import MongoClient
-        client = MongoClient(MONGO_URI)
+        # استخدام certifi لحل مشاكل SSL
+        client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
         db = client.get_database("telegram_bot_db")
         members_collection = db.members
         settings_collection = db.settings
