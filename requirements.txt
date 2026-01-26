@@ -1,0 +1,5 @@
+python-telegram-bot
+python-dotenv
+pymongo
+dnspython
+flask
