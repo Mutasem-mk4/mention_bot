@@ -18,6 +18,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, ContextTyp
 from flask import Flask
 from threading import Thread
 import sys
+from dotenv import load_dotenv
 
 # إعداد Flask (عشان Render ما يطفي البوت)
 app = Flask('')
