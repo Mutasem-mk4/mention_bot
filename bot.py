@@ -597,7 +597,7 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
             # await asyncio.sleep(1) # Removed to prevent Vercel 10s timeout
             pass
     
-    await update.message.reply_text("✅ تم الانتهاء من المنشن!")
+    await update.message.reply_text("ارحبوا 🫡")
 
 
 async def list_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
