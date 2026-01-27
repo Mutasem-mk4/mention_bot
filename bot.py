@@ -240,6 +240,7 @@ async def track_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     # إضافة أو تحديث المستخدم
     if user_id not in group_members[chat_id]:
+        logger.info(f"🆕 New member detected: {user.full_name} ({user_id}) in chat {chat_id}")
         group_members[chat_id][user_id] = {
             "username": user.username,
             "first_name": user.first_name or "User",
@@ -253,6 +254,7 @@ async def track_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
         new_first_name = user.first_name or "User"
         
         if old_data.get("username") != new_username or old_data.get("first_name") != new_first_name:
+            logger.info(f"🔄 Updating member info: {user_id} in chat {chat_id}")
             group_members[chat_id][user_id].update({
                 "username": new_username,
                 "first_name": new_first_name,
@@ -486,8 +488,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not update.message:
         return
     
-    # تتبع المستخدم أولاً
-    await track_user(update, context)
+    # تتبع المستخدم أولاً - تم نقله لمعالج منفصل (group -1) لضمان الدقة
+    pass
     
     # التحقق من وجود @all (فقط في الرسائل النصية)
     if update.message.text:
@@ -636,6 +638,23 @@ async def count_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     await update.message.reply_text(f"👥 عدد الأعضاء المحفوظين: {count}")
 
+async def bot_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """التحقق من حالة البوت والاتصال"""
+    if not await is_user_admin(update, context):
+        return
+        
+    db_status = "✅ متصل" if members_collection is not None else "❌ غير متصل (يعمل محلياً فقط)"
+    groups_count = len(group_members)
+    
+    status_text = (
+        f"⚙️ **حالة البوت:**\n\n"
+        f"🗄 قاعدة البيانات: {db_status}\n"
+        f"📊 عدد المجموعات النشطة: {groups_count}\n"
+        f"🔑 التوكن: `{BOT_TOKEN[:10]}...`\n"
+        f"🌐 البيئة: Vercel Serverless"
+    )
+    await update.message.reply_text(status_text, parse_mode=ParseMode.MARKDOWN)
+
 
 def create_app():
     """إنشاء وتجهيز تطبيق البوت"""
@@ -660,8 +679,12 @@ def create_app():
     application.add_handler(CommandHandler("clear", clear_members))
     application.add_handler(CommandHandler("list", list_members))
     application.add_handler(CommandHandler("count", count_members))
+    application.add_handler(CommandHandler("status", bot_status))
     
-    # معالج الرسائل
+    # معالج الرسائل وتلقي كل التفاعلات (حتى الأوامر) لتسجيل الأعضاء
+    application.add_handler(MessageHandler(filters.ALL, track_user), group=-1)
+    
+    # معالج الرسائل (للمنشن)
     application.add_handler(MessageHandler(~filters.COMMAND, handle_message))
     
     return application
