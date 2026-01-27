@@ -597,7 +597,17 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
             # await asyncio.sleep(1) # Removed to prevent Vercel 10s timeout
             pass
     
-    await update.message.reply_text("ارحبوا 🫡")
+    # رسائل انتهاء عشوائية
+    completion_messages = [
+        "ارحبوا 🫡",
+        "تم بنجاح! 🚀",
+        "تم المنشن للجميع ✅",
+        "أبشروا بالخير ✨",
+        "أهلاً وسهلاً بالجميع 👋",
+        "تم الإرسال.. الله يحييكم! 🌟"
+    ]
+    import random
+    await update.message.reply_text(random.choice(completion_messages))
 
 
 async def list_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
