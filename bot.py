@@ -67,17 +67,19 @@ db = None
 members_collection = None
 settings_collection = None
 
-if MONGO_URI:
-    try:
-        from pymongo import MongoClient
-        # استخدام certifi لحل مشاكل SSL
-        client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
-        db = client.get_database("telegram_bot_db")
-        members_collection = db.members
-        settings_collection = db.settings
-        print("✅ تم الاتصال بقاعدة بيانات MongoDB بنجاح!")
-    except Exception as e:
-        print(f"❌ فشل الاتصال بقاعدة البيانات: {e}")
+def init_db():
+    global db, members_collection, settings_collection
+    if MONGO_URI:
+        try:
+            from pymongo import MongoClient
+            # استخدام certifi لحل مشاكل SSL
+            client = MongoClient(MONGO_URI, tlsCAFile=certifi.where(), serverSelectionTimeoutMS=5000)
+            db = client.get_database("telegram_bot_db")
+            members_collection = db.members
+            settings_collection = db.settings
+            print("✅ تم الاتصال بقاعدة بيانات MongoDB بنجاح!")
+        except Exception as e:
+            print(f"❌ فشل الاتصال بقاعدة البيانات: {e}")
 
 DATA_FILE = "members_data.json"
 SETTINGS_FILE = "settings.json"
@@ -156,13 +158,16 @@ def save_settings(data):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
-# تحميل البيانات عند البدء
-group_members = load_data()
-group_settings = load_settings()
+# Loading data locally (will be called in create_app)
+def init_data():
+    global group_members, group_settings
+    init_db()
+    group_members = load_data()
+    group_settings = load_settings()
+    print(f"📊 Data loaded: {len(group_members)} groups")
 
-
-# تحميل البيانات عند البدء
-group_members = load_data()
+# group_members = load_data()  <-- MOVED
+# group_settings = load_settings() <-- MOVED
 
 
 async def is_user_admin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> bool:
@@ -637,6 +642,9 @@ def create_app():
     
     # إنشاء التطبيق
     application = Application.builder().token(BOT_TOKEN).build()
+    
+    # Initialize data
+    init_data()
     
     # إضافة الأوامر
     application.add_handler(CommandHandler("start", start))

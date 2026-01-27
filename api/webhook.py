@@ -7,18 +7,42 @@ import os
 app = Flask(__name__)
 
 # Initialize bot app
-bot_app = create_app()
-
-@app.route('/api/webhook', methods=['POST'])
+@app.route('/api/webhook', methods=['GET', 'POST'])
 def webhook():
+    if request.method == "GET":
+        try:
+            bot_app = create_app()
+            if not bot_app:
+                return "Config Error: BOT_TOKEN improperly set"
+            return f"Bot Initialized Successfully. Token: {bot_app.bot.token[:5]}..."
+        except Exception as e:
+            return f"Initialization Error: {str(e)}"
+
     if request.method == "POST":
-        # Retrieve the update object from the request data
-        update = Update.de_json(request.get_json(force=True), bot_app.bot)
+        async def process():
+            try:
+                bot_app = create_app()
+                await bot_app.initialize()
+                
+                update_json = request.get_json(force=True)
+                update = Update.de_json(update_json, bot_app.bot)
+                
+                await bot_app.process_update(update)
+            except Exception as e:
+                print(f"Error processing update: {e}")
+                return "Error"
+            finally:
+                try:
+                    await bot_app.shutdown()
+                except:
+                    pass
         
-        # Process the update asynchronously
-        asyncio.run(bot_app.process_update(update))
-        
-        return "OK"
+        try:
+            asyncio.run(process())
+            return "OK"
+        except Exception as e:
+            return f"Runtime Error: {str(e)}"
+    
     return "OK"
 
 @app.route('/')
