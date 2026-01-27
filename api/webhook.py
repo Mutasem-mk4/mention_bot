@@ -21,12 +21,19 @@ def webhook():
     if request.method == "POST":
         async def process():
             try:
-                bot_app = create_app()
+                update_json = request.get_json(force=True)
+                
+                # استخراج chat_id للتحميل السريع
+                chat_id = None
+                if "message" in update_json:
+                    chat_id = update_json["message"]["chat"]["id"]
+                elif "callback_query" in update_json:
+                    chat_id = update_json["callback_query"]["message"]["chat"]["id"]
+                
+                bot_app = create_app(chat_id)
                 await bot_app.initialize()
                 
-                update_json = request.get_json(force=True)
                 update = Update.de_json(update_json, bot_app.bot)
-                
                 await bot_app.process_update(update)
             except Exception as e:
                 print(f"Error processing update: {e}")

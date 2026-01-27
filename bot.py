@@ -84,15 +84,22 @@ DATA_FILE = "members_data.json"
 SETTINGS_FILE = "settings.json"
 
 
-def load_data():
+def load_data(chat_id=None):
     """تحميل بيانات الأعضاء (MongoDB أو ملف)"""
     if members_collection is not None:
-        # تحميل من MongoDB
+        if chat_id:
+            # تحميل مجموعة محددة فقط لسرعة الأداء
+            doc = members_collection.find_one({"_id": str(chat_id)})
+            if doc:
+                group_members[str(chat_id)] = doc["members"]
+                return {str(chat_id): doc["members"]}
+            return {}
+        
+        # تحميل الكل (لأغراض الإحصاء فقط)
         data = {}
         cursor = members_collection.find({})
         for doc in cursor:
-            chat_id = doc["_id"]
-            data[chat_id] = doc["members"]
+            data[doc["_id"]] = doc["members"]
         return data
     
     # تحميل من ملف محلي
@@ -105,13 +112,24 @@ def load_data():
     return {}
 
 
-def save_data(data):
+def save_data(data, chat_id=None):
     """حفظ بيانات الأعضاء (MongoDB أو ملف)"""
     if members_collection is not None:
-        # الحفظ في MongoDB
-        for chat_id, members in data.items():
+        if chat_id:
+            # حفظ مجموعة محددة فقط
+            members = data.get(str(chat_id))
+            if members:
+                members_collection.update_one(
+                    {"_id": str(chat_id)},
+                    {"$set": {"members": members}},
+                    upsert=True
+                )
+            return
+            
+        # الحفظ في MongoDB للكل
+        for cid, members in data.items():
             members_collection.update_one(
-                {"_id": chat_id},
+                {"_id": str(cid)},
                 {"$set": {"members": members}},
                 upsert=True
             )
@@ -122,15 +140,21 @@ def save_data(data):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
-def load_settings():
+def load_settings(chat_id=None):
     """تحميل الإعدادات (MongoDB أو ملف)"""
     if settings_collection is not None:
+        if chat_id:
+            doc = settings_collection.find_one({"_id": str(chat_id)})
+            if doc and "settings" in doc:
+                group_settings[str(chat_id)] = doc["settings"]
+                return {str(chat_id): doc["settings"]}
+            return {}
+            
         data = {}
         cursor = settings_collection.find({})
         for doc in cursor:
-            chat_id = doc["_id"]
             if "settings" in doc:
-                data[chat_id] = doc["settings"]
+                data[doc["_id"]] = doc["settings"]
         return data
 
     if os.path.exists(SETTINGS_FILE):
@@ -142,12 +166,22 @@ def load_settings():
     return {}
 
 
-def save_settings(data):
+def save_settings(data, chat_id=None):
     """حفظ الإعدادات (MongoDB أو ملف)"""
     if settings_collection is not None:
-        for chat_id, settings in data.items():
+        if chat_id:
+            settings = data.get(str(chat_id))
+            if settings:
+                settings_collection.update_one(
+                    {"_id": str(chat_id)},
+                    {"$set": {"settings": settings}},
+                    upsert=True
+                )
+            return
+            
+        for cid, settings in data.items():
             settings_collection.update_one(
-                {"_id": chat_id},
+                {"_id": str(cid)},
                 {"$set": {"settings": settings}},
                 upsert=True
             )
@@ -161,12 +195,23 @@ def save_settings(data):
 group_members = {}
 group_settings = {}
 
-def init_data():
+def init_data(chat_id=None):
     global group_members, group_settings
     init_db()
-    group_members = load_data() or {}
-    group_settings = load_settings() or {}
-    print(f"📊 Data loaded: {len(group_members)} groups")
+    
+    if chat_id:
+        chat_id = str(chat_id)
+        # فقط تحميل إذا لم يكن موجوداً في الكاش أو نريد تحديثه
+        if chat_id not in group_members:
+            load_data(chat_id)
+        if chat_id not in group_settings:
+            load_settings(chat_id)
+    else:
+        # تحميل الكل (عند بدء البوت محلياً فقط)
+        group_members = load_data() or {}
+        group_settings = load_settings() or {}
+    
+    logger.info(f"📊 Initialization complete. Groups in memory: {len(group_members)}")
 
 # group_members = load_data()  <-- MOVED
 # group_settings = load_settings() <-- MOVED
@@ -246,7 +291,7 @@ async def track_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "first_name": user.first_name or "User",
             "full_name": user.full_name or "User"
         }
-        save_data(group_members)
+        save_data(group_members, chat_id)
     else:
         # تحديث البيانات إذا تغيرت
         old_data = group_members[chat_id][user_id]
@@ -260,7 +305,7 @@ async def track_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "first_name": new_first_name,
                 "full_name": user.full_name or "User"
             })
-            save_data(group_members)
+            save_data(group_members, chat_id)
 
 
 async def add_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -666,7 +711,7 @@ async def bot_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(status_text, parse_mode=ParseMode.MARKDOWN)
 
 
-def create_app():
+def create_app(chat_id=None):
     """إنشاء وتجهيز تطبيق البوت"""
     if not BOT_TOKEN:
         print("❌ خطأ: لم يتم العثور على BOT_TOKEN!")
@@ -675,8 +720,8 @@ def create_app():
     # إنشاء التطبيق
     application = Application.builder().token(BOT_TOKEN).build()
     
-    # Initialize data
-    init_data()
+    # Initialize data for specific chat to save time
+    init_data(chat_id)
     
     # إضافة الأوامر
     application.add_handler(CommandHandler("start", start))
