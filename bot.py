@@ -505,7 +505,6 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """منشن لجميع الأعضاء - 5 في كل رسالة"""
     # التحقق من الصلاحيات
     if not await is_user_admin(update, context):
-        await update.message.reply_text("⚠️ معذرة، هذا الأمر متاح للمشرفين فقط.")
         return
 
     chat_id = str(update.effective_chat.id)
