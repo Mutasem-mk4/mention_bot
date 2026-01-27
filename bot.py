@@ -592,7 +592,8 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
         # انتظار قصير بين الرسائل لتجنب التقييد
         if i + batch_size < total_members:
-            await asyncio.sleep(1)
+            # await asyncio.sleep(1) # Removed to prevent Vercel 10s timeout
+            pass
     
     await update.message.reply_text("✅ تم الانتهاء من المنشن!")
 
