@@ -49,7 +49,6 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO,
     handlers=[
-        logging.FileHandler("bot.log", encoding='utf-8'),
         logging.StreamHandler()
     ]
 )
@@ -159,11 +158,14 @@ def save_settings(data):
 
 
 # Loading data locally (will be called in create_app)
+group_members = {}
+group_settings = {}
+
 def init_data():
     global group_members, group_settings
     init_db()
-    group_members = load_data()
-    group_settings = load_settings()
+    group_members = load_data() or {}
+    group_settings = load_settings() or {}
     print(f"📊 Data loaded: {len(group_members)} groups")
 
 # group_members = load_data()  <-- MOVED
