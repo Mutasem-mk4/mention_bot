@@ -68,6 +68,8 @@ settings_collection = None
 
 def init_db():
     global db, members_collection, settings_collection
+    if db is not None:
+        return
     if MONGO_URI:
         try:
             from pymongo import MongoClient
@@ -284,6 +286,7 @@ async def track_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
             logger.info(f"Merged temporary member {temp_id} into real ID {user_id}")
     
     # إضافة أو تحديث المستخدم
+    needs_save = False
     if user_id not in group_members[chat_id]:
         logger.info(f"🆕 New member detected: {user.full_name} ({user_id}) in chat {chat_id}")
         group_members[chat_id][user_id] = {
@@ -291,7 +294,7 @@ async def track_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "first_name": user.first_name or "User",
             "full_name": user.full_name or "User"
         }
-        save_data(group_members, chat_id)
+        needs_save = True
     else:
         # تحديث البيانات إذا تغيرت
         old_data = group_members[chat_id][user_id]
@@ -305,7 +308,13 @@ async def track_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "first_name": new_first_name,
                 "full_name": user.full_name or "User"
             })
-            save_data(group_members, chat_id)
+            needs_save = True
+            
+    if needs_save:
+        # الحفظ في الخلفية لعدم تعطيل الرد
+        # ملاحظة: في Vercel Serverless يفضل الانتظار لضمان الحفظ
+        # سأتركه كـ await لضمان الاستقرار في بيئة الـ Webhook
+        save_data(group_members, chat_id)
 
 
 async def add_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -586,7 +595,20 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
     total_members = len(members)
     batch_size = 5
     
-    # تقسيم الأعضاء إلى مجموعات من 5
+    # تقسيم الأعضاء إلى مجموعات من 5 وتجهيز المهام
+    tasks = []
+    total_batches = (total_members + batch_size - 1) // batch_size
+    
+    # استخدام الرسالة المخصصة أو الافتراضية مرة واحدة
+    custom_msg = "📣"
+    if chat_id in group_settings and "mention_message" in group_settings[chat_id]:
+        custom_msg = group_settings[chat_id]["mention_message"]
+        
+    # تحديد الرسالة التي سيتم الرد عليها
+    reply_to_id = update.message.message_id
+    if update.message.reply_to_message:
+        reply_to_id = update.message.reply_to_message.message_id
+
     for i in range(0, total_members, batch_size):
         batch = members[i:i + batch_size]
         mentions = []
@@ -595,52 +617,23 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if data.get("username"):
                 mentions.append(f"@{data['username']}")
             else:
-                # استخدام HTML للمنشن بدون username بدلاً من Markdown
                 name = html.escape(data['first_name'])
                 mentions.append(f'<a href="tg://user?id={user_id}">{name}</a>')
         
         batch_num = (i // batch_size) + 1
-        total_batches = (total_members + batch_size - 1) // batch_size
-        
-        # تحديد الرسالة التي سيتم الرد عليها
-        reply_to_id = update.message.message_id
-        if update.message.reply_to_message:
-            reply_to_id = update.message.reply_to_message.message_id
-        
-        # استخدام الرسالة المخصصة أو الافتراضية
-        custom_msg = "📣"
-        if chat_id in group_settings and "mention_message" in group_settings[chat_id]:
-            custom_msg = group_settings[chat_id]["mention_message"]
-            
         message = f"{custom_msg} ({batch_num}/{total_batches}): " + " ".join(mentions)
-        logger.info(f"Sending batch {batch_num}: {message}")
         
-        try:
-            await context.bot.send_message(
-                chat_id=chat_id,
-                text=message,
-                reply_to_message_id=reply_to_id,
-                parse_mode=ParseMode.HTML
-            )
-        except Exception as e:
-            logger.error(f"Failed to send message: {e}")
-            with open("error_log.txt", "a", encoding="utf-8") as f:
-                f.write(f"Error sending batch {batch_num}: {e}\nMessage: {message}\n\n")
-            
-            # Try sending without formatting if it failed
-            try:
-                await context.bot.send_message(
-                    chat_id=chat_id,
-                    text=message,
-                    reply_to_message_id=reply_to_id
-                )
-            except Exception as e2:
-                logger.error(f"Failed to send plain message: {e2}")
-        
-        # انتظار قصير بين الرسائل لتجنب التقييد
-        if i + batch_size < total_members:
-            # await asyncio.sleep(1) # Removed to prevent Vercel 10s timeout
-            pass
+        # إضافة مهمة الإرسال للقائمة
+        tasks.append(context.bot.send_message(
+            chat_id=chat_id,
+            text=message,
+            reply_to_message_id=reply_to_id,
+            parse_mode=ParseMode.HTML
+        ))
+    
+    # إرسال الجميع بالتوازي لأقصى سرعة
+    if tasks:
+        await asyncio.gather(*tasks, return_exceptions=True)
     
     # رسائل انتهاء عشوائية
     completion_messages = [
