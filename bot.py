@@ -609,6 +609,8 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.message.reply_to_message:
         reply_to_id = update.message.reply_to_message.message_id
 
+    # Sequential sending with throttling to avoid 429 errors
+    sent_count = 0
     for i in range(0, total_members, batch_size):
         batch = members[i:i + batch_size]
         mentions = []
@@ -623,17 +625,21 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
         batch_num = (i // batch_size) + 1
         message = f"{custom_msg} ({batch_num}/{total_batches}): " + " ".join(mentions)
         
-        # إضافة مهمة الإرسال للقائمة
-        tasks.append(context.bot.send_message(
-            chat_id=chat_id,
-            text=message,
-            reply_to_message_id=reply_to_id,
-            parse_mode=ParseMode.HTML
-        ))
-    
-    # إرسال الجميع بالتوازي لأقصى سرعة
-    if tasks:
-        await asyncio.gather(*tasks, return_exceptions=True)
+        try:
+            await context.bot.send_message(
+                chat_id=chat_id,
+                text=message,
+                reply_to_message_id=reply_to_id,
+                parse_mode=ParseMode.HTML
+            )
+            sent_count += 1
+        except Exception as e:
+            logger.error(f"Failed to send batch {batch_num}: {e}")
+            
+        # Throttling: Sleep 0.3s between messages to respect Telegram limits
+        # 0.3s * 20 msgs = 6s, well within Vercel's 10s limit (or 60s if configured)
+        if i + batch_size < total_members:
+            await asyncio.sleep(0.3)
     
     # رسائل انتهاء عشوائية
     completion_messages = [

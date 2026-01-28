@@ -87788,3 +87788,15 @@ telegram.error.NetworkError: httpx.ConnectError: [Errno 11001] getaddrinfo faile
 2026-01-26 13:16:43,950 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8258359660:AAFAch-Zg6OPqHOef-qItl7d6xdh9QtLfNA/getUpdates "HTTP/1.1 200 OK"
 2026-01-26 13:16:54,498 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8258359660:AAFAch-Zg6OPqHOef-qItl7d6xdh9QtLfNA/getUpdates "HTTP/1.1 200 OK"
 2026-01-26 13:17:04,600 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8258359660:AAFAch-Zg6OPqHOef-qItl7d6xdh9QtLfNA/getUpdates "HTTP/1.1 200 OK"
+2026-01-27 10:45:22,844 - pyrogram.connection.connection - INFO - Connecting...
+2026-01-27 10:45:22,919 - pyrogram.connection.connection - INFO - Connected! Production DC4 - IPv4
+2026-01-27 10:45:22,921 - pyrogram.session.session - INFO - NetworkTask started
+2026-01-27 10:45:23,303 - pyrogram.session.session - INFO - Session initialized: Layer 158
+2026-01-27 10:45:23,303 - pyrogram.session.session - INFO - Device: CPython 3.12.10 - Pyrogram 2.0.106
+2026-01-27 10:45:23,303 - pyrogram.session.session - INFO - System: Windows 11 (en)
+2026-01-27 10:45:23,303 - pyrogram.session.session - INFO - Session started
+2026-01-27 10:45:23,308 - pyrogram.session.session - INFO - PingTask started
+2026-01-27 10:45:23,521 - pyrogram.dispatcher - INFO - Started 16 HandlerTasks
+2026-01-27 12:15:12,270 - pyrogram.client - INFO - {
+    "_": "types.UpdatesTooLong"
+}
