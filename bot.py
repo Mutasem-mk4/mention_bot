@@ -950,79 +950,86 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
     custom_msg = group_settings.get(chat_id, {}).get("mention_message", "📣")
     reply_to_id = update.message.reply_to_message.message_id if update.message.reply_to_message else update.message.message_id
 
-    # البدء بالجولات
-    for r in range(1, total_rounds + 1):
-        round_prefix = f"({r}/{total_rounds}) " if total_rounds > 1 else ""
-        
-        for i in range(0, total_members, batch_size):
-            batch = valid_members[i:i + batch_size]
-            mentions = []
+    # البدء بالجولات مع ضمان إرسال رسالة الإكمال
+    try:
+        for r in range(1, total_rounds + 1):
+            round_prefix = f"({r}/{total_rounds}) " if total_rounds > 1 else ""
             
-            for uid, data in batch:
-                if data.get("username"):
-                    mentions.append(f"@{data['username']}")
-                else:
-                    name = html.escape(data['first_name'])
-                    mentions.append(f'<a href="tg://user?id={uid}">{name}</a>')
-            
-            batch_num = (i // batch_size) + 1
-            progress = f"{round_prefix}[{batch_num}/{total_batches}]"
-            message = f"{custom_msg} {progress}\n" + " ".join(mentions)
-            
-            # محاولة إرسال الدفعة مع معالجة الأخطاء والـ Rate Limit
-            batch_sent = False
-            max_retries = 3
-            retry_count = 0
-            
-            while not batch_sent and retry_count < max_retries:
-                try:
-                    await context.bot.send_message(
-                        chat_id=chat_id,
-                        text=message,
-                        reply_to_message_id=reply_to_id,
-                        parse_mode=ParseMode.HTML
-                    )
-                    logger.info(f"✅ Sent batch {batch_num}/{total_batches}")
-                    batch_sent = True
-                except Exception as e:
-                    retry_count += 1
-                    err_msg = str(e).lower()
-                    logger.error(f"❌ Error in Round {r} Batch {batch_num} (Try {retry_count}): {e}")
-                    
-                    if "retry after" in err_msg:
-                        import re
-                        match = re.search(r'after (\d+)', err_msg)
-                        seconds = int(match.group(1)) if match else 10
-                        wait_time = seconds + 1
-                        logger.warning(f"⏳ Rate limited! Waiting {wait_time}s then retrying...")
-                        await asyncio.sleep(wait_time)
+            for i in range(0, total_members, batch_size):
+                batch = valid_members[i:i + batch_size]
+                mentions = []
+                
+                for uid, data in batch:
+                    if data.get("username"):
+                        mentions.append(f"@{data['username']}")
                     else:
-                        # خطأ آخر (مثل رسالة طويلة جداً أو مشكلة مؤقتة)
-                        await asyncio.sleep(1)
-                        if retry_count >= max_retries:
-                            logger.error(f"Skipping Batch {batch_num} after {max_retries} attempts.")
-            
-            # تأخير بسيط جداً لزيادة السرعة (Render يتحمل الضغط، والتراسل مع التليجرام سيهتم بالـ Rate Limit)
-            await asyncio.sleep(0.05)
-
-    completion_msgs = [
-        "ارحبوا تراحيب المطر 🌧️💙",
-        "حياكم الله وبياكم جميعاً 👋🌸",
-        "يا هلا والله ومية هلا بالجميع ❤️🙌",
-        "ارحبوا يا الربع، على العين والراس 🫡👑",
-        "يا هلا ومسهلا بالجميع، نورتوا 🌟✨",
-        "ارحبوا ثم ارحبوا، حيا الله هالطلة 🙏✨",
-        "حيّ الله الجميع، نورتوا المكان 👁️✨",
-        "يا هلا ومية هلا، منورين والله 🌙🌟",
-        "ارحبوا يا كرام، حياكم الله 🫡🔥",
-        "يا هلا والله، نورتوا القعدة 💎✨",
-        "حياكم الله في محلكم وبين أهلكم 🏠💫",
-        "ارحبوا بالجميع، شرفتونا 🫡🌾",
-        "يا هلا باللي وصلوا، نورتوا الدار 🚪✨",
-        "حياكم الله، الجود من الموجود 👋❤️"
-    ]
-    import random
-    await update.message.reply_text(random.choice(completion_msgs))
+                        name = html.escape(data['first_name'])
+                        mentions.append(f'<a href="tg://user?id={uid}">{name}</a>')
+                
+                batch_num = (i // batch_size) + 1
+                progress = f"{round_prefix}[{batch_num}/{total_batches}]"
+                message = f"{custom_msg} {progress}\n" + " ".join(mentions)
+                
+                # محاولة إرسال الدفعة مع معالجة الأخطاء والـ Rate Limit
+                batch_sent = False
+                max_retries = 3
+                retry_count = 0
+                
+                while not batch_sent and retry_count < max_retries:
+                    try:
+                        await context.bot.send_message(
+                            chat_id=chat_id,
+                            text=message,
+                            reply_to_message_id=reply_to_id,
+                            parse_mode=ParseMode.HTML
+                        )
+                        logger.info(f"✅ Sent batch {batch_num}/{total_batches}")
+                        batch_sent = True
+                    except Exception as e:
+                        retry_count += 1
+                        err_msg = str(e).lower()
+                        logger.error(f"❌ Error in Round {r} Batch {batch_num} (Try {retry_count}): {e}")
+                        
+                        if "retry after" in err_msg:
+                            import re
+                            match = re.search(r'after (\d+)', err_msg)
+                            seconds = int(match.group(1)) if match else 10
+                            wait_time = seconds + 1
+                            logger.warning(f"⏳ Rate limited! Waiting {wait_time}s then retrying...")
+                            await asyncio.sleep(wait_time)
+                        else:
+                            # خطأ آخر (مثل رسالة طويلة جداً أو مشكلة مؤقتة)
+                            await asyncio.sleep(1)
+                            if retry_count >= max_retries:
+                                logger.error(f"Skipping Batch {batch_num} after {max_retries} attempts.")
+                
+                # تأخير بسيط جداً لزيادة السرعة
+                await asyncio.sleep(0.05)
+    except Exception as global_e:
+        logger.error(f"🔴 CRITICAL ERROR in mention_all: {global_e}")
+    finally:
+        # إرسال رسالة الإكمال دائماً
+        completion_msgs = [
+            "ارحبوا تراحيب المطر 🌧️💙",
+            "حياكم الله وبياكم جميعاً 👋🌸",
+            "يا هلا والله ومية هلا بالجميع ❤️🙌",
+            "ارحبوا يا الربع، على العين والراس 🫡👑",
+            "يا هلا ومسهلا بالجميع، نورتوا 🌟✨",
+            "ارحبوا ثم ارحبوا، حيا الله هالطلة 🙏✨",
+            "حيّ الله الجميع، نورتوا المكان 👁️✨",
+            "يا هلا ومية هلا، منورين والله 🌙🌟",
+            "ارحبوا يا كرام، حياكم الله 🫡🔥",
+            "يا هلا والله، نورتوا القعدة 💎✨",
+            "حياكم الله في محلكم وبين أهلكم 🏠💫",
+            "ارحبوا بالجميع، شرفتونا 🫡🌾",
+            "يا هلا باللي وصلوا، نورتوا الدار 🚪✨",
+            "حياكم الله، الجود من الموجود 👋❤️"
+        ]
+        import random
+        try:
+            await update.message.reply_text(random.choice(completion_msgs))
+        except Exception as final_e:
+            logger.error(f"Could not send completion message: {final_e}")
 
 
 async def list_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
