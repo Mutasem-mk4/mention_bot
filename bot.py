@@ -904,7 +904,20 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
     if not await is_user_admin(update, context):
         return
 
+    # منع التنفيذ المزدوج لنفس الرسالة
+    msg_id = update.message.message_id
     chat_id = str(update.effective_chat.id)
+    lock_key = f"{chat_id}_{msg_id}"
+    
+    if not hasattr(context.bot_data, 'mention_locks'):
+        context.bot_data['mention_locks'] = set()
+    
+    if lock_key in context.bot_data.get('mention_locks', set()):
+        logger.warning(f"⚠️ تم تخطي منشن مكرر للرسالة {msg_id}")
+        return
+    
+    context.bot_data.setdefault('mention_locks', set()).add(lock_key)
+
     init_data(chat_id)
     
     if chat_id not in group_members or not group_members[chat_id]:
@@ -1003,8 +1016,8 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                             if retry_count >= max_retries:
                                 logger.error(f"Skipping Batch {batch_num} after {max_retries} attempts.")
                 
-                # تأخير أكبر لتفادي الـ Rate Limit بقدر الإمكان (التليجرام يسمح برسالة واحدة كل ثانية تقريباً)
-                await asyncio.sleep(0.8)
+                # تأخير متوازن (0.5 ثانية لتفادي Rate Limit مع سرعة معقولة)
+                await asyncio.sleep(0.5)
     except Exception as global_e:
         logger.error(f"🔴 CRITICAL ERROR in mention_all: {global_e}")
     finally:
