@@ -1009,16 +1009,16 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                         if "retry after" in err_msg or "flood" in err_msg:
                             import re
                             match = re.search(r'(\d+)', err_msg)
-                            seconds = int(match.group(1)) if match else 20
-                            wait_time = seconds + 5
+                            seconds = int(match.group(1)) if match else 15
+                            wait_time = seconds + 2  # بافر أقل
                             logger.warning(f"⏳ Rate limited! Waiting {wait_time}s...")
                             await asyncio.sleep(wait_time)
                         else:
                             # خطأ آخر - انتظر وأعد المحاولة
-                            await asyncio.sleep(5)
+                            await asyncio.sleep(3)
                 
-                # تأخير ثابت 1.5 ثانية لتجنب Rate Limit نهائياً
-                await asyncio.sleep(1.5)
+                # تأخير ثابت 2.5 ثانية لتجنب الاصطدام بالـ Rate Limit (سيستغرق ~60 ثانية لـ 23 رسالة لكن بدون توقفات)
+                await asyncio.sleep(2.5)
     except Exception as global_e:
         logger.error(f"🔴 CRITICAL ERROR in mention_all: {global_e}")
     finally:
