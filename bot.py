@@ -1016,8 +1016,8 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                             if retry_count >= max_retries:
                                 logger.error(f"Skipping Batch {batch_num} after {max_retries} attempts.")
                 
-                # تأخير متوازن (0.5 ثانية لتفادي Rate Limit مع سرعة معقولة)
-                await asyncio.sleep(0.5)
+                # تأخير سريع (0.3 ثانية) مع الاعتماد على نظام Rate Limit الذكي
+                await asyncio.sleep(0.3)
     except Exception as global_e:
         logger.error(f"🔴 CRITICAL ERROR in mention_all: {global_e}")
     finally:
