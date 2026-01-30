@@ -969,32 +969,41 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
             progress = f"{round_prefix}[{batch_num}/{total_batches}]"
             message = f"{custom_msg} {progress}\n" + " ".join(mentions)
             
-            try:
-                await context.bot.send_message(
-                    chat_id=chat_id,
-                    text=message,
-                    reply_to_message_id=reply_to_id,
-                    parse_mode=ParseMode.HTML
-                )
-                logger.info(f"✅ Sent batch {batch_num}/{total_batches}")
-            except Exception as e:
-                err_msg = str(e).lower()
-                logger.error(f"❌ Error in Round {r} Batch {batch_num}: {e}")
-                
-                 # التعامل مع ضغط الإرسال (Rate Limit) تلقائياً
-                if "retry after" in err_msg:
-                    import re
-                    match = re.search(r'after (\d+)', err_msg)
-                    seconds = int(match.group(1)) if match else 10
-                    logger.warning(f"⏳ Rate limited! Waiting {seconds + 1}s...")
-                    await asyncio.sleep(seconds + 1)
-                    # إعادة المحاولة مرّة واحدة
-                    await context.bot.send_message(chat_id=chat_id, text=message, reply_to_message_id=reply_to_id, parse_mode=ParseMode.HTML)
-                else:
-                    await asyncio.sleep(2)
+            # محاولة إرسال الدفعة مع معالجة الأخطاء والـ Rate Limit
+            batch_sent = False
+            max_retries = 3
+            retry_count = 0
             
-            # تأخير بسيط لضمان استقرار الرسائل ومنع الحظر (Render يدعم الوقت الطويل)
-            await asyncio.sleep(0.3)
+            while not batch_sent and retry_count < max_retries:
+                try:
+                    await context.bot.send_message(
+                        chat_id=chat_id,
+                        text=message,
+                        reply_to_message_id=reply_to_id,
+                        parse_mode=ParseMode.HTML
+                    )
+                    logger.info(f"✅ Sent batch {batch_num}/{total_batches}")
+                    batch_sent = True
+                except Exception as e:
+                    retry_count += 1
+                    err_msg = str(e).lower()
+                    logger.error(f"❌ Error in Round {r} Batch {batch_num} (Try {retry_count}): {e}")
+                    
+                    if "retry after" in err_msg:
+                        import re
+                        match = re.search(r'after (\d+)', err_msg)
+                        seconds = int(match.group(1)) if match else 10
+                        wait_time = seconds + 1
+                        logger.warning(f"⏳ Rate limited! Waiting {wait_time}s then retrying...")
+                        await asyncio.sleep(wait_time)
+                    else:
+                        # خطأ آخر (مثل رسالة طويلة جداً أو مشكلة مؤقتة)
+                        await asyncio.sleep(1)
+                        if retry_count >= max_retries:
+                            logger.error(f"Skipping Batch {batch_num} after {max_retries} attempts.")
+            
+            # تأخير بسيط جداً لزيادة السرعة (Render يتحمل الضغط، والتراسل مع التليجرام سيهتم بالـ Rate Limit)
+            await asyncio.sleep(0.05)
 
     completion_msgs = [
         "ارحبوا تراحيب المطر 🌧️💙",
