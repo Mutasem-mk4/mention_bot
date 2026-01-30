@@ -985,7 +985,7 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                 
                 # محاولة إرسال الدفعة مع معالجة الأخطاء والـ Rate Limit
                 batch_sent = False
-                max_retries = 3
+                max_retries = 5  # زيادة عدد المحاولات
                 retry_count = 0
                 
                 while not batch_sent and retry_count < max_retries:
@@ -1003,21 +1003,22 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                         err_msg = str(e).lower()
                         logger.error(f"❌ Error in Round {r} Batch {batch_num} (Try {retry_count}): {e}")
                         
-                        if "retry after" in err_msg:
+                        if "retry after" in err_msg or "flood" in err_msg:
                             import re
-                            match = re.search(r'after (\d+)', err_msg)
-                            seconds = int(match.group(1)) if match else 10
-                            wait_time = seconds + 1
+                            match = re.search(r'(\d+)', err_msg)
+                            seconds = int(match.group(1)) if match else 15
+                            # انتظار الوقت المطلوب + 3 ثواني إضافية للتهدئة
+                            wait_time = seconds + 3
                             logger.warning(f"⏳ Rate limited! Waiting {wait_time}s then retrying...")
                             await asyncio.sleep(wait_time)
                         else:
-                            # خطأ آخر (مثل رسالة طويلة جداً أو مشكلة مؤقتة)
-                            await asyncio.sleep(1)
+                            # خطأ آخر
+                            await asyncio.sleep(2)
                             if retry_count >= max_retries:
                                 logger.error(f"Skipping Batch {batch_num} after {max_retries} attempts.")
                 
-                # تأخير سريع (0.3 ثانية) مع الاعتماد على نظام Rate Limit الذكي
-                await asyncio.sleep(0.3)
+                # تأخير أساسي 1 ثانية لمنع الاصطدام بالـ Rate Limit (التليجرام يسمح بـ 20 رسالة/دقيقة للمجموعات)
+                await asyncio.sleep(1.0)
     except Exception as global_e:
         logger.error(f"🔴 CRITICAL ERROR in mention_all: {global_e}")
     finally:
