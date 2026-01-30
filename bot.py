@@ -1003,8 +1003,8 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                             if retry_count >= max_retries:
                                 logger.error(f"Skipping Batch {batch_num} after {max_retries} attempts.")
                 
-                # تأخير بسيط جداً لزيادة السرعة
-                await asyncio.sleep(0.05)
+                # تأخير أكبر لتفادي الـ Rate Limit بقدر الإمكان (التليجرام يسمح برسالة واحدة كل ثانية تقريباً)
+                await asyncio.sleep(0.8)
     except Exception as global_e:
         logger.error(f"🔴 CRITICAL ERROR in mention_all: {global_e}")
     finally:
