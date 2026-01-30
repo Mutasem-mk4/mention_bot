@@ -1017,8 +1017,8 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                             # خطأ آخر - انتظر وأعد المحاولة
                             await asyncio.sleep(3)
                 
-                # تأخير ثابت 2.5 ثانية لتجنب الاصطدام بالـ Rate Limit (سيستغرق ~60 ثانية لـ 23 رسالة لكن بدون توقفات)
-                await asyncio.sleep(2.5)
+                # تأخير 1.2 ثانية (توازن بين السرعة والثبات - ~30 ثانية لـ 23 رسالة)
+                await asyncio.sleep(1.2)
     except Exception as global_e:
         logger.error(f"🔴 CRITICAL ERROR in mention_all: {global_e}")
     finally:
