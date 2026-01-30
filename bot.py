@@ -909,14 +909,20 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
     chat_id = str(update.effective_chat.id)
     lock_key = f"{chat_id}_{msg_id}"
     
-    if not hasattr(context.bot_data, 'mention_locks'):
+    # التأكد من وجود القفل بشكل صحيح
+    if 'mention_locks' not in context.bot_data:
         context.bot_data['mention_locks'] = set()
     
-    if lock_key in context.bot_data.get('mention_locks', set()):
+    if lock_key in context.bot_data['mention_locks']:
         logger.warning(f"⚠️ تم تخطي منشن مكرر للرسالة {msg_id}")
         return
     
-    context.bot_data.setdefault('mention_locks', set()).add(lock_key)
+    context.bot_data['mention_locks'].add(lock_key)
+    
+    # تنظيف الأقفال القديمة (الاحتفاظ بآخر 100 قفل فقط)
+    if len(context.bot_data['mention_locks']) > 100:
+        context.bot_data['mention_locks'] = set(list(context.bot_data['mention_locks'])[-50:])
+
 
     init_data(chat_id)
     
@@ -983,12 +989,10 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                 progress = f"{round_prefix}[{batch_num}/{total_batches}]"
                 message = f"{custom_msg} {progress}\n" + " ".join(mentions)
                 
-                # محاولة إرسال الدفعة مع معالجة الأخطاء والـ Rate Limit
+                # محاولة إرسال الدفعة - استمرار للمحاولة حتى النجاح
                 batch_sent = False
-                max_retries = 5  # زيادة عدد المحاولات
-                retry_count = 0
                 
-                while not batch_sent and retry_count < max_retries:
+                while not batch_sent:
                     try:
                         await context.bot.send_message(
                             chat_id=chat_id,
@@ -999,26 +1003,22 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                         logger.info(f"✅ Sent batch {batch_num}/{total_batches}")
                         batch_sent = True
                     except Exception as e:
-                        retry_count += 1
                         err_msg = str(e).lower()
-                        logger.error(f"❌ Error in Round {r} Batch {batch_num} (Try {retry_count}): {e}")
+                        logger.error(f"❌ Error Batch {batch_num}: {e}")
                         
                         if "retry after" in err_msg or "flood" in err_msg:
                             import re
                             match = re.search(r'(\d+)', err_msg)
-                            seconds = int(match.group(1)) if match else 15
-                            # انتظار الوقت المطلوب + 3 ثواني إضافية للتهدئة
-                            wait_time = seconds + 3
-                            logger.warning(f"⏳ Rate limited! Waiting {wait_time}s then retrying...")
+                            seconds = int(match.group(1)) if match else 20
+                            wait_time = seconds + 5
+                            logger.warning(f"⏳ Rate limited! Waiting {wait_time}s...")
                             await asyncio.sleep(wait_time)
                         else:
-                            # خطأ آخر
-                            await asyncio.sleep(2)
-                            if retry_count >= max_retries:
-                                logger.error(f"Skipping Batch {batch_num} after {max_retries} attempts.")
+                            # خطأ آخر - انتظر وأعد المحاولة
+                            await asyncio.sleep(5)
                 
-                # تأخير أساسي 1 ثانية لمنع الاصطدام بالـ Rate Limit (التليجرام يسمح بـ 20 رسالة/دقيقة للمجموعات)
-                await asyncio.sleep(1.0)
+                # تأخير ثابت 1.5 ثانية لتجنب Rate Limit نهائياً
+                await asyncio.sleep(1.5)
     except Exception as global_e:
         logger.error(f"🔴 CRITICAL ERROR in mention_all: {global_e}")
     finally:
