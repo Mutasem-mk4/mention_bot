@@ -694,6 +694,198 @@ async def export_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(export_text)
 
 
+async def import_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """استيراد قائمة الأعضاء من ملف أو نص"""
+    if not await is_user_admin(update, context):
+        return
+    
+    chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+    
+    # التحقق من وجود ملف مرفق
+    if update.message.reply_to_message and update.message.reply_to_message.document:
+        doc = update.message.reply_to_message.document
+        file = await context.bot.get_file(doc.file_id)
+        file_bytes = await file.download_as_bytearray()
+        content = file_bytes.decode('utf-8')
+    elif context.args:
+        content = " ".join(context.args)
+    else:
+        await update.message.reply_text(
+            "📥 **كيفية الاستيراد:**\n\n"
+            "1️⃣ أرسل ملف نصي ثم رد عليه بـ `/import`\n"
+            "2️⃣ أو اكتب: `/import @user1 @user2 @user3`",
+            parse_mode=ParseMode.MARKDOWN
+        )
+        return
+    
+    # استخراج اليوزرنيمات
+    import re
+    usernames = re.findall(r'@(\w+)', content)
+    
+    if not usernames:
+        await update.message.reply_text("❌ لم أجد أي يوزرنيمات في النص المرسل.")
+        return
+    
+    added = 0
+    for username in usernames:
+        temp_id = f"username_{username.lower()}"
+        if temp_id not in group_members[chat_id]:
+            group_members[chat_id][temp_id] = {
+                "username": username,
+                "first_name": username,
+                "full_name": username,
+                "multiplier": 1
+            }
+            added += 1
+    
+    if added > 0:
+        save_data(group_members, chat_id)
+        await update.message.reply_text(f"✅ تم استيراد {added} عضو جديد!")
+    else:
+        await update.message.reply_text("⚠️ كل الأعضاء المذكورين موجودين مسبقاً.")
+
+
+async def schedule_mention(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """جدولة منشن يومي في وقت محدد"""
+    if not await is_user_admin(update, context):
+        return
+    
+    chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+    
+    if not context.args:
+        current_schedule = group_settings.get(chat_id, {}).get("schedule_time")
+        if current_schedule:
+            await update.message.reply_text(
+                f"⏰ الجدولة الحالية: **{current_schedule}**\n\n"
+                f"لإلغاء: `/schedule off`\n"
+                f"لتغيير: `/schedule 18:00`",
+                parse_mode=ParseMode.MARKDOWN
+            )
+        else:
+            await update.message.reply_text(
+                "⏰ **جدولة المنشن التلقائي**\n\n"
+                "استخدم: `/schedule HH:MM`\n"
+                "مثال: `/schedule 18:00`\n\n"
+                "سيتم عمل @all يومياً في هذا الوقت.",
+                parse_mode=ParseMode.MARKDOWN
+            )
+        return
+    
+    time_arg = context.args[0].lower()
+    
+    # إلغاء الجدولة
+    if time_arg in ["off", "cancel", "stop", "الغاء"]:
+        if chat_id in group_settings and "schedule_time" in group_settings[chat_id]:
+            del group_settings[chat_id]["schedule_time"]
+            save_settings(group_settings, chat_id)
+            
+            # إلغاء الـ Job إذا كان موجوداً
+            job_name = f"schedule_{chat_id}"
+            current_jobs = context.job_queue.get_jobs_by_name(job_name)
+            for job in current_jobs:
+                job.schedule_removal()
+            
+            await update.message.reply_text("✅ تم إلغاء الجدولة.")
+        else:
+            await update.message.reply_text("⚠️ لا توجد جدولة نشطة.")
+        return
+    
+    # تحليل الوقت
+    import re
+    match = re.match(r'^(\d{1,2}):(\d{2})$', time_arg)
+    if not match:
+        await update.message.reply_text("❌ صيغة الوقت غير صحيحة. استخدم: `HH:MM`", parse_mode=ParseMode.MARKDOWN)
+        return
+    
+    hour, minute = int(match.group(1)), int(match.group(2))
+    if hour > 23 or minute > 59:
+        await update.message.reply_text("❌ الوقت غير صحيح.")
+        return
+    
+    # حفظ الإعدادات
+    if chat_id not in group_settings:
+        group_settings[chat_id] = {}
+    group_settings[chat_id]["schedule_time"] = time_arg
+    save_settings(group_settings, chat_id)
+    
+    # إعداد الـ Job
+    from datetime import time as dt_time
+    import pytz
+    
+    # إلغاء الـ Job القديم إذا كان موجوداً
+    job_name = f"schedule_{chat_id}"
+    current_jobs = context.job_queue.get_jobs_by_name(job_name)
+    for job in current_jobs:
+        job.schedule_removal()
+    
+    # إنشاء Job جديد (توقيت الأردن/السعودية UTC+3)
+    try:
+        tz = pytz.timezone('Asia/Riyadh')
+        context.job_queue.run_daily(
+            scheduled_mention_callback,
+            time=dt_time(hour=hour, minute=minute, tzinfo=tz),
+            chat_id=int(chat_id),
+            name=job_name,
+            data={"chat_id": chat_id}
+        )
+        await update.message.reply_text(f"✅ تم جدولة المنشن يومياً الساعة **{time_arg}** (توقيت الرياض)")
+    except Exception as e:
+        await update.message.reply_text(f"❌ خطأ في الجدولة: {e}")
+
+
+async def scheduled_mention_callback(context):
+    """تنفيذ المنشن المجدول"""
+    chat_id = context.job.data["chat_id"]
+    init_data(chat_id)
+    
+    if chat_id not in group_members or not group_members[chat_id]:
+        return
+    
+    # بناء قائمة الأعضاء
+    members = group_members.get(chat_id, {})
+    excluded = group_settings.get(chat_id, {}).get("excluded", [])
+    custom_msg = group_settings.get(chat_id, {}).get("mention_message", "📣")
+    
+    valid_members = []
+    for uid, data in members.items():
+        if uid in excluded:
+            continue
+        valid_members.append((uid, data))
+    
+    if not valid_members:
+        return
+    
+    batch_size = 5
+    total = len(valid_members)
+    
+    for i in range(0, total, batch_size):
+        batch = valid_members[i:i + batch_size]
+        mentions = []
+        
+        for uid, data in batch:
+            if data.get("username"):
+                mentions.append(f"@{data['username']}")
+            else:
+                name = html.escape(data.get('first_name', 'User'))
+                mentions.append(f'<a href="tg://user?id={uid}">{name}</a>')
+        
+        batch_num = (i // batch_size) + 1
+        total_batches = (total + batch_size - 1) // batch_size
+        message = f"⏰ {custom_msg} [{batch_num}/{total_batches}]\n" + " ".join(mentions)
+        
+        try:
+            await context.bot.send_message(
+                chat_id=int(chat_id),
+                text=message,
+                parse_mode=ParseMode.HTML
+            )
+            await asyncio.sleep(2.0)
+        except Exception as e:
+            logger.error(f"Scheduled mention error: {e}")
+
+
 async def track_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """تتبع المستخدمين تلقائياً عند إرسال أي رسالة"""
     if not update.effective_chat or not update.effective_user:
@@ -1344,6 +1536,8 @@ def create_app(chat_id=None):
         CommandHandler("stats", show_stats),
         CommandHandler("export", export_members),
         CommandHandler("count", count_members),
+        CommandHandler("import", import_members),
+        CommandHandler("schedule", schedule_mention),
         MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, auto_add_new_member),
         # MessageHandler(filters.ALL, track_user),  # تم نقله للبداية في مجموعة مستقلة
         MessageHandler(~filters.COMMAND, handle_message)
