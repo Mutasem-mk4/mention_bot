@@ -488,6 +488,171 @@ async def unboost_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"❌ المستخدم @{username} غير موجود")
 
 
+async def set_mention_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """تعيين رسالة مخصصة للمنشن"""
+    if not await is_user_admin(update, context):
+        return
+    
+    chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+    
+    if not context.args:
+        current_msg = group_settings.get(chat_id, {}).get("mention_message", "📣")
+        await update.message.reply_text(
+            f"📝 الرسالة الحالية: {current_msg}\n\n"
+            f"للتغيير استخدم:\n`/setmsg رسالتك الجديدة`",
+            parse_mode=ParseMode.MARKDOWN
+        )
+        return
+    
+    new_msg = " ".join(context.args)
+    if chat_id not in group_settings:
+        group_settings[chat_id] = {}
+    group_settings[chat_id]["mention_message"] = new_msg
+    save_settings(group_settings, chat_id)
+    await update.message.reply_text(f"✅ تم تعيين رسالة المنشن إلى:\n{new_msg}")
+
+
+async def exclude_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """استثناء عضو من المنشنات"""
+    if not await is_user_admin(update, context):
+        return
+    
+    chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+    
+    if not context.args:
+        # عرض المستثنين الحاليين
+        excluded = group_settings.get(chat_id, {}).get("excluded", [])
+        if not excluded:
+            await update.message.reply_text("📭 لا يوجد أعضاء مستثنين حالياً.")
+        else:
+            names = []
+            for uid in excluded:
+                if uid in group_members.get(chat_id, {}):
+                    data = group_members[chat_id][uid]
+                    names.append(f"• {data.get('first_name', uid)}")
+            await update.message.reply_text(f"🚫 الأعضاء المستثنين:\n" + "\n".join(names))
+        return
+    
+    username = context.args[0].replace("@", "").lower()
+    
+    # البحث عن العضو
+    found_uid = None
+    for uid, data in group_members.get(chat_id, {}).items():
+        if (data.get("username") or "").lower() == username:
+            found_uid = uid
+            break
+    
+    if not found_uid:
+        await update.message.reply_text(f"❌ المستخدم @{username} غير موجود في القائمة.")
+        return
+    
+    if chat_id not in group_settings:
+        group_settings[chat_id] = {}
+    if "excluded" not in group_settings[chat_id]:
+        group_settings[chat_id]["excluded"] = []
+    
+    if found_uid not in group_settings[chat_id]["excluded"]:
+        group_settings[chat_id]["excluded"].append(found_uid)
+        save_settings(group_settings, chat_id)
+        await update.message.reply_text(f"✅ تم استثناء @{username} من المنشنات.")
+    else:
+        await update.message.reply_text(f"⚠️ @{username} مستثنى بالفعل.")
+
+
+async def unexclude_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """إلغاء استثناء عضو"""
+    if not await is_user_admin(update, context):
+        return
+    
+    chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+    
+    if not context.args:
+        await update.message.reply_text("استخدم: `/unexclude @username`", parse_mode=ParseMode.MARKDOWN)
+        return
+    
+    username = context.args[0].replace("@", "").lower()
+    
+    # البحث عن العضو
+    found_uid = None
+    for uid, data in group_members.get(chat_id, {}).items():
+        if (data.get("username") or "").lower() == username:
+            found_uid = uid
+            break
+    
+    if not found_uid:
+        await update.message.reply_text(f"❌ المستخدم @{username} غير موجود.")
+        return
+    
+    excluded = group_settings.get(chat_id, {}).get("excluded", [])
+    if found_uid in excluded:
+        excluded.remove(found_uid)
+        group_settings[chat_id]["excluded"] = excluded
+        save_settings(group_settings, chat_id)
+        await update.message.reply_text(f"✅ تم إلغاء استثناء @{username}. سيتم منشنه الآن.")
+    else:
+        await update.message.reply_text(f"⚠️ @{username} ليس مستثنى أصلاً.")
+
+
+async def show_stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """عرض إحصائيات المجموعة"""
+    chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+    
+    members = group_members.get(chat_id, {})
+    settings = group_settings.get(chat_id, {})
+    tags = group_tags.get(chat_id, {})
+    
+    total_members = len(members)
+    excluded_count = len(settings.get("excluded", []))
+    boosted_count = sum(1 for m in members.values() if m.get("multiplier", 1) > 1)
+    tags_count = len(tags)
+    
+    await update.message.reply_text(
+        f"📊 **إحصائيات المجموعة**\n\n"
+        f"👥 إجمالي الأعضاء: {total_members}\n"
+        f"🚫 المستثنين: {excluded_count}\n"
+        f"⚡ المعززين (Boost): {boosted_count}\n"
+        f"🏷 التاجات: {tags_count}\n"
+        f"📝 رسالة المنشن: {settings.get('mention_message', '📣')}",
+        parse_mode=ParseMode.MARKDOWN
+    )
+
+
+async def export_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """تصدير قائمة الأعضاء"""
+    if not await is_user_admin(update, context):
+        return
+    
+    chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+    
+    members = group_members.get(chat_id, {})
+    if not members:
+        await update.message.reply_text("📭 القائمة فارغة!")
+        return
+    
+    lines = []
+    for uid, data in members.items():
+        username = f"@{data['username']}" if data.get('username') else f"ID:{uid}"
+        name = data.get('first_name', 'Unknown')
+        boost = f" (x{data['multiplier']})" if data.get('multiplier', 1) > 1 else ""
+        lines.append(f"{username} - {name}{boost}")
+    
+    export_text = f"📋 قائمة أعضاء المجموعة ({len(members)} عضو)\n\n" + "\n".join(lines)
+    
+    # إرسال كملف نصي إذا كان طويلاً
+    if len(export_text) > 4000:
+        from io import BytesIO
+        file = BytesIO(export_text.encode('utf-8'))
+        file.name = f"members_{chat_id}.txt"
+        await update.message.reply_document(file, caption="📋 قائمة الأعضاء")
+    else:
+        await update.message.reply_text(export_text)
+
+
 async def track_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """تتبع المستخدمين تلقائياً عند إرسال أي رسالة"""
     if not update.effective_chat or not update.effective_user:
@@ -950,7 +1115,11 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
     # يمكن للمدراء استخدام /clean لتنظيف القائمة يدوياً
     
     valid_members = []
+    excluded_list = group_settings.get(chat_id, {}).get("excluded", [])
     for uid in unique_uids:
+        # تخطي المستثنين
+        if uid in excluded_list:
+            continue
         data = group_members[chat_id][uid]
         multiplier = data.get("multiplier", 1)
         # الحد الأقصى للـ boost هو 5 لضمان عدم تجاوز الوقت
@@ -1122,6 +1291,11 @@ def create_app(chat_id=None):
         CommandHandler("tags", list_tags),
         CommandHandler("clean", clean_list),
         CommandHandler("status", bot_status),
+        CommandHandler("setmsg", set_mention_message),
+        CommandHandler("exclude", exclude_member),
+        CommandHandler("unexclude", unexclude_member),
+        CommandHandler("stats", show_stats),
+        CommandHandler("export", export_members),
         MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, auto_add_new_member),
         # MessageHandler(filters.ALL, track_user),  # تم نقله للبداية في مجموعة مستقلة
         MessageHandler(~filters.COMMAND, handle_message)
