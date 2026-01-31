@@ -631,13 +631,29 @@ async def show_stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
     boosted_count = sum(1 for m in members.values() if m.get("multiplier", 1) > 1)
     tags_count = len(tags)
     
+    # أكثر الأعضاء تفاعلاً
+    sorted_members = sorted(
+        [(uid, data) for uid, data in members.items() if data.get("message_count", 0) > 0],
+        key=lambda x: x[1].get("message_count", 0),
+        reverse=True
+    )[:5]
+    
+    top_active = ""
+    if sorted_members:
+        top_active = "\n\n🔥 **أكثر الأعضاء تفاعلاً:**\n"
+        for i, (uid, data) in enumerate(sorted_members, 1):
+            name = data.get("first_name", "Unknown")
+            count = data.get("message_count", 0)
+            top_active += f"{i}. {name}: {count} رسالة\n"
+    
     await update.message.reply_text(
         f"📊 **إحصائيات المجموعة**\n\n"
         f"👥 إجمالي الأعضاء: {total_members}\n"
         f"🚫 المستثنين: {excluded_count}\n"
         f"⚡ المعززين (Boost): {boosted_count}\n"
         f"🏷 التاجات: {tags_count}\n"
-        f"📝 رسالة المنشن: {settings.get('mention_message', '📣')}",
+        f"📝 رسالة المنشن: {settings.get('mention_message', '📣')}"
+        f"{top_active}",
         parse_mode=ParseMode.MARKDOWN
     )
 
@@ -723,6 +739,12 @@ async def track_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "full_name": user.full_name or "User"
             })
             needs_save = True
+    
+    # تتبع عدد الرسائل
+    if user_id in group_members[chat_id]:
+        current_count = group_members[chat_id][user_id].get("message_count", 0)
+        group_members[chat_id][user_id]["message_count"] = current_count + 1
+        needs_save = True
             
     if needs_save:
         save_data(group_members, chat_id)
