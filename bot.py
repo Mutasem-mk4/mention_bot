@@ -267,15 +267,21 @@ def init_data(chat_id=None):
 
 
 async def is_user_admin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> bool:
-    """التحقق مما إذا كان المستخدم مشرفاً"""
+    """التحقق مما إذا كان المستخدم مشرفاً (تيليجرام أو مخصص)"""
     if not update.effective_chat or update.effective_chat.type == "private":
         return True
         
     user_id = update.effective_user.id
-    chat_id = update.effective_chat.id
+    chat_id = str(update.effective_chat.id)
+    
+    # التحقق من المشرفين المخصصين أولاً
+    init_data(chat_id)
+    custom_admins = group_settings.get(chat_id, {}).get("custom_admins", [])
+    if str(user_id) in custom_admins:
+        return True
     
     try:
-        member = await context.bot.get_chat_member(chat_id, user_id)
+        member = await context.bot.get_chat_member(int(chat_id), user_id)
         return member.status in ["creator", "administrator"]
     except Exception as e:
         logger.error(f"Error checking admin status: {e}")
@@ -692,6 +698,123 @@ async def export_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_document(file, caption="📋 قائمة الأعضاء")
     else:
         await update.message.reply_text(export_text)
+
+
+async def is_telegram_admin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> bool:
+    """التحقق من أن المستخدم مشرف تيليجرام فعلي (وليس مخصص)"""
+    if not update.effective_chat or update.effective_chat.type == "private":
+        return True
+    
+    user_id = update.effective_user.id
+    chat_id = update.effective_chat.id
+    
+    try:
+        member = await context.bot.get_chat_member(chat_id, user_id)
+        return member.status in ["creator", "administrator"]
+    except Exception:
+        return False
+
+
+async def set_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """إضافة مشرف مخصص للبوت"""
+    # فقط مشرفي تيليجرام الفعليين يمكنهم إضافة مشرفين مخصصين
+    if not await is_telegram_admin(update, context):
+        await update.message.reply_text("❌ هذا الأمر متاح فقط لمشرفي المجموعة الفعليين.")
+        return
+    
+    chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+    
+    if not context.args:
+        await update.message.reply_text(
+            "👤 **إضافة مشرف للبوت**\n\n"
+            "استخدم: `/setadmin @username`\n\n"
+            "المشرف المخصص يستطيع استخدام جميع أوامر البوت حتى لو لم يكن مشرف في تيليجرام.",
+            parse_mode=ParseMode.MARKDOWN
+        )
+        return
+    
+    username = context.args[0].replace("@", "").lower()
+    
+    # البحث عن المستخدم
+    found_uid = None
+    for uid, data in group_members.get(chat_id, {}).items():
+        if (data.get("username") or "").lower() == username:
+            found_uid = uid
+            break
+    
+    if not found_uid:
+        await update.message.reply_text(f"❌ المستخدم @{username} غير موجود في قائمة الأعضاء.")
+        return
+    
+    if chat_id not in group_settings:
+        group_settings[chat_id] = {}
+    if "custom_admins" not in group_settings[chat_id]:
+        group_settings[chat_id]["custom_admins"] = []
+    
+    if found_uid not in group_settings[chat_id]["custom_admins"]:
+        group_settings[chat_id]["custom_admins"].append(found_uid)
+        save_settings(group_settings, chat_id)
+        await update.message.reply_text(f"✅ تم تعيين @{username} كمشرف للبوت!")
+    else:
+        await update.message.reply_text(f"⚠️ @{username} مشرف مخصص بالفعل.")
+
+
+async def remove_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """إزالة مشرف مخصص"""
+    if not await is_telegram_admin(update, context):
+        await update.message.reply_text("❌ هذا الأمر متاح فقط لمشرفي المجموعة الفعليين.")
+        return
+    
+    chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+    
+    if not context.args:
+        await update.message.reply_text("استخدم: `/removeadmin @username`", parse_mode=ParseMode.MARKDOWN)
+        return
+    
+    username = context.args[0].replace("@", "").lower()
+    
+    # البحث عن المستخدم
+    found_uid = None
+    for uid, data in group_members.get(chat_id, {}).items():
+        if (data.get("username") or "").lower() == username:
+            found_uid = uid
+            break
+    
+    if not found_uid:
+        await update.message.reply_text(f"❌ المستخدم @{username} غير موجود.")
+        return
+    
+    custom_admins = group_settings.get(chat_id, {}).get("custom_admins", [])
+    if found_uid in custom_admins:
+        custom_admins.remove(found_uid)
+        group_settings[chat_id]["custom_admins"] = custom_admins
+        save_settings(group_settings, chat_id)
+        await update.message.reply_text(f"✅ تم إزالة @{username} من المشرفين المخصصين.")
+    else:
+        await update.message.reply_text(f"⚠️ @{username} ليس مشرف مخصص.")
+
+
+async def list_admins(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """عرض قائمة المشرفين المخصصين"""
+    chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+    
+    custom_admins = group_settings.get(chat_id, {}).get("custom_admins", [])
+    
+    if not custom_admins:
+        await update.message.reply_text("📭 لا يوجد مشرفين مخصصين حالياً.")
+        return
+    
+    names = []
+    for uid in custom_admins:
+        if uid in group_members.get(chat_id, {}):
+            data = group_members[chat_id][uid]
+            username = f"@{data['username']}" if data.get('username') else data.get('first_name', uid)
+            names.append(f"• {username}")
+    
+    await update.message.reply_text(f"👤 **المشرفون المخصصون:**\n" + "\n".join(names), parse_mode=ParseMode.MARKDOWN)
 
 
 async def import_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1586,6 +1709,9 @@ def create_app(chat_id=None):
         CommandHandler("count", count_members),
         CommandHandler("import", import_members),
         CommandHandler("schedule", schedule_mention),
+        CommandHandler("setadmin", set_admin),
+        CommandHandler("removeadmin", remove_admin),
+        CommandHandler("listadmins", list_admins),
         MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, auto_add_new_member),
         # MessageHandler(filters.ALL, track_user),  # تم نقله للبداية في مجموعة مستقلة
         MessageHandler(~filters.COMMAND, handle_message)
