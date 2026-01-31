@@ -421,6 +421,27 @@ async def clear_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"🗑️ تم مسح {count} عضو")
 
 
+async def count_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """عرض عدد الأعضاء في القائمة"""
+    chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+    
+    members = group_members.get(chat_id, {})
+    excluded = group_settings.get(chat_id, {}).get("excluded", [])
+    
+    total = len(members)
+    excluded_count = len(excluded)
+    active = total - excluded_count
+    
+    await update.message.reply_text(
+        f"👥 **عدد الأعضاء**\n\n"
+        f"📊 الإجمالي: {total}\n"
+        f"✅ النشطين: {active}\n"
+        f"🚫 المستثنين: {excluded_count}",
+        parse_mode=ParseMode.MARKDOWN
+    )
+
+
 async def boost_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """تحديد عدد مرات منشن مستخدم معين عند عمل @all"""
     if not await is_user_admin(update, context):
@@ -1296,6 +1317,7 @@ def create_app(chat_id=None):
         CommandHandler("unexclude", unexclude_member),
         CommandHandler("stats", show_stats),
         CommandHandler("export", export_members),
+        CommandHandler("count", count_members),
         MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, auto_add_new_member),
         # MessageHandler(filters.ALL, track_user),  # تم نقله للبداية في مجموعة مستقلة
         MessageHandler(~filters.COMMAND, handle_message)
