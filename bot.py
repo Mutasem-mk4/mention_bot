@@ -620,6 +620,10 @@ async def unexclude_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def show_stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """عرض إحصائيات المجموعة"""
     chat_id = str(update.effective_chat.id)
+    
+    # إعادة تحميل البيانات من قاعدة البيانات لضمان الدقة
+    if chat_id in group_members:
+        del group_members[chat_id]
     init_data(chat_id)
     
     members = group_members.get(chat_id, {})
