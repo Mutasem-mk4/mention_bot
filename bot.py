@@ -1517,14 +1517,7 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                         mentions.append(f'<a href="tg://user?id={uid}">{name}</a>')
                 
                 batch_num = (i // batch_size) + 1
-                
-                # شريط تقدم بصري
-                progress_percent = int((batch_num / total_batches) * 100)
-                filled = int(progress_percent / 10)
-                empty = 10 - filled
-                progress_bar = "█" * filled + "░" * empty
-                
-                progress = f"{round_prefix}[{progress_bar}] {batch_num}/{total_batches}"
+                progress = f"{round_prefix}[{batch_num}/{total_batches}]"
                 message = f"{custom_msg} {progress}\n" + " ".join(mentions)
                 
                 # محاولة إرسال الدفعة - استمرار للمحاولة حتى النجاح
