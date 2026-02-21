@@ -343,22 +343,39 @@ async def add_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
     init_data(chat_id)
 
     # دعم الرد على رسالة مباشرة
-    if update.message.reply_to_message and update.message.reply_to_message.from_user:
-        replied_user = update.message.reply_to_message.from_user
-        if replied_user.is_bot:
-            await update.message.reply_text("❌ لا يمكن إضافة بوت.")
+    if update.message.reply_to_message:
+        replied_msg = update.message.reply_to_message
+        target_user = replied_msg.from_user
+        target_chat = replied_msg.sender_chat # للأدمينات المخفيين أو القنوات
+        
+        if target_user:
+            if target_user.is_bot:
+                await update.message.reply_text("❌ لا يمكن إضافة بوت.")
+                return
+            uid = str(target_user.id)
+            username = target_user.username
+            first_name = target_user.first_name or "User"
+            full_name = target_user.full_name or "User"
+            name_display = f"@{username}" if username else full_name
+        elif target_chat:
+            uid = f"chat_{target_chat.id}"
+            username = target_chat.username
+            first_name = target_chat.title or "Anonymous Admin"
+            full_name = target_chat.title or "Anonymous Admin"
+            name_display = f"@{username}" if username else first_name
+        else:
+            await update.message.reply_text("❌ لم يمكن تحديد صاحب الرسالة.")
             return
-        uid = str(replied_user.id)
+
         group_members[chat_id][uid] = {
-            "username": replied_user.username,
-            "first_name": replied_user.first_name or "User",
-            "full_name": replied_user.full_name or "User",
+            "username": username,
+            "first_name": first_name,
+            "full_name": full_name,
             "multiplier": group_members[chat_id].get(uid, {}).get("multiplier", 1)
         }
         save_data(group_members, chat_id)
-        name = f"@{replied_user.username}" if replied_user.username else replied_user.full_name
         await update.message.reply_text(
-            f"✅ تم إضافة {name}!\n👥 الإجمالي: {len(group_members[chat_id])}"
+            f"✅ تم إضافة {name_display}!\n👥 الإجمالي: {len(group_members[chat_id])}"
         )
         return
 
@@ -484,18 +501,31 @@ async def clear_confirm_callback(update: Update, context: ContextTypes.DEFAULT_T
 async def get_user_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """معرفة الآيدي الرقمي عن طريق الرد على رسالة"""
     if update.message.reply_to_message:
-        target = update.message.reply_to_message.from_user
-        if target:
+        replied_msg = update.message.reply_to_message
+        target_user = replied_msg.from_user
+        target_chat = replied_msg.sender_chat
+        
+        if target_user:
             lines = [
                 f"🆔 **معلومات المستخدم:**",
-                f"• الاسم: {target.full_name}",
-                f"• الآيدي: `{target.id}`",
+                f"• الاسم: {target_user.full_name}",
+                f"• الآيدي: `{target_user.id}`",
             ]
-            if target.username:
-                lines.append(f"• اليوزر: @{target.username}")
-            await update.message.reply_text("\n".join(lines), parse_mode=ParseMode.MARKDOWN)
+            if target_user.username:
+                lines.append(f"• اليوزر: @{target_user.username}")
+        elif target_chat:
+            lines = [
+                f"🆔 **معلومات الشات/الأدمن:**",
+                f"• الاسم: {target_chat.title}",
+                f"• الآيدي: `{target_chat.id}`",
+            ]
+            if target_chat.username:
+                lines.append(f"• اليوزر: @{target_chat.username}")
         else:
-            await update.message.reply_text("❌ لا يمكن الحصول على معلومات هذا المستخدم.")
+            await update.message.reply_text("❌ لم يمكن تحديد صاحب الرسالة.")
+            return
+            
+        await update.message.reply_text("\n".join(lines), parse_mode=ParseMode.MARKDOWN)
     else:
         # عرض معلومات من أرسل الأمر
         user = update.effective_user
@@ -1740,9 +1770,18 @@ async def ping_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not await is_user_admin(update, context): return
     custom_text = " ".join(context.args[1:]) if len(context.args) > 1 else ""
     mention = None
-    if update.message.reply_to_message and update.message.reply_to_message.from_user:
-        target = update.message.reply_to_message.from_user
-        mention = f"@{target.username}" if target.username else f'<a href="tg://user?id={target.id}">{html.escape(target.full_name or "User")}</a>'
+    if update.message.reply_to_message:
+        replied_msg = update.message.reply_to_message
+        target_user = replied_msg.from_user
+        target_chat = replied_msg.sender_chat
+        
+        if target_user:
+            mention = f"@{target_user.username}" if target_user.username else f'<a href="tg://user?id={target_user.id}">{html.escape(target_user.full_name or "User")}</a>'
+        elif target_chat:
+            mention = f"@{target_chat.username}" if target_chat.username else f'<a href="tg://user?id={target_chat.id}">{html.escape(target_chat.title or "Anonymous Admin")}</a>'
+        else:
+            await update.message.reply_text("❌ لم يمكن تحديد صاحب الرسالة.")
+            return
     elif context.args:
         mention = f"@{context.args[0].replace('@','').strip()}"
     else:
