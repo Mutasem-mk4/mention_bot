@@ -54,6 +54,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+BOT_VERSION = "1.0.2 (Fix Reply Detection)"
+
 # تحميل المتغيرات البيئية
 load_dotenv()
 
@@ -1937,7 +1939,8 @@ async def bot_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"🆔 آيدي هذه المجموعة: `{chat_id}`\n"
         f"📊 المجموعات النشطة: {len(group_members)}\n"
         f"🗄 قاعدة البيانات: {db_status}\n"
-        f"🚀 الاستضافة: {env_type}",
+        f"🚀 الاستضافة: {env_type}\n"
+        f"🔖 الإصدار: `{BOT_VERSION}`",
         parse_mode=ParseMode.MARKDOWN
     )
 
