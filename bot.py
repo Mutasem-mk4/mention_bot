@@ -12,9 +12,9 @@ import json
 import asyncio
 import re
 import html
-from telegram import Update
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.constants import ParseMode
-from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
+from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, ContextTypes, filters
 from flask import Flask
 from threading import Thread
 import sys
@@ -65,9 +65,14 @@ db = None
 members_collection = None
 settings_collection = None
 tags_collection = None
+history_collection = None  # سجل استخدام @all
+
+# كاش لعدد الرسائل (لتقليل عمليات الحفظ على MongoDB)
+message_count_cache = {}  # {chat_id: {user_id: count}}
+MESSAGE_SAVE_THRESHOLD = 5
 
 def init_db():
-    global db, members_collection, settings_collection, tags_collection
+    global db, members_collection, settings_collection, tags_collection, history_collection
     if db is not None:
         return
     if MONGO_URI:
@@ -79,6 +84,7 @@ def init_db():
             members_collection = db.members
             settings_collection = db.settings
             tags_collection = db.tags
+            history_collection = db.history
             print("✅ تم الاتصال بقاعدة بيانات MongoDB بنجاح!")
         except Exception as e:
             print(f"❌ فشل الاتصال بقاعدة البيانات: {e}")
@@ -290,25 +296,33 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "🤖 مرحباً! أنا بوت المنشن\n\n"
         "📋 كيفية الاستخدام:\n"
         "• أضفني للمجموعة وامنحني صلاحيات أدمن\n"
-        "• أرسل @all لمنشن جميع الأعضاء\n\n"
+        "• أرسل @all لمنشن جميع الأعضاء\n"
+        "• أرسل @all quiet للمنشن بدون رسالة إكمال\n\n"
         "📌 الأوامر (للمشرفين فقط 👮‍♂️):\n"
-        "/add @user1 @user2 - إضافة أعضاء يدوياً\n"
-        "/add_id 12345 Name - إضافة عضو بالآيدي\n"
-        "/boost @user 5 - زيادة عدد مرّات منشن شخص\n"
-        "/unboost @user - إعادة المنشن للوضع الطبيعي\n"
-        "/id - معرفة الآيدي (بالرد على الرسالة)\n"
-        "/set_msg <message> - تغيير رسالة المنشن\n"
+        "/add @user - إضافة (أو رُد على رسالة)\n"
+        "/add_id ID اسم - إضافة بالآيدي\n"
+        "/ping @user رسالة - منشن شخص واحد\n"
+        "/mention_id ID اسم - منشن بالآيدي\n"
+        "/boost @user 5 - زيادة مرّات المنشن\n"
+        "/unboost @user - إعادة الوضع الطبيعي\n"
+        "/id - معرفة الآيدي (بالرد)\n"
+        "/list - عرض الأعضاء (أو /list محمد للبحث)\n"
+        "/count - عدد الأعضاء\n"
+        "/history - آخر استخدامات @all\n"
+        "/backup - نسخة احتياطية\n"
         "/remove @user - حذف عضو\n"
-        "/list - عرض الأعضاء المحفوظين\n"
-        "/count - عدد الأعضاء المحفوظين\n"
-        "/sync_from <ID> - نسخ الأعضاء من مجموعة أخرى\n"
+        "/block_mention @user - منع @all لشخص\n"
+        "/unblock_mention @user - رفع الحظر\n"
+        "/setmsg رسالة - تغيير رسالة المنشن\n"
+        "/exclude @user - استثناء عضو\n"
+        "/unexclude @user - إلغاء الاستثناء\n"
         "/add_tag #tag - إنشاء تاج مخصص\n"
-        "/del_tag #tag - حذف تاج مخصص\n"
-        "/add_to_tag #tag @user - إضافة عضو لتاج\n"
-        "/rem_from_tag #tag @user - حذف عضو من تاج\n"
-        "/tags - عرض كل التاجات المخصصة\n"
-        "/clean - تنظيف القائمة من الحسابات المحذوفة أو التي غادرت\n"
-        "/clear - مسح كل الأعضاء\n\n"
+        "/del_tag #tag | /add_to_tag | /rem_from_tag | /tags\n"
+        "/sync_from <ID> - نسخ من مجموعة أخرى\n"
+        "/clean - تنظيف | /clear - مسح الكل\n"
+        "/schedule HH:MM - جدولة تلقائية\n"
+        "/setadmin @user - تعيين مشرف للبوت\n"
+        "/status - حالة البوت\n\n"
         "⚡ يتم حفظ الأعضاء بشكل دائم!"
     )
 
@@ -317,24 +331,45 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def add_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """إضافة أعضاء يدوياً بالـ username"""
+    """إضافة أعضاء يدوياً بالـ username أو بالرد على رسالة"""
     if update.effective_chat.type not in ["group", "supergroup"]:
         await update.message.reply_text("⚠️ هذا الأمر يعمل في المجموعات فقط!")
         return
-        
+
     if not await is_user_admin(update, context):
         return
-    
+
     chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+
+    # دعم الرد على رسالة مباشرة
+    if update.message.reply_to_message and update.message.reply_to_message.from_user:
+        replied_user = update.message.reply_to_message.from_user
+        if replied_user.is_bot:
+            await update.message.reply_text("❌ لا يمكن إضافة بوت.")
+            return
+        uid = str(replied_user.id)
+        group_members[chat_id][uid] = {
+            "username": replied_user.username,
+            "first_name": replied_user.first_name or "User",
+            "full_name": replied_user.full_name or "User",
+            "multiplier": group_members[chat_id].get(uid, {}).get("multiplier", 1)
+        }
+        save_data(group_members, chat_id)
+        name = f"@{replied_user.username}" if replied_user.username else replied_user.full_name
+        await update.message.reply_text(
+            f"✅ تم إضافة {name}!\n👥 الإجمالي: {len(group_members[chat_id])}"
+        )
+        return
+
     args = context.args
     if not args:
-        await update.message.reply_text("❌ الاستخدام: /add @user1 @user2")
+        await update.message.reply_text("❌ الاستخدام:\n/add @user1 @user2\nأو رُد على رسالة شخص بـ /add")
         return
-    
-    init_data(chat_id)
+
     added = []
     not_in_group = []
-    
+
     for username in args:
         uname = username.replace("@", "").strip()
         if not uname: continue
@@ -412,15 +447,38 @@ async def delete_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def clear_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """مسح كل الأعضاء من المجموعة"""
+    """مسح كل الأعضاء مع تأكيد inline"""
     if not await is_user_admin(update, context): return
     chat_id = str(update.effective_chat.id)
     init_data(chat_id)
-    if chat_id in group_members:
-        count = len(group_members[chat_id])
+    count = len(group_members.get(chat_id, {}))
+    if count == 0:
+        await update.message.reply_text("📭 القائمة فارغة أصلاً!")
+        return
+    keyboard = InlineKeyboardMarkup([[
+        InlineKeyboardButton("✅ نعم، امسح الكل", callback_data=f"clear_confirm_{chat_id}"),
+        InlineKeyboardButton("❌ إلغاء", callback_data="clear_cancel")
+    ]])
+    await update.message.reply_text(
+        f"⚠️ هل أنت متأكد من مسح **{count}** عضو؟\nلا يمكن التراجع!",
+        parse_mode=ParseMode.MARKDOWN,
+        reply_markup=keyboard
+    )
+
+
+async def clear_confirm_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """معالجة تأكيد /clear"""
+    query = update.callback_query
+    await query.answer()
+    if query.data == "clear_cancel":
+        await query.edit_message_text("✔️ تم إلغاء العملية.")
+        return
+    if query.data.startswith("clear_confirm_"):
+        chat_id = query.data.replace("clear_confirm_", "")
+        count = len(group_members.get(chat_id, {}))
         group_members[chat_id] = {}
         save_data(group_members, chat_id)
-        await update.message.reply_text(f"🗑️ تم مسح {count} عضو")
+        await query.edit_message_text(f"🗑️ تم مسح {count} عضو بنجاح.")
 
 
 async def get_user_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1063,12 +1121,18 @@ async def track_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
             })
             needs_save = True
     
-    # تتبع عدد الرسائل
+    # تتبع عدد الرسائل - حفظ كل MESSAGE_SAVE_THRESHOLD رسالة (يقلل ضغط MongoDB 80%)
     if user_id in group_members[chat_id]:
-        current_count = group_members[chat_id][user_id].get("message_count", 0)
-        group_members[chat_id][user_id]["message_count"] = current_count + 1
-        needs_save = True
-            
+        current_count = group_members[chat_id][user_id].get("message_count", 0) + 1
+        group_members[chat_id][user_id]["message_count"] = current_count
+        if chat_id not in message_count_cache:
+            message_count_cache[chat_id] = {}
+        cache_val = message_count_cache[chat_id].get(user_id, 0) + 1
+        message_count_cache[chat_id][user_id] = cache_val
+        if cache_val >= MESSAGE_SAVE_THRESHOLD:
+            message_count_cache[chat_id][user_id] = 0
+            needs_save = True
+
     if needs_save:
         save_data(group_members, chat_id)
 
@@ -1418,7 +1482,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 if rounds < 1: rounds = 1
                 if rounds > 10: rounds = 10
             except: pass
-        await mention_all(update, context, rounds)
+        quiet = bool(__import__("re").search(r"\bquiet\b", text, __import__("re").IGNORECASE))
+        await mention_all(update, context, rounds, quiet=quiet)
         return
 
     # 2. التحقق من التاجات المخصصة (#tagname)
@@ -1430,7 +1495,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
 
 
-async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_rounds=1):
+async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_rounds=1, quiet=False):
     """منشن الجميع مع دعم لعدة جولات والـ Boost"""
     if not await is_user_admin(update, context):
         return
@@ -1454,6 +1519,14 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
     if len(context.bot_data['mention_locks']) > 100:
         context.bot_data['mention_locks'] = set(list(context.bot_data['mention_locks'])[-50:])
 
+    # تحقق من blocked_mention
+    user_id_str = str(update.effective_user.id)
+    if user_id_str in group_settings.get(chat_id, {}).get("blocked_mention", []):
+        await update.message.reply_text("❌ ليس لديك صلاحية استخدام @all.")
+        return
+
+    # حفظ سجل الاستخدام
+    _save_history(chat_id, update.effective_user.id, update.effective_user.username or "")
 
     init_data(chat_id)
     
@@ -1604,32 +1677,40 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
             "تحياتي لكل الأعزاء 💐"
         ]
         import random
-        try:
-            await update.message.reply_text(random.choice(completion_msgs))
-        except Exception as final_e:
-            logger.error(f"Could not send completion message: {final_e}")
+        if not quiet:
+            try:
+                await update.message.reply_text(random.choice(completion_msgs))
+            except Exception as final_e:
+                logger.error(f"Could not send completion message: {final_e}")
 
 
 async def list_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """عرض قائمة الأعضاء مع الـ Boost"""
+    """عرض قائمة الأعضاء مع دعم البحث (/list محمد)"""
     chat_id = str(update.effective_chat.id)
     init_data(chat_id)
-    
+
     if chat_id not in group_members or not group_members[chat_id]:
         await update.message.reply_text("📭 القائمة فارغة!")
         return
-    
+
+    search_term = " ".join(context.args).lower().strip() if context.args else ""
+
     lines = []
     for uid, data in group_members[chat_id].items():
         boost = f" (x{data['multiplier']})" if data.get("multiplier", 1) > 1 else ""
-        if data.get("username"):
-            lines.append(f"• @{data['username']}{boost}")
-        else:
-            display_name = data.get('full_name') or data.get('first_name') or 'Unknown'
-            lines.append(f"• {display_name}{boost}")
-    
-    # عرض أول 100 لتجنب تجاوز حد الرسالة
-    text = f"📋 الأعضاء المحفوظين ({len(lines)}):\n\n" + "\n".join(lines[:100])
+        display = f"@{data['username']}" if data.get("username") else (data.get("full_name") or data.get("first_name") or "Unknown")
+        if search_term and search_term not in display.lower():
+            continue
+        lines.append(f"• {display}{boost}")
+
+    if not lines:
+        await update.message.reply_text(f"🔍 لم يُعثر على '{search_term}' في القائمة.")
+        return
+
+    title = f"📌 نتائج '{search_term}'" if search_term else f"📋 الأعضاء المحفوظين ({len(lines)})"
+    text = title + ":\n\n" + "\n".join(lines[:100])
+    if len(lines) > 100:
+        text += f"\n\n… و{len(lines)-100} آخرين."
     await update.message.reply_text(text)
 
 
@@ -1652,6 +1733,149 @@ async def count_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"🚫 المستثنين: {excluded_count}",
         parse_mode=ParseMode.MARKDOWN
     )
+
+
+async def ping_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """منشن شخص واحد مع رسالة مخصصة"""
+    if not await is_user_admin(update, context): return
+    custom_text = " ".join(context.args[1:]) if len(context.args) > 1 else ""
+    mention = None
+    if update.message.reply_to_message and update.message.reply_to_message.from_user:
+        target = update.message.reply_to_message.from_user
+        mention = f"@{target.username}" if target.username else f'<a href="tg://user?id={target.id}">{html.escape(target.full_name or "User")}</a>'
+    elif context.args:
+        mention = f"@{context.args[0].replace('@','').strip()}"
+    else:
+        await update.message.reply_text("❌ الاستخدام: /ping @user رسالة\nأو رُد على رسالة شخص بـ /ping رسالة")
+        return
+    msg = f"📣 {mention}"
+    if custom_text:
+        msg += f"\n{custom_text}"
+    await update.message.reply_text(msg, parse_mode=ParseMode.HTML)
+
+
+async def mention_by_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """منشن شخص بالآيدي الرقمي"""
+    if not await is_user_admin(update, context): return
+    if not context.args or not context.args[0].isdigit():
+        await update.message.reply_text("❌ الاستخدام: /mention_id 123456 الاسم")
+        return
+    uid = context.args[0]
+    name = " ".join(context.args[1:]) or "User"
+    mention = f'<a href="tg://user?id={uid}">{html.escape(name)}</a>'
+    await update.message.reply_text(f"📣 {mention}", parse_mode=ParseMode.HTML)
+
+
+def _save_history(chat_id: str, user_id: int, username: str):
+    """حفظ سجل استخدام @all"""
+    if history_collection is None:
+        return
+    from datetime import datetime, timezone
+    try:
+        history_collection.insert_one({
+            "chat_id": str(chat_id),
+            "user_id": str(user_id),
+            "username": username,
+            "timestamp": datetime.now(timezone.utc)
+        })
+        count = history_collection.count_documents({"chat_id": str(chat_id)})
+        if count > 100:
+            oldest = list(history_collection.find({"chat_id": str(chat_id)}).sort("timestamp", 1).limit(count - 100))
+            history_collection.delete_many({"_id": {"$in": [d["_id"] for d in oldest]}})
+    except Exception as e:
+        logger.error(f"History error: {e}")
+
+
+async def show_history(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """عرض آخر 5 استخدامات @all"""
+    if not await is_user_admin(update, context): return
+    chat_id = str(update.effective_chat.id)
+    if history_collection is None:
+        await update.message.reply_text("⚠️ السجل يتطلب اتصال MongoDB.")
+        return
+    records = list(history_collection.find({"chat_id": chat_id}).sort("timestamp", -1).limit(5))
+    if not records:
+        await update.message.reply_text("📭 لا يوجد سجل لاستخدام @all بعد.")
+        return
+    lines = ["📜 **آخر استخدامات @all:**\n"]
+    from datetime import timezone
+    for i, r in enumerate(records, 1):
+        ts = r["timestamp"]
+        if ts.tzinfo is None:
+            ts = ts.replace(tzinfo=timezone.utc)
+        who = f"@{r['username']}" if r.get("username") else f"ID:{r.get('user_id','?')}"
+        lines.append(f"{i}. {who} — {ts.strftime('%Y-%m-%d %H:%M')} UTC")
+    await update.message.reply_text("\n".join(lines), parse_mode=ParseMode.MARKDOWN)
+
+
+async def backup_data(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """تصدير كل بيانات المجموعة كملف JSON"""
+    if not await is_user_admin(update, context): return
+    chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+    from io import BytesIO
+    import json as _json
+    payload = {
+        "members": group_members.get(chat_id, {}),
+        "settings": group_settings.get(chat_id, {}),
+        "tags": group_tags.get(chat_id, {})
+    }
+    file = BytesIO(_json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8"))
+    file.name = f"backup_{chat_id}.json"
+    await update.message.reply_document(file, caption=f"💾 نسخة احتياطية | {len(payload['members'])} عضو")
+
+
+async def block_mention(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """منع مستخدم من تشغيل @all"""
+    if not await is_telegram_admin(update, context):
+        await update.message.reply_text("❌ هذا الأمر للمشرفين الفعليين فقط.")
+        return
+    chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+    if not context.args:
+        blocked = group_settings.get(chat_id, {}).get("blocked_mention", [])
+        if not blocked:
+            await update.message.reply_text("📭 لا يوجد ممنوعون حالياً.")
+        else:
+            names = [f"• {group_members.get(chat_id,{}).get(uid,{}).get('first_name', uid)}" for uid in blocked]
+            await update.message.reply_text("🚫 **الممنوعون من @all:**\n" + "\n".join(names), parse_mode=ParseMode.MARKDOWN)
+        return
+    username = context.args[0].replace("@", "").lower()
+    found_uid = next((uid for uid, d in group_members.get(chat_id, {}).items() if (d.get("username") or "").lower() == username), None)
+    if not found_uid:
+        await update.message.reply_text(f"❌ @{username} غير موجود في القائمة.")
+        return
+    if chat_id not in group_settings: group_settings[chat_id] = {}
+    if "blocked_mention" not in group_settings[chat_id]: group_settings[chat_id]["blocked_mention"] = []
+    if found_uid not in group_settings[chat_id]["blocked_mention"]:
+        group_settings[chat_id]["blocked_mention"].append(found_uid)
+        save_settings(group_settings, chat_id)
+        await update.message.reply_text(f"✅ تم منع @{username} من @all.")
+    else:
+        await update.message.reply_text(f"⚠️ @{username} ممنوع مسبقاً.")
+
+
+async def unblock_mention(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """رفع الحظر عن استخدام @all"""
+    if not await is_telegram_admin(update, context):
+        await update.message.reply_text("❌ هذا الأمر للمشرفين الفعليين فقط.")
+        return
+    chat_id = str(update.effective_chat.id)
+    init_data(chat_id)
+    if not context.args:
+        await update.message.reply_text("❌ الاستخدام: /unblock_mention @username")
+        return
+    username = context.args[0].replace("@", "").lower()
+    found_uid = next((uid for uid, d in group_members.get(chat_id, {}).items() if (d.get("username") or "").lower() == username), None)
+    blocked = group_settings.get(chat_id, {}).get("blocked_mention", [])
+    if found_uid and found_uid in blocked:
+        blocked.remove(found_uid)
+        group_settings[chat_id]["blocked_mention"] = blocked
+        save_settings(group_settings, chat_id)
+        await update.message.reply_text(f"✅ تم رفع الحظر عن @{username}.")
+    else:
+        await update.message.reply_text(f"⚠️ @{username} غير ممنوع أصلاً.")
+
 
 
 async def bot_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1712,9 +1936,15 @@ def create_app(chat_id=None):
         CommandHandler("setadmin", set_admin),
         CommandHandler("removeadmin", remove_admin),
         CommandHandler("listadmins", list_admins),
+        CommandHandler("ping", ping_user),
+        CommandHandler("mention_id", mention_by_id),
+        CommandHandler("history", show_history),
+        CommandHandler("backup", backup_data),
+        CommandHandler("block_mention", block_mention),
+        CommandHandler("unblock_mention", unblock_mention),
         MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, auto_add_new_member),
-        # MessageHandler(filters.ALL, track_user),  # تم نقله للبداية في مجموعة مستقلة
-        MessageHandler(~filters.COMMAND, handle_message)
+        MessageHandler(~filters.COMMAND, handle_message),
+        CallbackQueryHandler(clear_confirm_callback, pattern=r"^clear_(confirm|cancel)"),
     ]
     
     # إضافة track_user في البداية (لتتبع كل الرسائل)
@@ -1722,7 +1952,30 @@ def create_app(chat_id=None):
     
     for handler in handlers:
         app.add_handler(handler)
-            
+
+    # استعادة الجداول المحفوظة عند إعادة التشغيل
+    try:
+        from datetime import time as dt_time
+        import pytz
+        all_settings = load_settings()
+        for cid, sett in all_settings.items():
+            sched = sett.get("schedule_time")
+            if sched:
+                m = re.match(r'^(\d{1,2}):(\d{2})$', sched)
+                if m:
+                    h, mi = int(m.group(1)), int(m.group(2))
+                    tz = pytz.timezone('Asia/Riyadh')
+                    app.job_queue.run_daily(
+                        scheduled_mention_callback,
+                        time=dt_time(hour=h, minute=mi, tzinfo=tz),
+                        chat_id=int(cid),
+                        name=f"schedule_{cid}",
+                        data={"chat_id": cid}
+                    )
+                    logger.info(f"⏰ استعادة جدولة {cid} - {sched}")
+    except Exception as e:
+        logger.error(f"خطأ في استعادة الجداول: {e}")
+
     return app
 
 
