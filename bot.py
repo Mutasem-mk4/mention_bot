@@ -342,15 +342,18 @@ async def add_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = str(update.effective_chat.id)
     init_data(chat_id)
 
+    # استخدام effective_message لضمان الحصول على بيانات الرد
+    msg = update.effective_message
+    
     # دعم الرد على رسالة مباشرة
-    if update.message.reply_to_message:
-        replied_msg = update.message.reply_to_message
+    if msg.reply_to_message:
+        replied_msg = msg.reply_to_message
         target_user = replied_msg.from_user
         target_chat = replied_msg.sender_chat # للأدمينات المخفيين أو القنوات
-        
+        # ... logic remains same ...
         if target_user:
             if target_user.is_bot:
-                await update.message.reply_text("❌ لا يمكن إضافة بوت.")
+                await msg.reply_text("❌ لا يمكن إضافة بوت.")
                 return
             uid = str(target_user.id)
             username = target_user.username
@@ -364,7 +367,7 @@ async def add_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
             full_name = target_chat.title or "Anonymous Admin"
             name_display = f"@{username}" if username else first_name
         else:
-            await update.message.reply_text("❌ لم يمكن تحديد صاحب الرسالة.")
+            await msg.reply_text("❌ لم يمكن تحديد صاحب الرسالة.")
             return
 
         group_members[chat_id][uid] = {
@@ -374,14 +377,15 @@ async def add_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "multiplier": group_members[chat_id].get(uid, {}).get("multiplier", 1)
         }
         save_data(group_members, chat_id)
-        await update.message.reply_text(
+        await msg.reply_text(
             f"✅ تم إضافة {name_display}!\n👥 الإجمالي: {len(group_members[chat_id])}"
         )
         return
 
     args = context.args
     if not args:
-        await update.message.reply_text("❌ الاستخدام:\n/add @user1 @user2\nأو رُد على رسالة شخص بـ /add")
+        # إضافة رمز صغير (R-) للتشخيص إذا لم يجد الرد
+        await msg.reply_text("❌ الاستخدام:\n/add @user1 @user2\nأو رُد على رسالة شخص بـ /add (R-)")
         return
 
     added = []
@@ -500,8 +504,9 @@ async def clear_confirm_callback(update: Update, context: ContextTypes.DEFAULT_T
 
 async def get_user_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """معرفة الآيدي الرقمي عن طريق الرد على رسالة"""
-    if update.message.reply_to_message:
-        replied_msg = update.message.reply_to_message
+    msg = update.effective_message
+    if msg.reply_to_message:
+        replied_msg = msg.reply_to_message
         target_user = replied_msg.from_user
         target_chat = replied_msg.sender_chat
         
@@ -522,10 +527,10 @@ async def get_user_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if target_chat.username:
                 lines.append(f"• اليوزر: @{target_chat.username}")
         else:
-            await update.message.reply_text("❌ لم يمكن تحديد صاحب الرسالة.")
+            await msg.reply_text("❌ لم يمكن تحديد صاحب الرسالة. (تأكد من صلاحيات البوت)")
             return
             
-        await update.message.reply_text("\n".join(lines), parse_mode=ParseMode.MARKDOWN)
+        await msg.reply_text("\n".join(lines), parse_mode=ParseMode.MARKDOWN)
     else:
         # عرض معلومات من أرسل الأمر
         user = update.effective_user
@@ -1768,10 +1773,11 @@ async def count_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def ping_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """منشن شخص واحد مع رسالة مخصصة"""
     if not await is_user_admin(update, context): return
+    msg = update.effective_message
     custom_text = " ".join(context.args[1:]) if len(context.args) > 1 else ""
     mention = None
-    if update.message.reply_to_message:
-        replied_msg = update.message.reply_to_message
+    if msg.reply_to_message:
+        replied_msg = msg.reply_to_message
         target_user = replied_msg.from_user
         target_chat = replied_msg.sender_chat
         
@@ -1780,17 +1786,17 @@ async def ping_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif target_chat:
             mention = f"@{target_chat.username}" if target_chat.username else f'<a href="tg://user?id={target_chat.id}">{html.escape(target_chat.title or "Anonymous Admin")}</a>'
         else:
-            await update.message.reply_text("❌ لم يمكن تحديد صاحب الرسالة.")
+            await msg.reply_text("❌ لم يمكن تحديد صاحب الرسالة. (تأكد من صلاحيات البوت)")
             return
     elif context.args:
         mention = f"@{context.args[0].replace('@','').strip()}"
     else:
-        await update.message.reply_text("❌ الاستخدام: /ping @user رسالة\nأو رُد على رسالة شخص بـ /ping رسالة")
+        await msg.reply_text("❌ الاستخدام: /ping @user رسالة\nأو رُد على رسالة شخص بـ /ping رسالة")
         return
-    msg = f"📣 {mention}"
+    out_msg = f"📣 {mention}"
     if custom_text:
-        msg += f"\n{custom_text}"
-    await update.message.reply_text(msg, parse_mode=ParseMode.HTML)
+        out_msg += f"\n{custom_text}"
+    await msg.reply_text(out_msg, parse_mode=ParseMode.HTML)
 
 
 async def mention_by_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
