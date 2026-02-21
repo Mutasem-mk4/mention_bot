@@ -54,7 +54,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-BOT_VERSION = "1.0.2 (Fix Reply Detection)"
+BOT_VERSION = "1.0.3-NUCLEAR-FIX (2026-02-21 11:10)"
 
 # تحميل المتغيرات البيئية
 load_dotenv()

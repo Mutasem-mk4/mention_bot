@@ -1,1 +1,6 @@
 .vercel
+.env
+*.session
+*.session-journal
+bot.log
+__pycache__/
