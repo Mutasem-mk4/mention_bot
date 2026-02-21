@@ -58,7 +58,6 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-BOT_TOKEN = os.getenv("BOT_TOKEN")
 MONGO_URI = os.getenv("MONGO_URI")
 
 # تكوين MongoDB
@@ -236,10 +235,7 @@ def init_tags(chat_id):
             group_tags[chat_id] = loaded_tags[chat_id]
 
 
-# Loading data locally (will be called in create_app)
-group_members = {}
-group_settings = {}
-group_tags = {}
+# (these are initialized above at lines 92-94 — no need to re-declare)
 
 def init_data(chat_id=None):
     global group_members, group_settings, group_tags
@@ -427,25 +423,33 @@ async def clear_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"🗑️ تم مسح {count} عضو")
 
 
-async def count_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """عرض عدد الأعضاء في القائمة"""
-    chat_id = str(update.effective_chat.id)
-    init_data(chat_id)
-    
-    members = group_members.get(chat_id, {})
-    excluded = group_settings.get(chat_id, {}).get("excluded", [])
-    
-    total = len(members)
-    excluded_count = len(excluded)
-    active = total - excluded_count
-    
-    await update.message.reply_text(
-        f"👥 **عدد الأعضاء**\n\n"
-        f"📊 الإجمالي: {total}\n"
-        f"✅ النشطين: {active}\n"
-        f"🚫 المستثنين: {excluded_count}",
-        parse_mode=ParseMode.MARKDOWN
-    )
+async def get_user_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """معرفة الآيدي الرقمي عن طريق الرد على رسالة"""
+    if update.message.reply_to_message:
+        target = update.message.reply_to_message.from_user
+        if target:
+            lines = [
+                f"🆔 **معلومات المستخدم:**",
+                f"• الاسم: {target.full_name}",
+                f"• الآيدي: `{target.id}`",
+            ]
+            if target.username:
+                lines.append(f"• اليوزر: @{target.username}")
+            await update.message.reply_text("\n".join(lines), parse_mode=ParseMode.MARKDOWN)
+        else:
+            await update.message.reply_text("❌ لا يمكن الحصول على معلومات هذا المستخدم.")
+    else:
+        # عرض معلومات من أرسل الأمر
+        user = update.effective_user
+        lines = [
+            f"🆔 **معلوماتك:**",
+            f"• الاسم: {user.full_name}",
+            f"• الآيدي: `{user.id}`",
+        ]
+        if user.username:
+            lines.append(f"• اليوزر: @{user.username}")
+        lines.append(f"\n💡 للحصول على آيدي شخص آخر، رُد على رسالته بـ /id")
+        await update.message.reply_text("\n".join(lines), parse_mode=ParseMode.MARKDOWN)
 
 
 async def boost_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1459,18 +1463,6 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
 
     # بناء القائمة مع مراعاة الـ Multiplier والتحقق من الوجود
     valid_members = []
-    ids_to_remove = []
-    
-    def find_id_by_username(username):
-        """البحث عن المعرف الرقمي للمستخدم في قاعدة البيانات العالمية"""
-        uname = username.lower()
-        for cid in group_members:
-            for uid_key, udata in group_members[cid].items():
-                if uid_key.isdigit() and (udata.get("username") or "").lower() == uname:
-                    return int(uid_key)
-        return None
-
-    ids_to_remove = []
     unique_uids = list(group_members[chat_id].keys())
     
     # تخطي فحص الوجود لزيادة السرعة في المجموعات الكبيرة على Vercel
@@ -1513,7 +1505,7 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                     if data.get("username"):
                         mentions.append(f"@{data['username']}")
                     else:
-                        name = html.escape(data['first_name'])
+                        name = html.escape(data.get('first_name') or data.get('full_name') or 'User')
                         mentions.append(f'<a href="tg://user?id={uid}">{name}</a>')
                 
                 batch_num = (i // batch_size) + 1
@@ -1633,7 +1625,8 @@ async def list_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if data.get("username"):
             lines.append(f"• @{data['username']}{boost}")
         else:
-            lines.append(f"• {data['full_name']}{boost}")
+            display_name = data.get('full_name') or data.get('first_name') or 'Unknown'
+            lines.append(f"• {display_name}{boost}")
     
     # عرض أول 100 لتجنب تجاوز حد الرسالة
     text = f"📋 الأعضاء المحفوظين ({len(lines)}):\n\n" + "\n".join(lines[:100])
@@ -1641,11 +1634,24 @@ async def list_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def count_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """عرض عدد الأعضاء"""
+    """عرض عدد الأعضاء في القائمة"""
     chat_id = str(update.effective_chat.id)
     init_data(chat_id)
-    count = len(group_members.get(chat_id, {}))
-    await update.message.reply_text(f"👥 عدد الأعضاء: {count}")
+    
+    members = group_members.get(chat_id, {})
+    excluded = group_settings.get(chat_id, {}).get("excluded", [])
+    
+    total = len(members)
+    excluded_count = len(excluded)
+    active = total - excluded_count
+    
+    await update.message.reply_text(
+        f"👥 **عدد الأعضاء**\n\n"
+        f"📊 الإجمالي: {total}\n"
+        f"✅ النشطين: {active}\n"
+        f"🚫 المستثنين: {excluded_count}",
+        parse_mode=ParseMode.MARKDOWN
+    )
 
 
 async def bot_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1700,6 +1706,7 @@ def create_app(chat_id=None):
         CommandHandler("stats", show_stats),
         CommandHandler("export", export_members),
         CommandHandler("count", count_members),
+        CommandHandler("id", get_user_id),
         CommandHandler("import", import_members),
         CommandHandler("schedule", schedule_mention),
         CommandHandler("setadmin", set_admin),
