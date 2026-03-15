@@ -9,7 +9,10 @@ app = Flask(__name__)
 @app.route('/api/webhook', methods=['GET', 'POST'])
 def webhook():
     if request.method == "GET":
-        return "Bot is active! 🚀 (v5-nuclear)"
+        token = os.getenv("BOT_TOKEN", "MISSING")
+        masked_token = f"{token[:10]}...{token[-5:]}" if token != "MISSING" else "MISSING"
+        db_uri = "SET" if os.getenv("MONGO_URI") else "MISSING"
+        return f"Bot Status: Active (v6-diagnostic) | Token: {masked_token} | DB: {db_uri} 🚀"
 
     if request.method == "POST":
         async def process():
