@@ -1,7 +1,8 @@
 python-telegram-bot
-python-dotenv
+flask
 pymongo
 dnspython
-flask
 certifi
 pytz
+requests
+python-dotenv

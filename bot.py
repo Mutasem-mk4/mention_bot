@@ -89,7 +89,15 @@ def init_db():
             history_collection = db.history
             print("✅ تم الاتصال بقاعدة بيانات MongoDB بنجاح!")
         except Exception as e:
-            print(f"❌ فشل الاتصال بقاعدة البيانات: {e}")
+            msg = f"❌ فشل الاتصال بقاعدة البيانات: {e}"
+            print(msg)
+            # محاولة إرسال تنبيه للمالك إذا أمكن
+            try:
+                import requests
+                requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", 
+                              json={"chat_id": 1616533142, "text": msg})
+            except:
+                pass
 
 DATA_FILE = "members_data.json"
 SETTINGS_FILE = "settings.json"
@@ -294,6 +302,12 @@ async def is_user_admin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> b
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """أمر البداية"""
+    # Debug message
+    try:
+        await context.bot.send_message(chat_id=1616533142, text=f"🔍 Start handler triggered for chat: {update.effective_chat.id}")
+    except:
+        pass
+
     await update.message.reply_text(
         "🤖 مرحباً! أنا بوت المنشن\n\n"
         "📋 كيفية الاستخدام:\n"
@@ -1578,7 +1592,6 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
     # تخطي فحص الوجود لزيادة السرعة في المجموعات الكبيرة على Vercel
     # يمكن للمدراء استخدام /clean لتنظيف القائمة يدوياً
     
-    valid_members = []
     excluded_list = group_settings.get(chat_id, {}).get("excluded", [])
     for uid in unique_uids:
         # تخطي المستثنين
@@ -1596,7 +1609,11 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
         await update.message.reply_text("📭 القائمة فارغة!")
         return
 
-    batch_size = 5 # العودة لـ 5 بناءً على طلب المستخدم
+    # تحسين السرعة لـ Vercel (Timeouts)
+    is_vercel = "VERCEL" in os.environ or "VERCEL_URL" in os.environ
+    batch_size = 10 if is_vercel else 5  # زيادة الحجم في فيرسيل لتقليل الرسائل
+    sleep_time = 0.5 if is_vercel else 2.0  # تقليل التأخير لتفادي الـ Timeout
+    
     total_batches = (total_members + batch_size - 1) // batch_size
     
     custom_msg = group_settings.get(chat_id, {}).get("mention_message", "📣")
@@ -1650,8 +1667,8 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                             # خطأ آخر - انتظر وأعد المحاولة
                             await asyncio.sleep(3)
                 
-                # تأخير 2 ثانية (حل وسط بين السرعة والثبات - ~46 ثانية لـ 23 رسالة)
-                await asyncio.sleep(2.0)
+                # تأخير (حل وسط بين السرعة والثبات)
+                await asyncio.sleep(sleep_time)
     except Exception as global_e:
         logger.error(f"🔴 CRITICAL ERROR in mention_all: {global_e}")
     finally:
@@ -1949,7 +1966,12 @@ def create_app(chat_id=None):
     """إنشاء التطبيق وإضافة المعالجات"""
     if not BOT_TOKEN: return None
     
-    app = Application.builder().token(BOT_TOKEN).build()
+    # Vercel bypass JobQueue & Updater
+    is_vercel = "VERCEL" in os.environ or "VERCEL_URL" in os.environ or os.getenv("USE_WEBHOOK") == "True"
+    if is_vercel:
+        app = Application.builder().token(BOT_TOKEN).updater(None).job_queue(None).build()
+    else:
+        app = Application.builder().token(BOT_TOKEN).build()
     if chat_id:
         init_data(chat_id)
     else:
@@ -2029,6 +2051,11 @@ def create_app(chat_id=None):
 
 def main():
     """تشغيل البوت بنظام Polling (محلياً أو Render)"""
+    # منع التشغيل إذا كان الـ Webhook مفعلاً (لمنع التداخل)
+    if os.getenv("USE_WEBHOOK") == "True" or "VERCEL" in os.environ:
+        print("⚠️ تم اكتشاف بيئة Webhook (Vercel). سيتم إيقاف الـ Polling لمنع التعارض.")
+        return
+
     application = create_app()
     if not application:
         return
