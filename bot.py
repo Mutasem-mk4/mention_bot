@@ -1549,6 +1549,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_rounds=1, quiet=False):
     """منشن الجميع مع دعم لعدة جولات والـ Boost"""
     if not await is_user_admin(update, context):
+        await update.message.reply_text("⚠️ المعذرة، هذا الأمر متاح للمشرفين فقط.")
         return
 
     # منع التنفيذ المزدوج لنفس الرسالة
@@ -2067,7 +2068,7 @@ def main():
     print("📌 الأوامر: /add, /remove, /list, /count, /clear, @all")
     
     # تشغيل سيرفر الويب الوهمي (Keep Alive)
-    keep_alive()
+    # keep_alive()
 
     # بدء تشغيل البوت (مع حذف الويب هوك القديم لضمان العمل على Render)
     print("🚀 جاري تشغيل البوت بنظام Polling...")
