@@ -108,14 +108,7 @@ def init_db():
             print("✅ تم الاتصال بقاعدة بيانات MongoDB بنجاح!")
         except Exception as e:
             msg = f"❌ فشل الاتصال بقاعدة البيانات: {e}"
-            print(msg)
-            # محاولة إرسال تنبيه للمالك إذا أمكن
-            try:
-                import requests
-                requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", 
-                              json={"chat_id": 1616533142, "text": msg})
-            except:
-                pass
+            logger.error(msg)
 
 DATA_FILE = "members_data.json"
 SETTINGS_FILE = "settings.json"
