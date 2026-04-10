@@ -146,7 +146,14 @@ def load_data(chat_id=None):
     if os.path.exists(DATA_FILE):
         try:
             with open(DATA_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
+                data = json.load(f)
+                if chat_id:
+                    chat_key = str(chat_id)
+                    if chat_key in data:
+                        group_members[chat_key] = data[chat_key]
+                        return {chat_key: data[chat_key]}
+                    return {}
+                return data
         except:
             return {}
     return {}
@@ -206,7 +213,14 @@ def load_settings(chat_id=None):
     if os.path.exists(SETTINGS_FILE):
         try:
             with open(SETTINGS_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
+                data = json.load(f)
+                if chat_id:
+                    chat_key = str(chat_id)
+                    if chat_key in data:
+                        group_settings[chat_key] = data[chat_key]
+                        return {chat_key: data[chat_key]}
+                    return {}
+                return data
         except:
             return {}
     return {}
@@ -257,7 +271,14 @@ def load_tags(chat_id=None):
     else:
         if os.path.exists(TAGS_FILE):
             with open(TAGS_FILE, "r", encoding='utf-8') as f:
-                return json.load(f)
+                data = json.load(f)
+                if chat_id:
+                    chat_key = str(chat_id)
+                    if chat_key in data:
+                        group_tags[chat_key] = data[chat_key]
+                        return {chat_key: data[chat_key]}
+                    return {}
+                return data
     return {}
 
 
