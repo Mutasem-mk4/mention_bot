@@ -1982,7 +1982,10 @@ async def bot_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """حالة البوت مع عرض الآيدي"""
     if not await is_user_admin(update, context): return
     chat_id = str(update.effective_chat.id)
-    db_status = "✅ متصل بـ MongoDB" if members_collection is not None else "⚠️ تخزين محلي"
+    init_data(chat_id)
+    live_count = len(group_members.get(chat_id, {}))
+    fallback_count = len(load_data().get(chat_id, {}))
+    db_status = "✅ متصل بـ MongoDB" if members_collection is not None else "⚠️ تخزين محلي/بديل"
     
     # تحديد البيئة
     env_type = "Render (Polling)" if "RENDER" in os.environ else "Vercel (Webhook)"
@@ -1991,6 +1994,8 @@ async def bot_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"⚙️ **حالة البوت:**\n\n"
         f"🆔 آيدي هذه المجموعة: `{chat_id}`\n"
         f"📊 المجموعات النشطة: {len(group_members)}\n"
+        f"👥 أعضاء هذه المجموعة: {live_count}\n"
+        f"💾 أعضاء ملف البديل لهذه المجموعة: {fallback_count}\n"
         f"🗄 قاعدة البيانات: {db_status}\n"
         f"🚀 الاستضافة: {env_type}\n"
         f"🔖 الإصدار: `{BOT_VERSION}`",
