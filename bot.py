@@ -12,6 +12,7 @@ import json
 import asyncio
 import re
 import html
+import time
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.constants import ParseMode
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, ContextTypes, filters
@@ -72,10 +73,12 @@ history_collection = None  # سجل استخدام @all
 # كاش لعدد الرسائل (لتقليل عمليات الحفظ على MongoDB)
 message_count_cache = {}  # {chat_id: {user_id: count}}
 MESSAGE_SAVE_THRESHOLD = 5
+DB_RETRY_COOLDOWN_SECONDS = 300
+db_retry_after = 0.0
 
 
 def disable_db(exc=None):
-    global db, members_collection, settings_collection, tags_collection, history_collection
+    global db, members_collection, settings_collection, tags_collection, history_collection, db_retry_after
     if exc:
         logger.error(f"Disabling MongoDB and falling back to local storage: {exc}")
     db = None
@@ -83,10 +86,13 @@ def disable_db(exc=None):
     settings_collection = None
     tags_collection = None
     history_collection = None
+    db_retry_after = time.time() + DB_RETRY_COOLDOWN_SECONDS
 
 def init_db():
     global db, members_collection, settings_collection, tags_collection, history_collection
     if db is not None:
+        return
+    if time.time() < db_retry_after:
         return
     if MONGO_URI:
         try:
