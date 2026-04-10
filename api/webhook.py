@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import os
+from threading import Lock
 
 from flask import Flask, request
 from telegram import Update
@@ -10,6 +11,24 @@ from bot import create_app, init_data
 app = Flask(__name__)
 logger = logging.getLogger(__name__)
 bot_app = create_app()
+bot_app_initialized = False
+bot_app_lock = Lock()
+
+async def _initialize_app():
+    if bot_app is None:
+        raise RuntimeError("BOT_TOKEN is missing")
+    await bot_app.initialize()
+
+
+def ensure_initialized():
+    global bot_app_initialized
+    if bot_app_initialized:
+        return
+    with bot_app_lock:
+        if bot_app_initialized:
+            return
+        asyncio.run(_initialize_app())
+        bot_app_initialized = True
 
 
 async def _process_update(update_json, chat_id):
@@ -19,12 +38,8 @@ async def _process_update(update_json, chat_id):
     if chat_id is not None:
         init_data(chat_id)
 
-    await bot_app.initialize()
-    try:
-        update = Update.de_json(update_json, bot_app.bot)
-        await bot_app.process_update(update)
-    finally:
-        await bot_app.shutdown()
+    update = Update.de_json(update_json, bot_app.bot)
+    await bot_app.process_update(update)
 
 @app.route('/api/webhook', methods=['GET', 'POST'])
 def webhook():
@@ -44,6 +59,7 @@ def webhook():
             elif "callback_query" in update_json:
                 chat_id = update_json["callback_query"]["message"]["chat"]["id"]
 
+            ensure_initialized()
             asyncio.run(_process_update(update_json, chat_id))
             return "OK", 200
         except Exception as e:
