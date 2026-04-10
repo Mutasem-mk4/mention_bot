@@ -5,16 +5,19 @@ import os
 from flask import Flask, request
 from telegram import Update
 
-from bot import create_app
+from bot import create_app, init_data
 
 app = Flask(__name__)
 logger = logging.getLogger(__name__)
+bot_app = create_app()
 
 
 async def _process_update(update_json, chat_id):
-    bot_app = create_app(chat_id)
     if bot_app is None:
         raise RuntimeError("BOT_TOKEN is missing")
+
+    if chat_id is not None:
+        init_data(chat_id)
 
     await bot_app.initialize()
     try:
