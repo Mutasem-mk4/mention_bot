@@ -989,6 +989,11 @@ async def schedule_mention(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     chat_id = str(update.effective_chat.id)
     init_data(chat_id)
+    if context.job_queue is None:
+        await update.message.reply_text(
+            "❌ الجدولة غير مدعومة في وضع Webhook الحالي. شغّل البوت بنظام Polling أو فعّل JobQueue أولاً."
+        )
+        return
     
     if not context.args:
         current_schedule = group_settings.get(chat_id, {}).get("schedule_time")
@@ -2029,20 +2034,21 @@ def create_app(chat_id=None):
         from datetime import time as dt_time
         import pytz
         all_settings = load_settings()
-        for cid, sett in all_settings.items():
-            sched = sett.get("schedule_time")
-            if sched:
-                m = re.match(r'^(\d{1,2}):(\d{2})$', sched)
-                if m:
-                    h, mi = int(m.group(1)), int(m.group(2))
-                    tz = pytz.timezone('Asia/Riyadh')
-                    app.job_queue.run_daily(
-                        scheduled_mention_callback,
-                        time=dt_time(hour=h, minute=mi, tzinfo=tz),
-                        chat_id=int(cid),
-                        name=f"schedule_{cid}",
-                        data={"chat_id": cid}
-                    )
+        if app.job_queue is not None:
+            for cid, sett in all_settings.items():
+                sched = sett.get("schedule_time")
+                if sched:
+                    m = re.match(r'^(\d{1,2}):(\d{2})$', sched)
+                    if m:
+                        h, mi = int(m.group(1)), int(m.group(2))
+                        tz = pytz.timezone('Asia/Riyadh')
+                        app.job_queue.run_daily(
+                            scheduled_mention_callback,
+                            time=dt_time(hour=h, minute=mi, tzinfo=tz),
+                            chat_id=int(cid),
+                            name=f"schedule_{cid}",
+                            data={"chat_id": cid}
+                        )
                     logger.info(f"⏰ استعادة جدولة {cid} - {sched}")
     except Exception as e:
         logger.error(f"خطأ في استعادة الجداول: {e}")
