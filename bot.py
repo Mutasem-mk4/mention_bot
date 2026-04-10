@@ -73,6 +73,17 @@ history_collection = None  # سجل استخدام @all
 message_count_cache = {}  # {chat_id: {user_id: count}}
 MESSAGE_SAVE_THRESHOLD = 5
 
+
+def disable_db(exc=None):
+    global db, members_collection, settings_collection, tags_collection, history_collection
+    if exc:
+        logger.error(f"Disabling MongoDB and falling back to local storage: {exc}")
+    db = None
+    members_collection = None
+    settings_collection = None
+    tags_collection = None
+    history_collection = None
+
 def init_db():
     global db, members_collection, settings_collection, tags_collection, history_collection
     if db is not None:
@@ -82,6 +93,7 @@ def init_db():
             from pymongo import MongoClient
             # استخدام certifi لحل مشاكل SSL
             client = MongoClient(MONGO_URI, tlsCAFile=certifi.where(), serverSelectionTimeoutMS=5000)
+            client.admin.command("ping")
             db = client.get_database("telegram_bot_db")
             members_collection = db.members
             settings_collection = db.settings
@@ -112,20 +124,23 @@ group_tags = {}     # {chat_id: {tag_name: [user_ids]}}
 def load_data(chat_id=None):
     """تحميل بيانات الأعضاء (MongoDB أو ملف)"""
     if members_collection is not None:
-        if chat_id:
-            # تحميل مجموعة محددة فقط لسرعة الأداء
-            doc = members_collection.find_one({"_id": str(chat_id)})
-            if doc:
-                group_members[str(chat_id)] = doc["members"]
-                return {str(chat_id): doc["members"]}
-            return {}
-        
-        # تحميل الكل (لأغراض الإحصاء فقط)
-        data = {}
-        cursor = members_collection.find({})
-        for doc in cursor:
-            data[doc["_id"]] = doc["members"]
-        return data
+        try:
+            if chat_id:
+                # تحميل مجموعة محددة فقط لسرعة الأداء
+                doc = members_collection.find_one({"_id": str(chat_id)})
+                if doc:
+                    group_members[str(chat_id)] = doc["members"]
+                    return {str(chat_id): doc["members"]}
+                return {}
+            
+            # تحميل الكل (لأغراض الإحصاء فقط)
+            data = {}
+            cursor = members_collection.find({})
+            for doc in cursor:
+                data[doc["_id"]] = doc["members"]
+            return data
+        except Exception as e:
+            disable_db(e)
     
     # تحميل من ملف محلي
     if os.path.exists(DATA_FILE):
@@ -140,25 +155,28 @@ def load_data(chat_id=None):
 def save_data(data, chat_id=None):
     """حفظ بيانات الأعضاء (MongoDB أو ملف)"""
     if members_collection is not None:
-        if chat_id:
-            # حفظ مجموعة محددة فقط
-            members = data.get(str(chat_id))
-            if members:
+        try:
+            if chat_id:
+                # حفظ مجموعة محددة فقط
+                members = data.get(str(chat_id))
+                if members:
+                    members_collection.update_one(
+                        {"_id": str(chat_id)},
+                        {"$set": {"members": members}},
+                        upsert=True
+                    )
+                return
+                
+            # الحفظ في MongoDB للكل
+            for cid, members in data.items():
                 members_collection.update_one(
-                    {"_id": str(chat_id)},
+                    {"_id": str(cid)},
                     {"$set": {"members": members}},
                     upsert=True
                 )
             return
-            
-        # الحفظ في MongoDB للكل
-        for cid, members in data.items():
-            members_collection.update_one(
-                {"_id": str(cid)},
-                {"$set": {"members": members}},
-                upsert=True
-            )
-        return
+        except Exception as e:
+            disable_db(e)
 
     # الحفظ في ملف محلي
     with open(DATA_FILE, "w", encoding="utf-8") as f:
@@ -168,19 +186,22 @@ def save_data(data, chat_id=None):
 def load_settings(chat_id=None):
     """تحميل الإعدادات (MongoDB أو ملف)"""
     if settings_collection is not None:
-        if chat_id:
-            doc = settings_collection.find_one({"_id": str(chat_id)})
-            if doc and "settings" in doc:
-                group_settings[str(chat_id)] = doc["settings"]
-                return {str(chat_id): doc["settings"]}
-            return {}
-            
-        data = {}
-        cursor = settings_collection.find({})
-        for doc in cursor:
-            if "settings" in doc:
-                data[doc["_id"]] = doc["settings"]
-        return data
+        try:
+            if chat_id:
+                doc = settings_collection.find_one({"_id": str(chat_id)})
+                if doc and "settings" in doc:
+                    group_settings[str(chat_id)] = doc["settings"]
+                    return {str(chat_id): doc["settings"]}
+                return {}
+                
+            data = {}
+            cursor = settings_collection.find({})
+            for doc in cursor:
+                if "settings" in doc:
+                    data[doc["_id"]] = doc["settings"]
+            return data
+        except Exception as e:
+            disable_db(e)
 
     if os.path.exists(SETTINGS_FILE):
         try:
@@ -194,23 +215,26 @@ def load_settings(chat_id=None):
 def save_settings(data, chat_id=None):
     """حفظ الإعدادات (MongoDB أو ملف)"""
     if settings_collection is not None:
-        if chat_id:
-            settings = data.get(str(chat_id))
-            if settings:
+        try:
+            if chat_id:
+                settings = data.get(str(chat_id))
+                if settings:
+                    settings_collection.update_one(
+                        {"_id": str(chat_id)},
+                        {"$set": {"settings": settings}},
+                        upsert=True
+                    )
+                return
+                
+            for cid, settings in data.items():
                 settings_collection.update_one(
-                    {"_id": str(chat_id)},
+                    {"_id": str(cid)},
                     {"$set": {"settings": settings}},
                     upsert=True
                 )
             return
-            
-        for cid, settings in data.items():
-            settings_collection.update_one(
-                {"_id": str(cid)},
-                {"$set": {"settings": settings}},
-                upsert=True
-            )
-        return
+        except Exception as e:
+            disable_db(e)
 
     with open(SETTINGS_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
@@ -219,14 +243,17 @@ def save_settings(data, chat_id=None):
 def load_tags(chat_id=None):
     """تحميل المنشن المخصص"""
     if tags_collection is not None:
-        if chat_id:
-            doc = tags_collection.find_one({"_id": str(chat_id)})
-            if doc:
-                group_tags[str(chat_id)] = doc["tags"]
-                return {str(chat_id): doc["tags"]}
-            return {}
-        for doc in tags_collection.find():
-            group_tags[doc["_id"]] = doc["tags"]
+        try:
+            if chat_id:
+                doc = tags_collection.find_one({"_id": str(chat_id)})
+                if doc:
+                    group_tags[str(chat_id)] = doc["tags"]
+                    return {str(chat_id): doc["tags"]}
+                return {}
+            for doc in tags_collection.find():
+                group_tags[doc["_id"]] = doc["tags"]
+        except Exception as e:
+            disable_db(e)
     else:
         if os.path.exists(TAGS_FILE):
             with open(TAGS_FILE, "r", encoding='utf-8') as f:
@@ -236,10 +263,13 @@ def load_tags(chat_id=None):
 
 def save_tags(data, chat_id):
     if tags_collection is not None:
-        tags_collection.replace_one({"_id": str(chat_id)}, {"tags": data}, upsert=True)
-    else:
-        with open(TAGS_FILE, "w", encoding='utf-8') as f:
-            json.dump(group_tags, f, ensure_ascii=False, indent=4)
+        try:
+            tags_collection.replace_one({"_id": str(chat_id)}, {"tags": data}, upsert=True)
+            return
+        except Exception as e:
+            disable_db(e)
+    with open(TAGS_FILE, "w", encoding='utf-8') as f:
+        json.dump(group_tags, f, ensure_ascii=False, indent=4)
 
 
 def init_tags(chat_id):
