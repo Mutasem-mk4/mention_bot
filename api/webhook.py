@@ -76,6 +76,30 @@ def send_message(chat_id, text, **extra):
     response.raise_for_status()
 
 
+def telegram_get(method, params, timeout=4):
+    token = os.getenv("BOT_TOKEN")
+    if not token:
+        raise RuntimeError("BOT_TOKEN is missing")
+
+    response = requests.get(
+        f"https://api.telegram.org/bot{token}/{method}",
+        params=params,
+        timeout=timeout,
+    )
+    response.raise_for_status()
+    return response.json()
+
+
+def get_chat_member_count(chat_id):
+    try:
+        data = telegram_get("getChatMemberCount", {"chat_id": chat_id}, timeout=4)
+        if data.get("ok"):
+            return data.get("result")
+    except Exception as exc:
+        logger.warning("Telegram member count failed: %s", exc)
+    return None
+
+
 def load_settings_for_chat(chat_id):
     chat_key = str(chat_id)
 
@@ -192,13 +216,11 @@ def is_telegram_admin(message, chat_id):
     if not token:
         raise RuntimeError("BOT_TOKEN is missing")
 
-    response = requests.get(
-        f"https://api.telegram.org/bot{token}/getChatMember",
-        params={"chat_id": chat_id, "user_id": user_id},
+    result = telegram_get(
+        "getChatMember",
+        {"chat_id": chat_id, "user_id": user_id},
         timeout=4,
-    )
-    response.raise_for_status()
-    result = response.json().get("result") or {}
+    ).get("result") or {}
     return result.get("status") in {"creator", "administrator"}
 
 
@@ -228,6 +250,7 @@ def try_fast_mention_all(message, chat_id, text):
     quiet = bool(re.search(r"\bquiet\b", text, re.IGNORECASE))
     members = load_members_for_chat(chat_id)
     settings = load_settings_for_chat(chat_id)
+    actual_count = get_chat_member_count(chat_id)
     excluded = set(settings.get("excluded", []))
     custom_msg = html.escape(settings.get("mention_message", "📣"))
 
@@ -240,8 +263,18 @@ def try_fast_mention_all(message, chat_id, text):
             valid_members.append((uid, data))
 
     if not valid_members:
-        send_message(chat_id, "📭 القائمة فارغة!", reply_to_message_id=message.get("message_id"))
+        suffix = f"\n👥 عدد أعضاء المجموعة في تيليجرام: {actual_count}" if actual_count else ""
+        send_message(chat_id, "📭 قائمة المنشن المحفوظة فارغة!" + suffix, reply_to_message_id=message.get("message_id"))
         return True
+
+    unique_saved = len({uid for uid, _ in valid_members})
+    if actual_count and unique_saved < max(5, actual_count // 2):
+        send_message(
+            chat_id,
+            f"⚠️ المجموعة فيها {actual_count} عضو، لكن البوت حافظ {unique_saved} فقط للمنشن.\n"
+            "تيليجرام لا يسمح للبوت بجلب كل الأعضاء تلقائياً. خلي الأعضاء يرسلوا رسالة، أو أضفهم بـ /add أو /import.",
+            reply_to_message_id=message.get("message_id"),
+        )
 
     batch_size = 20
     total_batches = (len(valid_members) + batch_size - 1) // batch_size
@@ -285,15 +318,21 @@ def try_fast_command(update_json):
 
     if command == "/count":
         members = load_members_for_chat(chat_id)
-        send_message(chat_id, f"👥 عدد الأعضاء المحفوظين: {len(members)}")
+        actual_count = get_chat_member_count(chat_id)
+        text_out = f"👥 أعضاء المنشن المحفوظين: {len(members)}"
+        if actual_count is not None:
+            text_out += f"\n👥 أعضاء المجموعة في تيليجرام: {actual_count}"
+        send_message(chat_id, text_out)
         return True
 
     if command == "/list":
         args = text.split(maxsplit=1)
         search_term = args[1].lower().strip() if len(args) > 1 else ""
         members = load_members_for_chat(chat_id)
+        actual_count = get_chat_member_count(chat_id)
         if not members:
-            send_message(chat_id, "📭 القائمة فارغة!")
+            suffix = f"\n👥 أعضاء المجموعة في تيليجرام: {actual_count}" if actual_count is not None else ""
+            send_message(chat_id, "📭 قائمة المنشن المحفوظة فارغة!" + suffix)
             return True
 
         lines = []
@@ -309,10 +348,14 @@ def try_fast_command(update_json):
             send_message(chat_id, f"🔍 لم يُعثر على '{search_term}' في القائمة.")
             return True
 
-        title = f"📌 نتائج '{search_term}'" if search_term else f"📋 الأعضاء المحفوظين ({len(lines)})"
+        title = f"📌 نتائج '{search_term}'" if search_term else f"📋 أعضاء المنشن المحفوظين ({len(lines)})"
         out = title + ":\n\n" + "\n".join(lines[:100])
         if len(lines) > 100:
             out += f"\n\n... و{len(lines) - 100} آخرين."
+        if actual_count is not None:
+            out += f"\n\n👥 أعضاء المجموعة في تيليجرام: {actual_count}"
+            if len(members) < actual_count:
+                out += f"\n⚠️ البوت لا يملك إلا {len(members)} عضو محفوظ للمنشن."
         send_message(chat_id, out)
         return True
 
