@@ -20,6 +20,7 @@ bot_app_lock = Lock()
 create_app = None
 init_data = None
 Update = None
+mongo_client = None
 
 START_TEXT = (
     "🤖 مرحباً! أنا بوت المنشن\n\n"
@@ -91,37 +92,79 @@ def load_settings_for_chat(chat_id):
     return {}
 
 
+def load_members_from_json(chat_key):
+    try:
+        with open("members_data.json", "r", encoding="utf-8") as file:
+            return json.load(file).get(chat_key) or {}
+    except Exception as exc:
+        logger.warning("Fast member load from JSON failed: %s", exc)
+        return {}
+
+
+def load_members_from_mongo(chat_key):
+    global mongo_client
+    mongo_uri = os.getenv("MONGO_URI")
+    if not mongo_uri:
+        return {}
+
+    try:
+        import certifi
+        from pymongo import MongoClient
+
+        if mongo_client is None:
+            mongo_client = MongoClient(
+                mongo_uri,
+                tlsCAFile=certifi.where(),
+                serverSelectionTimeoutMS=1800,
+                connectTimeoutMS=1800,
+            )
+        doc = mongo_client.get_database("telegram_bot_db").members.find_one({"_id": chat_key})
+        if doc:
+            return doc.get("members", {}) or {}
+    except Exception as exc:
+        logger.warning("Fast member load from MongoDB failed: %s", exc)
+
+    return {}
+
+
 def load_members_for_chat(chat_id):
     chat_key = str(chat_id)
 
+    if os.getenv("VERCEL") or os.getenv("VERCEL_URL"):
+        local_members = load_members_from_json(chat_key)
+        mongo_members = load_members_from_mongo(chat_key)
+        return {**local_members, **mongo_members}
+
+    return load_members_from_json(chat_key)
+
+
+def save_member_to_mongo(chat_id, user):
+    chat_key = str(chat_id)
+    user_id = str(user.get("id"))
+    if not user_id or user.get("is_bot"):
+        return
+
+    current = load_members_from_mongo(chat_key)
+    existing = current.get(user_id, {})
+    current[user_id] = {
+        "username": user.get("username"),
+        "first_name": user.get("first_name") or "User",
+        "full_name": " ".join(
+            part for part in [user.get("first_name"), user.get("last_name")] if part
+        ) or user.get("first_name") or "User",
+        "multiplier": existing.get("multiplier", 1),
+        "message_count": existing.get("message_count", 0),
+    }
     try:
-        with open("members_data.json", "r", encoding="utf-8") as file:
-            members = json.load(file).get(chat_key) or {}
-            if members:
-                return members
-    except Exception as exc:
-        logger.warning("Fast member load from JSON failed: %s", exc)
-
-    mongo_uri = os.getenv("MONGO_URI")
-
-    if mongo_uri:
-        try:
-            import certifi
-            from pymongo import MongoClient
-
-            client = MongoClient(
-                mongo_uri,
-                tlsCAFile=certifi.where(),
-                serverSelectionTimeoutMS=800,
-                connectTimeoutMS=800,
+        load_members_from_mongo(chat_key)
+        if mongo_client is not None:
+            mongo_client.get_database("telegram_bot_db").members.update_one(
+                {"_id": chat_key},
+                {"$set": {"members": current}},
+                upsert=True,
             )
-            doc = client.get_database("telegram_bot_db").members.find_one({"_id": chat_key})
-            if doc:
-                return doc.get("members", {}) or {}
-        except Exception as exc:
-            logger.warning("Fast member load from MongoDB failed: %s", exc)
-
-    return {}
+    except Exception as exc:
+        logger.warning("Fast member save to MongoDB failed: %s", exc)
 
 
 def format_member(data):
