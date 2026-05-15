@@ -1149,7 +1149,7 @@ async def scheduled_mention_callback(context):
     if not valid_members:
         return
     
-    batch_size = 5
+    batch_size = 15
     total = len(valid_members)
     
     for i in range(0, total, batch_size):
@@ -1173,7 +1173,7 @@ async def scheduled_mention_callback(context):
                 text=message,
                 parse_mode=ParseMode.HTML
             )
-            await asyncio.sleep(2.0)
+            await asyncio.sleep(0.15)
         except Exception as e:
             logger.error(f"Scheduled mention error: {e}")
 
@@ -1557,7 +1557,7 @@ async def mention_tag(update: Update, context: ContextTypes.DEFAULT_TYPE, tag_na
 
     if not valid_members: return
 
-    batch_size = 5
+    batch_size = 15
     for i in range(0, len(valid_members), batch_size):
         batch = valid_members[i:i+batch_size]
         mentions = []
@@ -1570,7 +1570,7 @@ async def mention_tag(update: Update, context: ContextTypes.DEFAULT_TYPE, tag_na
                 mentions.append(f"@{uname}")
         
         await update.message.reply_text(" ".join(mentions), parse_mode=ParseMode.HTML)
-        await asyncio.sleep(0.3)
+        await asyncio.sleep(0.1)
 
 
 async def mention_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -1684,8 +1684,8 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
 
     # تحسين السرعة لـ Vercel (Timeouts)
     is_vercel = "VERCEL" in os.environ or "VERCEL_URL" in os.environ
-    batch_size = 10 if is_vercel else 5  # زيادة الحجم في فيرسيل لتقليل الرسائل
-    sleep_time = 0.5 if is_vercel else 2.0  # تقليل التأخير لتفادي الـ Timeout
+    batch_size = 20 if is_vercel else 15  # تقليل عدد الرسائل لتسريع المنشن
+    sleep_time = 0.1 if is_vercel else 0.15  # الاعتماد على انتظار Telegram فقط عند الـ flood limit
     
     total_batches = (total_members + batch_size - 1) // batch_size
     
@@ -1742,8 +1742,8 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                             if attempts >= 3:
                                 logger.error(f"Skipping batch {batch_num} after {attempts} failed attempts")
                                 break
-                            # خطأ آخر - انتظر وأعد المحاولة
-                            await asyncio.sleep(3)
+                            # خطأ آخر - انتظر قليلاً وأعد المحاولة
+                            await asyncio.sleep(1)
                 
                 # تأخير (حل وسط بين السرعة والثبات)
                 await asyncio.sleep(sleep_time)
