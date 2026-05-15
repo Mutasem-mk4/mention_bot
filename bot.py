@@ -352,12 +352,6 @@ async def is_user_admin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> b
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """أمر البداية"""
-    # Debug message
-    try:
-        await context.bot.send_message(chat_id=1616533142, text=f"🔍 Start handler triggered for chat: {update.effective_chat.id}")
-    except:
-        pass
-
     await update.message.reply_text(
         "🤖 مرحباً! أنا بوت المنشن\n\n"
         "📋 كيفية الاستخدام:\n"
@@ -1181,6 +1175,9 @@ async def scheduled_mention_callback(context):
 async def track_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """تتبع المستخدمين تلقائياً عند إرسال أي رسالة"""
     if not update.effective_chat or not update.effective_user:
+        return
+
+    if update.message and update.message.text and update.message.text.startswith("/"):
         return
     
     if update.effective_chat.type not in ["group", "supergroup"]:
@@ -2057,7 +2054,7 @@ def create_app(chat_id=None):
         app = Application.builder().token(BOT_TOKEN).build()
     if chat_id:
         init_data(chat_id)
-    else:
+    elif not is_vercel:
         init_db() # Just connect, don't load all
     
     handlers = [
