@@ -363,6 +363,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "📋 كيفية الاستخدام:\n"
         "• أضفني للمجموعة وامنحني صلاحيات أدمن\n"
         "• أرسل @all لمنشن جميع الأعضاء\n"
+        "• أو استخدم /mention لمنشن جميع الأعضاء\n"
         "• أرسل @all quiet للمنشن بدون رسالة إكمال\n\n"
         "📌 الأوامر (للمشرفين فقط 👮‍♂️):\n"
         "/add @user - إضافة (أو رُد على رسالة)\n"
@@ -1137,7 +1138,7 @@ async def scheduled_mention_callback(context):
     # بناء قائمة الأعضاء
     members = group_members.get(chat_id, {})
     excluded = group_settings.get(chat_id, {}).get("excluded", [])
-    custom_msg = group_settings.get(chat_id, {}).get("mention_message", "📣")
+    custom_msg = html.escape(group_settings.get(chat_id, {}).get("mention_message", "📣"))
     
     valid_members = []
     for uid, data in members.items():
@@ -1572,6 +1573,22 @@ async def mention_tag(update: Update, context: ContextTypes.DEFAULT_TYPE, tag_na
         await asyncio.sleep(0.3)
 
 
+async def mention_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Command alias for mentioning everyone: /mention [rounds] [quiet]."""
+    rounds = 1
+    quiet = False
+
+    for arg in context.args:
+        lowered = arg.lower()
+        if lowered == "quiet":
+            quiet = True
+            continue
+        if arg.isdigit():
+            rounds = max(1, min(int(arg), 10))
+
+    await mention_all(update, context, rounds, quiet=quiet)
+
+
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """معالجة الرسائل والتحقق من @all مع إمكانية تحديد عدد المرات"""
     if not update.message or not update.message.text:
@@ -1672,7 +1689,7 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
     
     total_batches = (total_members + batch_size - 1) // batch_size
     
-    custom_msg = group_settings.get(chat_id, {}).get("mention_message", "📣")
+    custom_msg = html.escape(group_settings.get(chat_id, {}).get("mention_message", "📣"))
     reply_to_id = update.message.reply_to_message.message_id if update.message.reply_to_message else update.message.message_id
 
     # البدء بالجولات مع ضمان إرسال رسالة الإكمال
@@ -1698,6 +1715,7 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                 # محاولة إرسال الدفعة - استمرار للمحاولة حتى النجاح
                 batch_sent = False
                 
+                attempts = 0
                 while not batch_sent:
                     try:
                         await context.bot.send_message(
@@ -1709,6 +1727,7 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                         logger.info(f"✅ Sent batch {batch_num}/{total_batches}")
                         batch_sent = True
                     except Exception as e:
+                        attempts += 1
                         err_msg = str(e).lower()
                         logger.error(f"❌ Error Batch {batch_num}: {e}")
                         
@@ -1720,6 +1739,9 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                             logger.warning(f"⏳ Rate limited! Waiting {wait_time}s...")
                             await asyncio.sleep(wait_time)
                         else:
+                            if attempts >= 3:
+                                logger.error(f"Skipping batch {batch_num} after {attempts} failed attempts")
+                                break
                             # خطأ آخر - انتظر وأعد المحاولة
                             await asyncio.sleep(3)
                 
@@ -2040,6 +2062,9 @@ def create_app(chat_id=None):
     
     handlers = [
         CommandHandler("start", start),
+        CommandHandler("mention", mention_command),
+        CommandHandler("all", mention_command),
+        CommandHandler("everyone", mention_command),
         CommandHandler("add", add_members),
         CommandHandler("add_id", add_member_id),
         CommandHandler("boost", boost_user),
