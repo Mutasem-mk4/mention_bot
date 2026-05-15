@@ -1,9 +1,11 @@
 import asyncio
+import json
 import logging
 import os
 from threading import Lock
 
 from flask import Flask, request
+from dotenv import load_dotenv
 import requests
 
 app = Flask(__name__)
@@ -51,27 +53,109 @@ START_TEXT = (
 )
 
 
-def try_fast_start(update_json):
+def send_message(chat_id, text, **extra):
+    token = os.getenv("BOT_TOKEN")
+    if not token:
+        load_dotenv()
+        token = os.getenv("BOT_TOKEN")
+    if not token:
+        raise RuntimeError("BOT_TOKEN is missing")
+
+    payload = {"chat_id": chat_id, "text": text}
+    payload.update(extra)
+    response = requests.post(
+        f"https://api.telegram.org/bot{token}/sendMessage",
+        json=payload,
+        timeout=6,
+    )
+    response.raise_for_status()
+
+
+def load_members_for_chat(chat_id):
+    load_dotenv()
+    chat_key = str(chat_id)
+    mongo_uri = os.getenv("MONGO_URI")
+
+    if mongo_uri:
+        try:
+            import certifi
+            from pymongo import MongoClient
+
+            client = MongoClient(
+                mongo_uri,
+                tlsCAFile=certifi.where(),
+                serverSelectionTimeoutMS=1200,
+                connectTimeoutMS=1200,
+            )
+            doc = client.get_database("telegram_bot_db").members.find_one({"_id": chat_key})
+            if doc:
+                return doc.get("members", {}) or {}
+        except Exception as exc:
+            logger.warning("Fast member load from MongoDB failed: %s", exc)
+
+    try:
+        with open("members_data.json", "r", encoding="utf-8") as file:
+            return (json.load(file).get(chat_key) or {})
+    except Exception as exc:
+        logger.warning("Fast member load from JSON failed: %s", exc)
+        return {}
+
+
+def format_member(data):
+    username = data.get("username")
+    if username:
+        return f"@{username}"
+    return data.get("full_name") or data.get("first_name") or "Unknown"
+
+
+def try_fast_command(update_json):
     message = update_json.get("message") or {}
     text = message.get("text") or ""
     chat = message.get("chat") or {}
     chat_id = chat.get("id")
 
     command = text.split(maxsplit=1)[0].split("@", 1)[0].lower() if text else ""
-    if not chat_id or command not in {"/start", "/help"}:
+    if not chat_id:
         return False
 
-    token = os.getenv("BOT_TOKEN")
-    if not token:
-        raise RuntimeError("BOT_TOKEN is missing")
+    if command in {"/start", "/help"}:
+        send_message(chat_id, START_TEXT)
+        return True
 
-    response = requests.post(
-        f"https://api.telegram.org/bot{token}/sendMessage",
-        json={"chat_id": chat_id, "text": START_TEXT},
-        timeout=4,
-    )
-    response.raise_for_status()
-    return True
+    if command == "/count":
+        members = load_members_for_chat(chat_id)
+        send_message(chat_id, f"👥 عدد الأعضاء المحفوظين: {len(members)}")
+        return True
+
+    if command == "/list":
+        args = text.split(maxsplit=1)
+        search_term = args[1].lower().strip() if len(args) > 1 else ""
+        members = load_members_for_chat(chat_id)
+        if not members:
+            send_message(chat_id, "📭 القائمة فارغة!")
+            return True
+
+        lines = []
+        for data in members.values():
+            display = format_member(data)
+            if search_term and search_term not in display.lower():
+                continue
+            multiplier = data.get("multiplier", 1)
+            boost = f" (x{multiplier})" if multiplier > 1 else ""
+            lines.append(f"• {display}{boost}")
+
+        if not lines:
+            send_message(chat_id, f"🔍 لم يُعثر على '{search_term}' في القائمة.")
+            return True
+
+        title = f"📌 نتائج '{search_term}'" if search_term else f"📋 الأعضاء المحفوظين ({len(lines)})"
+        out = title + ":\n\n" + "\n".join(lines[:100])
+        if len(lines) > 100:
+            out += f"\n\n... و{len(lines) - 100} آخرين."
+        send_message(chat_id, out)
+        return True
+
+    return False
 
 
 def ensure_app_created():
@@ -135,7 +219,7 @@ def webhook():
             elif "callback_query" in update_json:
                 chat_id = update_json["callback_query"]["message"]["chat"]["id"]
 
-            if not try_fast_start(update_json):
+            if not try_fast_command(update_json):
                 ensure_initialized()
                 asyncio.run(_process_update(update_json, chat_id))
             return "OK", 200
