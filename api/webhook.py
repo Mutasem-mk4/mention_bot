@@ -74,6 +74,15 @@ def send_message(chat_id, text, **extra):
 def load_members_for_chat(chat_id):
     load_dotenv()
     chat_key = str(chat_id)
+
+    try:
+        with open("members_data.json", "r", encoding="utf-8") as file:
+            members = json.load(file).get(chat_key) or {}
+            if members:
+                return members
+    except Exception as exc:
+        logger.warning("Fast member load from JSON failed: %s", exc)
+
     mongo_uri = os.getenv("MONGO_URI")
 
     if mongo_uri:
@@ -84,8 +93,8 @@ def load_members_for_chat(chat_id):
             client = MongoClient(
                 mongo_uri,
                 tlsCAFile=certifi.where(),
-                serverSelectionTimeoutMS=1200,
-                connectTimeoutMS=1200,
+                serverSelectionTimeoutMS=800,
+                connectTimeoutMS=800,
             )
             doc = client.get_database("telegram_bot_db").members.find_one({"_id": chat_key})
             if doc:
@@ -93,12 +102,7 @@ def load_members_for_chat(chat_id):
         except Exception as exc:
             logger.warning("Fast member load from MongoDB failed: %s", exc)
 
-    try:
-        with open("members_data.json", "r", encoding="utf-8") as file:
-            return (json.load(file).get(chat_key) or {})
-    except Exception as exc:
-        logger.warning("Fast member load from JSON failed: %s", exc)
-        return {}
+    return {}
 
 
 def format_member(data):
