@@ -1,7 +1,10 @@
 import asyncio
+import html
 import json
 import logging
 import os
+import re
+import time
 from threading import Lock
 
 from flask import Flask, request
@@ -10,6 +13,7 @@ import requests
 
 app = Flask(__name__)
 logger = logging.getLogger(__name__)
+load_dotenv()
 bot_app = None
 bot_app_initialized = False
 bot_app_lock = Lock()
@@ -71,8 +75,23 @@ def send_message(chat_id, text, **extra):
     response.raise_for_status()
 
 
+def load_settings_for_chat(chat_id):
+    chat_key = str(chat_id)
+
+    try:
+        with open("settings.json", "r", encoding="utf-8") as file:
+            settings = json.load(file).get(chat_key) or {}
+            if settings:
+                return settings
+    except FileNotFoundError:
+        pass
+    except Exception as exc:
+        logger.warning("Fast settings load from JSON failed: %s", exc)
+
+    return {}
+
+
 def load_members_for_chat(chat_id):
-    load_dotenv()
     chat_key = str(chat_id)
 
     try:
@@ -112,6 +131,98 @@ def format_member(data):
     return data.get("full_name") or data.get("first_name") or "Unknown"
 
 
+def is_anonymous_group_admin(message, chat_id):
+    sender_chat = message.get("sender_chat") or {}
+    return sender_chat.get("id") == chat_id
+
+
+def is_telegram_admin(message, chat_id):
+    if is_anonymous_group_admin(message, chat_id):
+        return True
+
+    user = message.get("from") or {}
+    user_id = user.get("id")
+    if not user_id:
+        return False
+
+    token = os.getenv("BOT_TOKEN")
+    if not token:
+        raise RuntimeError("BOT_TOKEN is missing")
+
+    response = requests.get(
+        f"https://api.telegram.org/bot{token}/getChatMember",
+        params={"chat_id": chat_id, "user_id": user_id},
+        timeout=4,
+    )
+    response.raise_for_status()
+    result = response.json().get("result") or {}
+    return result.get("status") in {"creator", "administrator"}
+
+
+def mention_text(uid, data):
+    username = data.get("username")
+    if username:
+        return f"@{username}"
+    name = html.escape(data.get("full_name") or data.get("first_name") or "User")
+    return f'<a href="tg://user?id={uid}">{name}</a>'
+
+
+def try_fast_mention_all(message, chat_id, text):
+    match = re.search(r"(?:^|\s)@(?:all|everyone)(?:\s+(\d+))?\b", text, re.IGNORECASE)
+    if not match:
+        return False
+
+    if not is_telegram_admin(message, chat_id):
+        send_message(
+            chat_id,
+            "⚠️ المعذرة، هذا الأمر متاح للمشرفين فقط.",
+            reply_to_message_id=message.get("message_id"),
+        )
+        return True
+
+    rounds = int(match.group(1) or 1)
+    rounds = max(1, min(rounds, 10))
+    quiet = bool(re.search(r"\bquiet\b", text, re.IGNORECASE))
+    members = load_members_for_chat(chat_id)
+    settings = load_settings_for_chat(chat_id)
+    excluded = set(settings.get("excluded", []))
+    custom_msg = html.escape(settings.get("mention_message", "📣"))
+
+    valid_members = []
+    for uid, data in members.items():
+        if uid in excluded:
+            continue
+        multiplier = min(data.get("multiplier", 1), 5)
+        for _ in range(multiplier):
+            valid_members.append((uid, data))
+
+    if not valid_members:
+        send_message(chat_id, "📭 القائمة فارغة!", reply_to_message_id=message.get("message_id"))
+        return True
+
+    batch_size = 20
+    total_batches = (len(valid_members) + batch_size - 1) // batch_size
+    reply_to = message.get("reply_to_message", {}).get("message_id") or message.get("message_id")
+
+    for round_num in range(1, rounds + 1):
+        round_prefix = f"({round_num}/{rounds}) " if rounds > 1 else ""
+        for index in range(0, len(valid_members), batch_size):
+            batch = valid_members[index:index + batch_size]
+            batch_num = (index // batch_size) + 1
+            mentions = " ".join(mention_text(uid, data) for uid, data in batch)
+            send_message(
+                chat_id,
+                f"{custom_msg} {round_prefix}[{batch_num}/{total_batches}]\n{mentions}",
+                parse_mode="HTML",
+                reply_to_message_id=reply_to,
+            )
+            time.sleep(0.05)
+
+    if not quiet:
+        send_message(chat_id, "✅ تم المنشن بنجاح!", reply_to_message_id=message.get("message_id"))
+    return True
+
+
 def try_fast_command(update_json):
     message = update_json.get("message") or {}
     text = message.get("text") or ""
@@ -121,6 +232,9 @@ def try_fast_command(update_json):
     command = text.split(maxsplit=1)[0].split("@", 1)[0].lower() if text else ""
     if not chat_id:
         return False
+
+    if try_fast_mention_all(message, chat_id, text):
+        return True
 
     if command in {"/start", "/help"}:
         send_message(chat_id, START_TEXT)

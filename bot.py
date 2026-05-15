@@ -332,6 +332,10 @@ async def is_user_admin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> b
     """التحقق مما إذا كان المستخدم مشرفاً (تيليجرام أو مخصص)"""
     if not update.effective_chat or update.effective_chat.type == "private":
         return True
+
+    if update.effective_message and update.effective_message.sender_chat:
+        if update.effective_message.sender_chat.id == update.effective_chat.id:
+            return True
         
     user_id = update.effective_user.id
     chat_id = str(update.effective_chat.id)

@@ -1,10 +1,7 @@
 .vercel
-<<<<<<< HEAD
 .env
+.env*.local
 *.session
 *.session-journal
 bot.log
 __pycache__/
-=======
-.env*.local
->>>>>>> e27b9e9 (Sync before restart)
