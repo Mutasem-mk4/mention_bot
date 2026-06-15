@@ -65,21 +65,21 @@
       "first_name": "Yousef",
       "full_name": "Yousef AK",
       "multiplier": 1,
-      "message_count": 12
+      "message_count": 13
     },
     "5185123317": {
       "username": null,
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
-      "message_count": 12
+      "message_count": 15
     },
     "5125017835": {
       "username": "a7md3bdullah",
       "first_name": "أَحمَد",
       "full_name": "أَحمَد",
       "multiplier": 1,
-      "message_count": 9
+      "message_count": 14
     },
     "7013515340": {
       "username": null,
@@ -100,21 +100,21 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 7
     },
     "6552337666": {
       "username": null,
       "first_name": "Sedal",
       "full_name": "Sedal Al Manaseer",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 4
     },
     "6389363574": {
       "username": null,
       "first_name": "Maya",
       "full_name": "Maya Tayfour",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 5
     },
     "5592390194": {
       "username": "hashem_al_dwekat",
@@ -129,6 +129,430 @@
       "full_name": "Aya Alshahrouri",
       "multiplier": 1,
       "message_count": 1
+    },
+    "username_maya": {
+      "username": "Maya",
+      "multiplier": 1
+    },
+    "username_a7md3bdullah": {
+      "username": "a7md3bdullah",
+      "multiplier": 1
+    },
+    "username_جُــود": {
+      "username": "جُــود",
+      "multiplier": 1
+    },
+    "username_aya": {
+      "username": "Aya",
+      "multiplier": 1
+    },
+    "username_dania.mhmadd": {
+      "username": "Dania.mhmadd",
+      "multiplier": 1
+    },
+    "username_layan": {
+      "username": "Layan",
+      "multiplier": 1
+    },
+    "username_zain": {
+      "username": "Zain",
+      "multiplier": 1
+    },
+    "username_ahmad": {
+      "username": "Ahmad",
+      "multiplier": 1
+    },
+    "username_ramadan": {
+      "username": "Ramadan",
+      "multiplier": 1
+    },
+    "username_d3a2": {
+      "username": "D3A2",
+      "multiplier": 1
+    },
+    "username_mahmoud": {
+      "username": "Mahmoud",
+      "multiplier": 1
+    },
+    "username_imad": {
+      "username": "Imad",
+      "multiplier": 1
+    },
+    "username_عبدالكريم": {
+      "username": "عبدالكريم",
+      "multiplier": 1
+    },
+    "username_ابو": {
+      "username": "ابو",
+      "multiplier": 1
+    },
+    "username_mohamad": {
+      "username": "Mohamad",
+      "multiplier": 1
+    },
+    "username_yaqin_samah": {
+      "username": "Yaqin_samah",
+      "multiplier": 1
+    },
+    "username_i_bullet": {
+      "username": "i_bullet",
+      "multiplier": 1
+    },
+    "username_صهيب": {
+      "username": "صهيب",
+      "multiplier": 1
+    },
+    "username_oalsurakhi": {
+      "username": "oAlsurakhi",
+      "multiplier": 1
+    },
+    "username_mohanad_semreen": {
+      "username": "mohanad_semreen",
+      "multiplier": 1
+    },
+    "username_57761": {
+      "username": "57761",
+      "multiplier": 1
+    },
+    "username_joodbasiil": {
+      "username": "joodbasiil",
+      "multiplier": 1
+    },
+    "username_22216": {
+      "username": "22216",
+      "multiplier": 1
+    },
+    "username_دانا": {
+      "username": "دانا",
+      "multiplier": 1
+    },
+    "username_qusai": {
+      "username": "Qusai",
+      "multiplier": 1
+    },
+    "username_bissan": {
+      "username": "Bissan",
+      "multiplier": 1
+    },
+    "username_khtam": {
+      "username": "khtam",
+      "multiplier": 1
+    },
+    "username_omar_abdrabboh7": {
+      "username": "omar_abdrabboh7",
+      "multiplier": 1
+    },
+    "username_fatima": {
+      "username": "Fatima",
+      "multiplier": 1
+    },
+    "username_lojain_mohammad": {
+      "username": "lojain_mohammad",
+      "multiplier": 1
+    },
+    "username_halajaber6": {
+      "username": "HalaJaber6",
+      "multiplier": 1
+    },
+    "username_batool": {
+      "username": "Batool",
+      "multiplier": 1
+    },
+    "username_maram": {
+      "username": "Maram",
+      "multiplier": 1
+    },
+    "username_nada": {
+      "username": "Nada",
+      "multiplier": 1
+    },
+    "username_dareen": {
+      "username": "Dareen",
+      "multiplier": 1
+    },
+    "username_raneem": {
+      "username": "Raneem",
+      "multiplier": 1
+    },
+    "username_..": {
+      "username": "..",
+      "multiplier": 1
+    },
+    "username_salsabeel": {
+      "username": "Salsabeel",
+      "multiplier": 1
+    },
+    "username_arak": {
+      "username": "arak",
+      "multiplier": 1
+    },
+    "username_zaid_zaid10": {
+      "username": "zaid_zaid10",
+      "multiplier": 1
+    },
+    "username_raneem🦋💜": {
+      "username": "Raneem🦋💜",
+      "multiplier": 1
+    },
+    "username_sundus": {
+      "username": "Sundus",
+      "multiplier": 1
+    },
+    "username_قصي": {
+      "username": "قصي",
+      "multiplier": 1
+    },
+    "username_ahmad_od7": {
+      "username": "ahmad_od7",
+      "multiplier": 1
+    },
+    "username_3bood": {
+      "username": "3bood",
+      "multiplier": 1
+    },
+    "username_amany": {
+      "username": "amany",
+      "multiplier": 1
+    },
+    "username_mohjamous": {
+      "username": "mohjamous",
+      "multiplier": 1
+    },
+    "username_bayan": {
+      "username": "Bayan",
+      "multiplier": 1
+    },
+    "username_m7moudz": {
+      "username": "M7moudz",
+      "multiplier": 1
+    },
+    "username_saharalshboul": {
+      "username": "SaharAlshboul",
+      "multiplier": 1
+    },
+    "username_𝑀𝑜ℎ𝑎𝑚𝑚𝑎𝑑": {
+      "username": "𝑀𝑜ℎ𝑎𝑚𝑚𝑎𝑑",
+      "multiplier": 1
+    },
+    "username_heba": {
+      "username": "Heba",
+      "multiplier": 1
+    },
+    "username_farah_m00": {
+      "username": "Farah_M00",
+      "multiplier": 1
+    },
+    "username_zakaria": {
+      "username": "Zakaria",
+      "multiplier": 1
+    },
+    "username_rosol": {
+      "username": "Rosol",
+      "multiplier": 1
+    },
+    "username_shahed": {
+      "username": "shahed",
+      "multiplier": 1
+    },
+    "username_saleh": {
+      "username": "saleh",
+      "multiplier": 1
+    },
+    "username_b": {
+      "username": "B",
+      "multiplier": 1
+    },
+    "username_salma": {
+      "username": "Salma",
+      "multiplier": 1
+    },
+    "username_rahaf": {
+      "username": "Rahaf",
+      "multiplier": 1
+    },
+    "username_raafatayyoub": {
+      "username": "RaafatAyyoub",
+      "multiplier": 1
+    },
+    "username_البراء": {
+      "username": "البراء",
+      "multiplier": 1
+    },
+    "username_mahmooud_e36": {
+      "username": "mahmooud_e36",
+      "multiplier": 1
+    },
+    "username_نورا": {
+      "username": "نورا",
+      "multiplier": 1
+    },
+    "username_sali_fahhar": {
+      "username": "Sali_Fahhar",
+      "multiplier": 1
+    },
+    "username_qamar": {
+      "username": "QAMAR",
+      "multiplier": 1
+    },
+    "username_hala": {
+      "username": "Hala",
+      "multiplier": 1
+    },
+    "username_marya_rajeh": {
+      "username": "marya_rajeh",
+      "multiplier": 1
+    },
+    "username_شهد": {
+      "username": "شهد",
+      "multiplier": 1
+    },
+    "username_دلع": {
+      "username": "دلع",
+      "multiplier": 1
+    },
+    "username_maisam_2004": {
+      "username": "maisam_2004",
+      "multiplier": 1
+    },
+    "username_الديج": {
+      "username": "الديج",
+      "multiplier": 1
+    },
+    "username_🤍": {
+      "username": "🤍",
+      "multiplier": 1
+    },
+    "username_sajida": {
+      "username": "Sajida",
+      "multiplier": 1
+    },
+    "username_malek": {
+      "username": "Malek",
+      "multiplier": 1
+    },
+    "username_monif(ابو": {
+      "username": "Monif(ابو",
+      "multiplier": 1
+    },
+    "username_بهاء)": {
+      "username": "بهاء)",
+      "multiplier": 1
+    },
+    "username_qassasafa": {
+      "username": "qassasafa",
+      "multiplier": 1
+    },
+    "username_naghamalwreadat": {
+      "username": "Naghamalwreadat",
+      "multiplier": 1
+    },
+    "username_heba_6": {
+      "username": "heba_6",
+      "multiplier": 1
+    },
+    "username_aboodw615": {
+      "username": "aboodw615",
+      "multiplier": 1
+    },
+    "username_ismaeel_almashaiekh": {
+      "username": "ismaeel_almashaiekh",
+      "multiplier": 1
+    },
+    "username_مَحمُود": {
+      "username": "مَحمُود",
+      "multiplier": 1
+    },
+    "username_wasan": {
+      "username": "Wasan",
+      "multiplier": 1
+    },
+    "username_fatheallak": {
+      "username": "Fatheallak",
+      "multiplier": 1
+    },
+    "username_f_km2006": {
+      "username": "F_km2006",
+      "multiplier": 1
+    },
+    "username_ibrahim_sabbah": {
+      "username": "ibrahim_sabbah",
+      "multiplier": 1
+    },
+    "username_yara": {
+      "username": "Yara",
+      "multiplier": 1
+    },
+    "username_sobhe_hayyeh": {
+      "username": "sobhe_hayyeh",
+      "multiplier": 1
+    },
+    "username_laith": {
+      "username": "Laith",
+      "multiplier": 1
+    },
+    "username_saba’a": {
+      "username": "Saba’a",
+      "multiplier": 1
+    },
+    "username_abdalkareem": {
+      "username": "Abdalkareem",
+      "multiplier": 1
+    },
+    "username_tareq": {
+      "username": "tareq",
+      "multiplier": 1
+    },
+    "username_baraa": {
+      "username": "Baraa",
+      "multiplier": 1
+    },
+    "username_الخريج🤍": {
+      "username": "الخريج🤍",
+      "multiplier": 1
+    },
+    "username_mohammad_aljaafreh": {
+      "username": "Mohammad_Aljaafreh",
+      "multiplier": 1
+    },
+    "username_abdamdkd": {
+      "username": "Abdamdkd",
+      "multiplier": 1
+    },
+    "username_aishaiibrahiim": {
+      "username": "aishaiibrahiim",
+      "multiplier": 1
+    },
+    "username_mohammed3moush": {
+      "username": "MOHAMMED3MOUSH",
+      "multiplier": 1
+    },
+    "username_yazan": {
+      "username": "Yazan",
+      "multiplier": 1
+    },
+    "username_daniazeyad": {
+      "username": "Daniazeyad",
+      "multiplier": 1
+    },
+    "username_ra2nd": {
+      "username": "ra2nd",
+      "multiplier": 1
+    },
+    "username_ola": {
+      "username": "Ola",
+      "multiplier": 1
+    },
+    "username_rahhal": {
+      "username": "Rahhal",
+      "multiplier": 1
+    },
+    "username_esraalhroub": {
+      "username": "Esraalhroub",
+      "multiplier": 1
+    },
+    "username_hashem_al_dwekat": {
+      "username": "hashem_al_dwekat",
+      "multiplier": 1
     }
   },
   "-1003997895530": {
