@@ -86,7 +86,7 @@
       "first_name": "Ali",
       "full_name": "Ali emad",
       "multiplier": 1,
-      "message_count": 16
+      "message_count": 17
     },
     "7808578242": {
       "username": "Don_sul",
@@ -568,6 +568,13 @@
       "username": "Esraalhroub",
       "first_name": "Esra",
       "full_name": "Esra Alhroub🦋",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "2005587169": {
+      "username": null,
+      "first_name": "Yazan",
+      "full_name": "Yazan Nehad",
       "multiplier": 1,
       "message_count": 1
     }
