@@ -21,6 +21,8 @@ from threading import Thread
 import sys
 from dotenv import load_dotenv
 import certifi
+import base64
+import requests
 
 # إعداد Flask (عشان Render ما يطفي البوت)
 app = Flask('')
@@ -63,6 +65,84 @@ load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 MONGO_URI = os.getenv("MONGO_URI")
 
+# تكوين قاعدة بيانات GitHub
+class GitHubDB:
+    def __init__(self, token, repo, branch="main"):
+        self.token = token
+        self.repo = repo
+        self.branch = branch
+        self.headers = {
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28"
+        }
+        self.sha_cache = {}
+
+    def get_file(self, path):
+        url = f"https://api.github.com/repos/{self.repo}/contents/{path}"
+        params = {"ref": self.branch}
+        try:
+            res = requests.get(url, headers=self.headers, params=params)
+            if res.status_code == 200:
+                data = res.json()
+                self.sha_cache[path] = data["sha"]
+                content_b64 = data["content"].replace("\n", "")
+                content_bytes = base64.b64decode(content_b64)
+                return json.loads(content_bytes.decode("utf-8")), data["sha"]
+            elif res.status_code == 404:
+                return {}, None
+            else:
+                logger.error(f"GitHub GET error {res.status_code}: {res.text}")
+                return None, None
+        except Exception as e:
+            logger.error(f"GitHub GET exception: {e}")
+            return None, None
+
+    def put_file(self, path, data_dict):
+        url = f"https://api.github.com/repos/{self.repo}/contents/{path}"
+        
+        # We need the current SHA
+        sha = self.sha_cache.get(path)
+        if not sha:
+            # Fetch it first to be sure
+            _, sha = self.get_file(path)
+            
+        content_str = json.dumps(data_dict, ensure_ascii=False, indent=2)
+        content_bytes = content_str.encode("utf-8")
+        content_b64 = base64.b64encode(content_bytes).decode("utf-8")
+        
+        payload = {
+            "message": f"update {path} via mention bot",
+            "content": content_b64,
+            "branch": self.branch
+        }
+        if sha:
+            payload["sha"] = sha
+            
+        try:
+            res = requests.put(url, headers=self.headers, json=payload)
+            if res.status_code in [200, 201]:
+                res_data = res.json()
+                self.sha_cache[path] = res_data["content"]["sha"]
+                return True
+            else:
+                logger.error(f"GitHub PUT error {res.status_code}: {res.text}")
+                if path in self.sha_cache:
+                    del self.sha_cache[path]
+                return False
+        except Exception as e:
+            logger.error(f"GitHub PUT exception: {e}")
+            return False
+
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+GITHUB_REPO = os.getenv("GITHUB_REPO")
+GITHUB_BRANCH = os.getenv("GITHUB_BRANCH", "main")
+
+github_client = None
+if GITHUB_TOKEN and GITHUB_REPO:
+    github_client = GitHubDB(GITHUB_TOKEN, GITHUB_REPO, GITHUB_BRANCH)
+    print("✅ تم تفعيل قاعدة بيانات GitHub بنجاح!")
+
 # تكوين MongoDB
 db = None
 members_collection = None
@@ -72,7 +152,7 @@ history_collection = None  # سجل استخدام @all
 
 # كاش لعدد الرسائل (لتقليل عمليات الحفظ على MongoDB)
 message_count_cache = {}  # {chat_id: {user_id: count}}
-MESSAGE_SAVE_THRESHOLD = 5
+MESSAGE_SAVE_THRESHOLD = 50 if github_client is not None else 5
 DB_RETRY_COOLDOWN_SECONDS = 300
 db_retry_after = 0.0
 
@@ -90,6 +170,8 @@ def disable_db(exc=None):
 
 def init_db():
     global db, members_collection, settings_collection, tags_collection, history_collection
+    if github_client is not None:
+        return
     if db is not None:
         return
     if time.time() < db_retry_after:
@@ -121,7 +203,26 @@ group_tags = {}     # {chat_id: {tag_name: [user_ids]}}
 
 
 def load_data(chat_id=None):
-    """تحميل بيانات الأعضاء (MongoDB أو ملف)"""
+    """تحميل بيانات الأعضاء (MongoDB أو ملف أو GitHub)"""
+    if github_client is not None:
+        try:
+            data, _ = github_client.get_file(DATA_FILE)
+            if data:
+                if chat_id:
+                    chat_key = str(chat_id)
+                    if chat_key in data:
+                        group_members[chat_key] = data[chat_key]
+                        return {chat_key: data[chat_key]}
+                    return {}
+                else:
+                    for k, v in data.items():
+                        group_members[k] = v
+                return data
+            return {}
+        except Exception as e:
+            logger.error(f"Failed to load data from GitHub: {e}")
+            return {}
+
     if members_collection is not None:
         try:
             if chat_id:
@@ -159,7 +260,23 @@ def load_data(chat_id=None):
 
 
 def save_data(data, chat_id=None):
-    """حفظ بيانات الأعضاء (MongoDB أو ملف)"""
+    """حفظ بيانات الأعضاء (MongoDB أو ملف أو GitHub)"""
+    if github_client is not None:
+        try:
+            full_data, _ = github_client.get_file(DATA_FILE)
+            if full_data is None:
+                full_data = {}
+            if chat_id:
+                full_data[str(chat_id)] = data.get(str(chat_id), {})
+            else:
+                for k, v in data.items():
+                    full_data[str(k)] = v
+            github_client.put_file(DATA_FILE, full_data)
+            return
+        except Exception as e:
+            logger.error(f"Failed to save data to GitHub: {e}")
+            return
+
     if members_collection is not None:
         try:
             if chat_id:
@@ -190,7 +307,26 @@ def save_data(data, chat_id=None):
 
 
 def load_settings(chat_id=None):
-    """تحميل الإعدادات (MongoDB أو ملف)"""
+    """تحميل الإعدادات (MongoDB أو ملف أو GitHub)"""
+    if github_client is not None:
+        try:
+            data, _ = github_client.get_file(SETTINGS_FILE)
+            if data:
+                if chat_id:
+                    chat_key = str(chat_id)
+                    if chat_key in data:
+                        group_settings[chat_key] = data[chat_key]
+                        return {chat_key: data[chat_key]}
+                    return {}
+                else:
+                    for k, v in data.items():
+                        group_settings[k] = v
+                return data
+            return {}
+        except Exception as e:
+            logger.error(f"Failed to load settings from GitHub: {e}")
+            return {}
+
     if settings_collection is not None:
         try:
             if chat_id:
@@ -226,7 +362,23 @@ def load_settings(chat_id=None):
 
 
 def save_settings(data, chat_id=None):
-    """حفظ الإعدادات (MongoDB أو ملف)"""
+    """حفظ الإعدادات (MongoDB أو ملف أو GitHub)"""
+    if github_client is not None:
+        try:
+            full_data, _ = github_client.get_file(SETTINGS_FILE)
+            if full_data is None:
+                full_data = {}
+            if chat_id:
+                full_data[str(chat_id)] = data.get(str(chat_id), {})
+            else:
+                for k, v in data.items():
+                    full_data[str(k)] = v
+            github_client.put_file(SETTINGS_FILE, full_data)
+            return
+        except Exception as e:
+            logger.error(f"Failed to save settings to GitHub: {e}")
+            return
+
     if settings_collection is not None:
         try:
             if chat_id:
@@ -255,6 +407,25 @@ def save_settings(data, chat_id=None):
 
 def load_tags(chat_id=None):
     """تحميل المنشن المخصص"""
+    if github_client is not None:
+        try:
+            data, _ = github_client.get_file(TAGS_FILE)
+            if data:
+                if chat_id:
+                    chat_key = str(chat_id)
+                    if chat_key in data:
+                        group_tags[chat_key] = data[chat_key]
+                        return {chat_key: data[chat_key]}
+                    return {}
+                else:
+                    for k, v in data.items():
+                        group_tags[k] = v
+                return data
+            return {}
+        except Exception as e:
+            logger.error(f"Failed to load tags from GitHub: {e}")
+            return {}
+
     if tags_collection is not None:
         try:
             if chat_id:
@@ -282,6 +453,18 @@ def load_tags(chat_id=None):
 
 
 def save_tags(data, chat_id):
+    if github_client is not None:
+        try:
+            full_data, _ = github_client.get_file(TAGS_FILE)
+            if full_data is None:
+                full_data = {}
+            full_data[str(chat_id)] = data
+            github_client.put_file(TAGS_FILE, full_data)
+            return
+        except Exception as e:
+            logger.error(f"Failed to save tags to GitHub: {e}")
+            return
+
     if tags_collection is not None:
         try:
             tags_collection.replace_one({"_id": str(chat_id)}, {"tags": data}, upsert=True)
@@ -312,15 +495,28 @@ def init_data(chat_id=None):
         # فقط تحميل إذا لم يكن موجوداً في الكاش أو نريد تحديثه
         if chat_id not in group_members:
             load_data(chat_id)
+            if chat_id not in group_members:
+                group_members[chat_id] = {}
         if chat_id not in group_settings:
             load_settings(chat_id)
+            if chat_id not in group_settings:
+                group_settings[chat_id] = {}
         if chat_id not in group_tags:
             init_tags(chat_id) # Use init_tags to load for specific chat_id
+            if chat_id not in group_tags:
+                group_tags[chat_id] = {}
     else:
         # تحميل الكل (عند بدء البوت محلياً فقط)
         group_members = load_data() or {}
         group_settings = load_settings() or {}
         group_tags = load_tags() or {}
+        
+    # Ensure all caches have the key if loaded
+    if chat_id:
+        chat_id = str(chat_id)
+        if chat_id not in group_members: group_members[chat_id] = {}
+        if chat_id not in group_settings: group_settings[chat_id] = {}
+        if chat_id not in group_tags: group_tags[chat_id] = {}
     
     logger.info(f"📊 Initialization complete. Groups in memory: {len(group_members)}")
 
@@ -1147,7 +1343,7 @@ async def scheduled_mention_callback(context):
     if not valid_members:
         return
     
-    batch_size = 15
+    batch_size = 5
     total = len(valid_members)
     
     for i in range(0, total, batch_size):
@@ -1558,7 +1754,7 @@ async def mention_tag(update: Update, context: ContextTypes.DEFAULT_TYPE, tag_na
 
     if not valid_members: return
 
-    batch_size = 15
+    batch_size = 5
     for i in range(0, len(valid_members), batch_size):
         batch = valid_members[i:i+batch_size]
         mentions = []
@@ -1685,7 +1881,7 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
 
     # تحسين السرعة لـ Vercel (Timeouts)
     is_vercel = "VERCEL" in os.environ or "VERCEL_URL" in os.environ
-    batch_size = 20 if is_vercel else 15  # تقليل عدد الرسائل لتسريع المنشن
+    batch_size = 5
     sleep_time = 0.1 if is_vercel else 0.15  # الاعتماد على انتظار Telegram فقط عند الـ flood limit
     
     total_batches = (total_members + batch_size - 1) // batch_size
@@ -2028,7 +2224,7 @@ async def bot_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     init_data(chat_id)
     live_count = len(group_members.get(chat_id, {}))
     fallback_count = len(load_data().get(chat_id, {}))
-    db_status = "✅ متصل بـ MongoDB" if members_collection is not None else "⚠️ تخزين محلي/بديل"
+    db_status = "✅ متصل بـ GitHub" if github_client is not None else ("✅ متصل بـ MongoDB" if members_collection is not None else "⚠️ تخزين محلي/بديل")
     
     # تحديد البيئة
     env_type = "Render (Polling)" if "RENDER" in os.environ else "Vercel (Webhook)"
