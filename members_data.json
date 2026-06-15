@@ -64,7 +64,7 @@
       "first_name": "Yousef",
       "full_name": "Yousef AK",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 4
     },
     "5185123317": {
       "username": null,
@@ -77,6 +77,13 @@
       "username": "a7md3bdullah",
       "first_name": "أَحمَد",
       "full_name": "أَحمَد",
+      "multiplier": 1,
+      "message_count": 2
+    },
+    "7013515340": {
+      "username": null,
+      "first_name": "Ali",
+      "full_name": "Ali emad",
       "multiplier": 1,
       "message_count": 1
     }
