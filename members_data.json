@@ -466,10 +466,6 @@
       "username": "F_km2006",
       "multiplier": 1
     },
-    "username_ibrahim_sabbah": {
-      "username": "ibrahim_sabbah",
-      "multiplier": 1
-    },
     "username_yara": {
       "username": "Yara",
       "multiplier": 1
@@ -590,6 +586,13 @@
       "username": "Fatheallak",
       "first_name": "Fathe allak",
       "full_name": "Fathe allak",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5935841253": {
+      "username": "ibrahim_sabbah",
+      "first_name": "Ibrahim",
+      "full_name": "Ibrahim Sabbah",
       "multiplier": 1,
       "message_count": 1
     }
