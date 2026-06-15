@@ -64,12 +64,19 @@
       "first_name": "Yousef",
       "full_name": "Yousef AK",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "5185123317": {
       "username": null,
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5125017835": {
+      "username": "a7md3bdullah",
+      "first_name": "أَحمَد",
+      "full_name": "أَحمَد",
       "multiplier": 1,
       "message_count": 1
     }
