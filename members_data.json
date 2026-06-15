@@ -108,7 +108,7 @@
       "first_name": "رَنــد",
       "full_name": "رَنــد",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 8
     },
     "5185123317": {
       "username": null,
@@ -160,6 +160,13 @@
     "username_جُــود": {
       "username": "جُــود",
       "multiplier": 1
+    },
+    "5821447675": {
+      "username": null,
+      "first_name": "جُــود",
+      "full_name": "جُــود",
+      "multiplier": 1,
+      "message_count": 1
     }
   }
 }
