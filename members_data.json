@@ -78,7 +78,7 @@
       "first_name": "أَحمَد",
       "full_name": "أَحمَد",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 6
     },
     "7013515340": {
       "username": null,
@@ -91,6 +91,13 @@
       "username": "Don_sul",
       "first_name": "Don",
       "full_name": "Don Sul",
+      "multiplier": 1,
+      "message_count": 3
+    },
+    "5821447675": {
+      "username": null,
+      "first_name": "جُــود",
+      "full_name": "جُــود",
       "multiplier": 1,
       "message_count": 1
     }
