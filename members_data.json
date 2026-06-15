@@ -57,21 +57,22 @@
     "1616533142": {
       "username": "mk4lj",
       "first_name": "مـعـتـصـم",
-      "full_name": "مـعـتـصـم خرما"
+      "full_name": "مـعـتـصـم خرما",
+      "message_count": 2
     },
     "1460123110": {
       "username": "youssefabukhalaf",
       "first_name": "Yousef",
       "full_name": "Yousef AK",
       "multiplier": 1,
-      "message_count": 5
+      "message_count": 9
     },
     "5185123317": {
       "username": null,
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 6
     },
     "5125017835": {
       "username": "a7md3bdullah",
@@ -112,6 +113,13 @@
       "username": null,
       "first_name": "Maya",
       "full_name": "Maya Tayfour",
+      "multiplier": 1,
+      "message_count": 2
+    },
+    "5592390194": {
+      "username": "hashem_al_dwekat",
+      "first_name": "Hashem",
+      "full_name": "Hashem Al-Dwekat",
       "multiplier": 1,
       "message_count": 1
     }
