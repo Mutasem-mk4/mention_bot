@@ -510,10 +510,6 @@
       "username": "Mohammad_Aljaafreh",
       "multiplier": 1
     },
-    "username_abdamdkd": {
-      "username": "Abdamdkd",
-      "multiplier": 1
-    },
     "username_aishaiibrahiim": {
       "username": "aishaiibrahiim",
       "multiplier": 1
@@ -584,6 +580,13 @@
       "username": null,
       "first_name": "Ola Rahhal",
       "full_name": "Ola Rahhal",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "6349146985": {
+      "username": "Abdamdkd",
+      "first_name": "Abdelrahman Alsalhot",
+      "full_name": "Abdelrahman Alsalhot",
       "multiplier": 1,
       "message_count": 1
     }
