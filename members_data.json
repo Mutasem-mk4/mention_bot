@@ -65,14 +65,14 @@
       "first_name": "Yousef",
       "full_name": "Yousef AK",
       "multiplier": 1,
-      "message_count": 26
+      "message_count": 30
     },
     "5185123317": {
       "username": null,
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
-      "message_count": 33
+      "message_count": 34
     },
     "5125017835": {
       "username": "a7md3bdullah",
@@ -86,14 +86,14 @@
       "first_name": "Ali",
       "full_name": "Ali emad",
       "multiplier": 1,
-      "message_count": 15
+      "message_count": 16
     },
     "7808578242": {
       "username": "Don_sul",
       "first_name": "Don",
       "full_name": "Don Sul",
       "multiplier": 1,
-      "message_count": 5
+      "message_count": 6
     },
     "5821447675": {
       "username": null,
@@ -107,7 +107,7 @@
       "first_name": "Sedal",
       "full_name": "Sedal Al Manaseer",
       "multiplier": 1,
-      "message_count": 16
+      "message_count": 18
     },
     "6389363574": {
       "username": null,
@@ -538,16 +538,12 @@
       "username": "Rahhal",
       "multiplier": 1
     },
-    "username_esraalhroub": {
-      "username": "Esraalhroub",
-      "multiplier": 1
-    },
     "8439771115": {
       "username": null,
       "first_name": "Batool",
       "full_name": "Batool Alsawalha",
       "multiplier": 1,
-      "message_count": 5
+      "message_count": 6
     },
     "8032608968": {
       "username": "ra2nd",
@@ -567,6 +563,13 @@
     "username_mlokqandil": {
       "username": "mlokqandil",
       "multiplier": 1
+    },
+    "5794749468": {
+      "username": "Esraalhroub",
+      "first_name": "Esra",
+      "full_name": "Esra Alhroub🦋",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1003997895530": {
