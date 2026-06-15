@@ -102,6 +102,15 @@ def get_chat_member_count(chat_id):
 
 def load_settings_for_chat(chat_id):
     chat_key = str(chat_id)
+    from bot import github_client
+    if github_client is not None:
+        try:
+            data, _ = github_client.get_file("settings.json")
+            if data:
+                return data.get(chat_key) or {}
+        except Exception as exc:
+            logger.warning("Fast settings load from GitHub failed: %s", exc)
+        return {}
 
     try:
         with open("settings.json", "r", encoding="utf-8") as file:
@@ -153,6 +162,15 @@ def load_members_from_mongo(chat_key):
 
 def load_members_for_chat(chat_id):
     chat_key = str(chat_id)
+    from bot import github_client
+    if github_client is not None:
+        try:
+            data, _ = github_client.get_file("members_data.json")
+            if data:
+                return data.get(chat_key) or {}
+        except Exception as exc:
+            logger.warning("Fast member load from GitHub failed: %s", exc)
+        return {}
 
     if os.getenv("VERCEL") or os.getenv("VERCEL_URL"):
         local_members = load_members_from_json(chat_key)
@@ -276,7 +294,7 @@ def try_fast_mention_all(message, chat_id, text):
             reply_to_message_id=message.get("message_id"),
         )
 
-    batch_size = 20
+    batch_size = 5
     total_batches = (len(valid_members) + batch_size - 1) // batch_size
     reply_to = message.get("reply_to_message", {}).get("message_id") or message.get("message_id")
 
