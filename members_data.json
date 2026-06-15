@@ -606,10 +606,6 @@
       "multiplier": 1,
       "message_count": 5
     },
-    "username_fatheallak": {
-      "username": "Fatheallak",
-      "multiplier": 1
-    },
     "username_awsmalaysheh.": {
       "username": "Awsmalaysheh.",
       "multiplier": 1
@@ -672,12 +668,19 @@
       "first_name": "مـعـتـصـم",
       "full_name": "مـعـتـصـم خرما",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 4
     },
     "5273491192": {
       "username": null,
       "first_name": "Dania.mhmadd",
       "full_name": "Dania.mhmadd",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5605394680": {
+      "username": "Fatheallak",
+      "first_name": "Fathe allak",
+      "full_name": "Fathe allak",
       "multiplier": 1,
       "message_count": 1
     }
