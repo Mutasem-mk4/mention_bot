@@ -100,7 +100,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 24
+      "message_count": 25
     },
     "6552337666": {
       "username": null,
@@ -462,10 +462,6 @@
       "username": "Wasan",
       "multiplier": 1
     },
-    "username_fatheallak": {
-      "username": "Fatheallak",
-      "multiplier": 1
-    },
     "username_f_km2006": {
       "username": "F_km2006",
       "multiplier": 1
@@ -587,6 +583,13 @@
       "username": "Abdamdkd",
       "first_name": "Abdelrahman Alsalhot",
       "full_name": "Abdelrahman Alsalhot",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5605394680": {
+      "username": "Fatheallak",
+      "first_name": "Fathe allak",
+      "full_name": "Fathe allak",
       "multiplier": 1,
       "message_count": 1
     }
