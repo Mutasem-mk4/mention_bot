@@ -115,7 +115,7 @@
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 4
     },
     "username_fatheallak": {
       "username": "Fatheallak",
@@ -139,6 +139,26 @@
     },
     "username_maisam_2004": {
       "username": "maisam_2004",
+      "multiplier": 1
+    },
+    "username_ola": {
+      "username": "Ola",
+      "multiplier": 1
+    },
+    "username_rahhal": {
+      "username": "Rahhal",
+      "multiplier": 1
+    },
+    "username_ali": {
+      "username": "Ali",
+      "multiplier": 1
+    },
+    "username_بتولتيي💞🤏🏻": {
+      "username": "بتولتيي💞🤏🏻",
+      "multiplier": 1
+    },
+    "username_جُــود": {
+      "username": "جُــود",
       "multiplier": 1
     }
   }
