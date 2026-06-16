@@ -541,6 +541,14 @@ def webhook():
         try:
             update_json = request.get_json(force=True, silent=False)
 
+            # Ignore old messages to prevent spamming old queued mentions
+            message = update_json.get("message")
+            if message:
+                msg_date = message.get("date")
+                if msg_date and (time.time() - msg_date) > 90:
+                    logger.info(f"Skipping old message from {msg_date} (current: {time.time()})")
+                    return "OK", 200
+
             chat_id = None
             if "message" in update_json:
                 chat_id = update_json["message"]["chat"]["id"]
