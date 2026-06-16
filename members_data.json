@@ -100,7 +100,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 24
+      "message_count": 25
     },
     "6552337666": {
       "username": null,
@@ -366,10 +366,6 @@
       "username": "Rahaf",
       "multiplier": 1
     },
-    "username_raafatayyoub": {
-      "username": "RaafatAyyoub",
-      "multiplier": 1
-    },
     "username_البراء": {
       "username": "البراء",
       "multiplier": 1
@@ -392,10 +388,6 @@
     },
     "username_hala": {
       "username": "Hala",
-      "multiplier": 1
-    },
-    "username_marya_rajeh": {
-      "username": "marya_rajeh",
       "multiplier": 1
     },
     "username_شهد": {
@@ -462,16 +454,8 @@
       "username": "Wasan",
       "multiplier": 1
     },
-    "username_fatheallak": {
-      "username": "Fatheallak",
-      "multiplier": 1
-    },
     "username_f_km2006": {
       "username": "F_km2006",
-      "multiplier": 1
-    },
-    "username_ibrahim_sabbah": {
-      "username": "ibrahim_sabbah",
       "multiplier": 1
     },
     "username_yara": {
@@ -508,10 +492,6 @@
     },
     "username_mohammad_aljaafreh": {
       "username": "Mohammad_Aljaafreh",
-      "multiplier": 1
-    },
-    "username_abdamdkd": {
-      "username": "Abdamdkd",
       "multiplier": 1
     },
     "username_aishaiibrahiim": {
@@ -554,10 +534,10 @@
     },
     "8994163884": {
       "username": "mlokqandil",
-      "first_name": "马拉克🤍.",
-      "full_name": "马拉克🤍.",
+      "first_name": "Malak Qandil || ملك قنديل 🤍",
+      "full_name": "Malak Qandil || ملك قنديل 🤍",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "5794749468": {
       "username": "Esraalhroub",
@@ -579,6 +559,55 @@
       "full_name": "Dania.mhmadd",
       "multiplier": 1,
       "message_count": 1
+    },
+    "2145547042": {
+      "username": null,
+      "first_name": "Ola Rahhal",
+      "full_name": "Ola Rahhal",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "6349146985": {
+      "username": "Abdamdkd",
+      "first_name": "Abdelrahman Alsalhot",
+      "full_name": "Abdelrahman Alsalhot",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5605394680": {
+      "username": "Fatheallak",
+      "first_name": "Fathe allak",
+      "full_name": "Fathe allak",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5935841253": {
+      "username": "ibrahim_sabbah",
+      "first_name": "Ibrahim",
+      "full_name": "Ibrahim Sabbah",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8466200242": {
+      "username": null,
+      "first_name": "Raneem",
+      "full_name": "Raneem Nazzal",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5502305785": {
+      "username": "marya_rajeh",
+      "first_name": "Marya",
+      "full_name": "Marya Rajeh🍯✨",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5842181239": {
+      "username": "RaafatAyyoub",
+      "first_name": "Ra'afat",
+      "full_name": "Ra'afat Ayyoub",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1003997895530": {
@@ -595,10 +624,6 @@
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
       "message_count": 5
-    },
-    "username_fatheallak": {
-      "username": "Fatheallak",
-      "multiplier": 1
     },
     "username_awsmalaysheh.": {
       "username": "Awsmalaysheh.",
@@ -662,12 +687,19 @@
       "first_name": "مـعـتـصـم",
       "full_name": "مـعـتـصـم خرما",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 4
     },
     "5273491192": {
       "username": null,
       "first_name": "Dania.mhmadd",
       "full_name": "Dania.mhmadd",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5605394680": {
+      "username": "Fatheallak",
+      "first_name": "Fathe allak",
+      "full_name": "Fathe allak",
       "multiplier": 1,
       "message_count": 1
     }
