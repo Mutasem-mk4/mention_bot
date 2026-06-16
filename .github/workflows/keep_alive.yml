@@ -1,0 +1,19 @@
+name: Keep Render Bot Alive
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render Web Service
+        run: |
+          if [ -n "${{ secrets.RENDER_URL }}" ]; then
+            curl -s "${{ secrets.RENDER_URL }}"
+            echo "Successfully pinged Render!"
+          else
+            echo "RENDER_URL secret is not set. Please set the RENDER_URL secret in your GitHub repository settings to keep the bot alive."
+          fi
