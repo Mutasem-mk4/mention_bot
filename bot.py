@@ -2351,7 +2351,7 @@ def main():
     print("📌 الأوامر: /add, /remove, /list, /count, /clear, @all")
     
     # تشغيل سيرفر الويب الوهمي (Keep Alive)
-    # keep_alive()
+    keep_alive()
 
     # بدء تشغيل البوت (مع حذف الويب هوك القديم لضمان العمل على Render)
     print("🚀 جاري تشغيل البوت بنظام Polling...")
