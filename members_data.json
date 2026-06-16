@@ -438,10 +438,6 @@
       "username": "heba_6",
       "multiplier": 1
     },
-    "username_ismaeel_almashaiekh": {
-      "username": "ismaeel_almashaiekh",
-      "multiplier": 1
-    },
     "username_مَحمُود": {
       "username": "مَحمُود",
       "multiplier": 1
@@ -640,6 +636,13 @@
       "username": null,
       "first_name": "Rahaf",
       "full_name": "Rahaf Tayeh",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8470838884": {
+      "username": "ismaeel_almashaiekh",
+      "first_name": "ismaeel",
+      "full_name": "ismaeel almashaiekh",
       "multiplier": 1,
       "message_count": 1
     }
