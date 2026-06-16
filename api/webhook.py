@@ -298,19 +298,24 @@ def try_fast_mention_all(message, chat_id, text):
     total_batches = (len(valid_members) + batch_size - 1) // batch_size
     reply_to = message.get("reply_to_message", {}).get("message_id") or message.get("message_id")
 
+    payloads = []
+    host_url = request.host_url
+    api_url = f"{host_url}api/send_batch"
+    token = os.getenv("BOT_TOKEN")
+
     for round_num in range(1, rounds + 1):
         round_prefix = f"({round_num}/{rounds}) " if rounds > 1 else ""
         for index in range(0, len(valid_members), batch_size):
             batch = valid_members[index:index + batch_size]
             batch_num = (index // batch_size) + 1
             mentions = " ".join(mention_text(uid, data) for uid, data in batch)
-            send_message(
-                chat_id,
-                f"{custom_msg} {round_prefix}[{batch_num}/{total_batches}]\n{mentions}",
-                parse_mode="HTML",
-                reply_to_message_id=reply_to,
-            )
-            time.sleep(0.05)
+            payloads.append({
+                "token": token,
+                "chat_id": chat_id,
+                "text": f"{custom_msg} {round_prefix}[{batch_num}/{total_batches}]\n{mentions}",
+                "parse_mode": "HTML",
+                "reply_to_message_id": reply_to
+            })
 
     if not quiet:
         completion_msgs = [
@@ -370,7 +375,27 @@ def try_fast_mention_all(message, chat_id, text):
             "تحياتي لكل الأعزاء 💐"
         ]
         import random
-        send_message(chat_id, random.choice(completion_msgs), reply_to_message_id=message.get("message_id"))
+        payloads.append({
+            "token": token,
+            "chat_id": chat_id,
+            "text": random.choice(completion_msgs),
+            "reply_to_message_id": message.get("message_id")
+        })
+
+    # Trigger all batch sends in parallel using background threads
+    from threading import Thread
+
+    def trigger_batch(p):
+        try:
+            requests.post(api_url, json=p, timeout=0.25)
+        except requests.exceptions.Timeout:
+            pass
+        except Exception as e:
+            logger.error(f"Async batch trigger error: {e}")
+
+    for p in payloads:
+        Thread(target=trigger_batch, args=(p,)).start()
+
     return True
 
 
@@ -479,6 +504,30 @@ async def _process_update(update_json, chat_id):
 
     update = Update.de_json(update_json, bot_app.bot)
     await bot_app.process_update(update)
+
+@app.route('/api/send_batch', methods=['POST'])
+def send_batch():
+    try:
+        data = request.get_json(force=True, silent=True) or {}
+        token = data.get("token")
+        if not token or token != os.getenv("BOT_TOKEN"):
+            return "Unauthorized", 401
+
+        chat_id = data.get("chat_id")
+        text = data.get("text")
+        reply_to_id = data.get("reply_to_message_id")
+        parse_mode = data.get("parse_mode")
+
+        send_message(
+            chat_id,
+            text,
+            reply_to_message_id=reply_to_id,
+            parse_mode=parse_mode
+        )
+        return "OK", 200
+    except Exception as e:
+        logger.error(f"Error in send_batch: {e}")
+        return str(e), 500
 
 @app.route('/api/webhook', methods=['GET', 'POST'])
 def webhook():
