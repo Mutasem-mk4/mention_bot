@@ -1730,6 +1730,15 @@ async def list_tags(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def mention_tag(update: Update, context: ContextTypes.DEFAULT_TYPE, tag_name: str):
     """منشن أعضاء تاج معين"""
     if not await is_user_admin(update, context): return
+    
+    # Ignore old messages to prevent spamming old queued mentions
+    from datetime import datetime, timezone
+    if update.message and update.message.date:
+        now = datetime.now(timezone.utc)
+        diff = (now - update.message.date).total_seconds()
+        if diff > 90:
+            logger.info(f"Skipping old mention_tag (age: {diff}s)")
+            return
     chat_id = str(update.effective_chat.id)
     init_data(chat_id)
     init_tags(chat_id)
@@ -1820,6 +1829,15 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
     if not await is_user_admin(update, context):
         await update.message.reply_text("⚠️ المعذرة، هذا الأمر متاح للمشرفين فقط.")
         return
+
+    # Ignore old messages to prevent spamming old queued mentions
+    from datetime import datetime, timezone
+    if update.message and update.message.date:
+        now = datetime.now(timezone.utc)
+        diff = (now - update.message.date).total_seconds()
+        if diff > 90:
+            logger.info(f"Skipping old mention_all (age: {diff}s)")
+            return
 
     # منع التنفيذ المزدوج لنفس الرسالة
     msg_id = update.message.message_id
