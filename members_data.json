@@ -394,10 +394,6 @@
       "username": "Hala",
       "multiplier": 1
     },
-    "username_marya_rajeh": {
-      "username": "marya_rajeh",
-      "multiplier": 1
-    },
     "username_شهد": {
       "username": "شهد",
       "multiplier": 1
@@ -600,6 +596,13 @@
       "username": null,
       "first_name": "Raneem",
       "full_name": "Raneem Nazzal",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5502305785": {
+      "username": "marya_rajeh",
+      "first_name": "Marya",
+      "full_name": "Marya Rajeh🍯✨",
       "multiplier": 1,
       "message_count": 1
     }
