@@ -630,11 +630,11 @@
       "message_count": 1
     },
     "1888601586": {
-      "username": "kw_aik",
       "first_name": "Mohammed",
+      "last_name": null,
       "full_name": "Mohammed",
-      "multiplier": 1,
-      "message_count": 1
+      "username": "kw_aik",
+      "multiplier": 1
     }
   },
   "-1003997895530": {
