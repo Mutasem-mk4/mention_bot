@@ -398,10 +398,6 @@
       "username": "دلع",
       "multiplier": 1
     },
-    "username_maisam_2004": {
-      "username": "maisam_2004",
-      "multiplier": 1
-    },
     "username_الديج": {
       "username": "الديج",
       "multiplier": 1
@@ -650,6 +646,13 @@
       "username": null,
       "first_name": "malek",
       "full_name": "malek abuhijleh",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "910490489": {
+      "username": "maisam_2004",
+      "first_name": "Maisam",
+      "full_name": "Maisam",
       "multiplier": 1,
       "message_count": 1
     }
