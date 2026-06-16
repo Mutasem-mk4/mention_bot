@@ -522,7 +522,7 @@
       "first_name": "رَنــد",
       "full_name": "رَنــد",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 4
     },
     "8994163884": {
       "username": "mlokqandil",
@@ -564,7 +564,7 @@
       "first_name": "Abdelrahman Alsalhot",
       "full_name": "Abdelrahman Alsalhot",
       "multiplier": 1,
-      "message_count": 17
+      "message_count": 18
     },
     "5605394680": {
       "username": "Fatheallak",
@@ -635,6 +635,13 @@
       "full_name": "Mohammed",
       "username": "kw_aik",
       "multiplier": 1
+    },
+    "6074600745": {
+      "username": null,
+      "first_name": "Rahaf",
+      "full_name": "Rahaf Tayeh",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1003997895530": {
