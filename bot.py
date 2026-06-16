@@ -112,7 +112,7 @@ class GitHubDB:
         content_b64 = base64.b64encode(content_bytes).decode("utf-8")
         
         payload = {
-            "message": f"update {path} via mention bot [skip ci]",
+            "message": f"update {path} via mention bot [skip ci] [skip render] [skip deploy] [render skip]",
             "content": content_b64,
             "branch": self.branch
         }
