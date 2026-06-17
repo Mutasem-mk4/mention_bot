@@ -482,10 +482,6 @@
       "username": "aishaiibrahiim",
       "multiplier": 1
     },
-    "username_mohammed3moush": {
-      "username": "MOHAMMED3MOUSH",
-      "multiplier": 1
-    },
     "username_yazan": {
       "username": "Yazan",
       "multiplier": 1
@@ -667,6 +663,13 @@
       "username": null,
       "first_name": "Baraa",
       "full_name": "Baraa",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5397798571": {
+      "username": "MOHAMMED3MOUSH",
+      "first_name": "MOHAMMED",
+      "full_name": "MOHAMMED 3MOUSH",
       "multiplier": 1,
       "message_count": 1
     }
