@@ -68,12 +68,27 @@ def send_message(chat_id, text, **extra):
 
     payload = {"chat_id": chat_id, "text": text}
     payload.update(extra)
-    response = requests.post(
-        f"https://api.telegram.org/bot{token}/sendMessage",
-        json=payload,
-        timeout=6,
-    )
-    response.raise_for_status()
+    
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    attempts = 0
+    while attempts < 3:
+        try:
+            response = requests.post(url, json=payload, timeout=6)
+            if response.status_code == 200:
+                return True
+            elif response.status_code == 429:
+                res_data = response.json()
+                retry_after = res_data.get("parameters", {}).get("retry_after", 5)
+                logger.warning(f"Telegram 429! Sleeping for {retry_after}s...")
+                time.sleep(retry_after + 1)
+                attempts += 1
+            else:
+                response.raise_for_status()
+        except Exception as e:
+            logger.error(f"Error sending message: {e}")
+            time.sleep(1)
+            attempts += 1
+    return False
 
 
 def telegram_get(method, params, timeout=4):
@@ -298,7 +313,7 @@ def try_fast_mention_all(message, chat_id, text):
     total_batches = (len(valid_members) + batch_size - 1) // batch_size
     reply_to = message.get("reply_to_message", {}).get("message_id") or message.get("message_id")
 
-    payloads = []
+    batches = []
     host_url = request.host_url
     api_url = f"{host_url}api/send_batch"
     token = os.getenv("BOT_TOKEN")
@@ -309,13 +324,7 @@ def try_fast_mention_all(message, chat_id, text):
             batch = valid_members[index:index + batch_size]
             batch_num = (index // batch_size) + 1
             mentions = " ".join(mention_text(uid, data) for uid, data in batch)
-            payloads.append({
-                "token": token,
-                "chat_id": chat_id,
-                "text": f"{custom_msg} {round_prefix}[{batch_num}/{total_batches}]\n{mentions}",
-                "parse_mode": "HTML",
-                "reply_to_message_id": reply_to
-            })
+            batches.append(f"{custom_msg} {round_prefix}[{batch_num}/{total_batches}]\n{mentions}")
 
     if not quiet:
         completion_msgs = [
@@ -375,26 +384,23 @@ def try_fast_mention_all(message, chat_id, text):
             "تحياتي لكل الأعزاء 💐"
         ]
         import random
-        payloads.append({
-            "token": token,
-            "chat_id": chat_id,
-            "text": random.choice(completion_msgs),
-            "reply_to_message_id": message.get("message_id")
-        })
+        batches.append(random.choice(completion_msgs))
 
-    # Trigger all batch sends in parallel using background threads
-    from threading import Thread
+    # Trigger the first batch asynchronously
+    first_payload = {
+        "token": token,
+        "chat_id": chat_id,
+        "batches": batches,
+        "reply_to_message_id": reply_to,
+        "current_index": 0
+    }
 
-    def trigger_batch(p):
-        try:
-            requests.post(api_url, json=p, timeout=0.25)
-        except requests.exceptions.Timeout:
-            pass
-        except Exception as e:
-            logger.error(f"Async batch trigger error: {e}")
-
-    for p in payloads:
-        Thread(target=trigger_batch, args=(p,)).start()
+    try:
+        requests.post(api_url, json=first_payload, timeout=0.25)
+    except requests.exceptions.Timeout:
+        pass
+    except Exception as e:
+        logger.error(f"Failed to trigger first batch: {e}")
 
     return True
 
@@ -514,16 +520,46 @@ def send_batch():
             return "Unauthorized", 401
 
         chat_id = data.get("chat_id")
-        text = data.get("text")
+        batches = data.get("batches")
         reply_to_id = data.get("reply_to_message_id")
-        parse_mode = data.get("parse_mode")
+        current_index = data.get("current_index", 0)
 
+        if not batches or not isinstance(batches, list) or current_index >= len(batches):
+            return "Invalid index or empty batches", 400
+
+        text = batches[current_index]
+
+        # Send this batch with retry handling
         send_message(
             chat_id,
             text,
             reply_to_message_id=reply_to_id,
-            parse_mode=parse_mode
+            parse_mode="HTML"
         )
+
+        # If there are more batches, sleep and trigger the next one
+        if current_index + 1 < len(batches):
+            # Sleep 2.5 seconds to respect Telegram's rate limit per group
+            time.sleep(2.5)
+
+            next_payload = {
+                "token": token,
+                "chat_id": chat_id,
+                "batches": batches,
+                "reply_to_message_id": reply_to_id,
+                "current_index": current_index + 1
+            }
+
+            host_url = request.host_url
+            api_url = f"{host_url}api/send_batch"
+
+            try:
+                requests.post(api_url, json=next_payload, timeout=0.25)
+            except requests.exceptions.Timeout:
+                pass
+            except Exception as e:
+                logger.error(f"Failed to trigger next batch: {e}")
+
         return "OK", 200
     except Exception as e:
         logger.error(f"Error in send_batch: {e}")
