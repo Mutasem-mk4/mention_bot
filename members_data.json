@@ -65,14 +65,14 @@
       "first_name": "Yousef",
       "full_name": "Yousef AK",
       "multiplier": 1,
-      "message_count": 58
+      "message_count": 60
     },
     "5185123317": {
       "username": null,
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
-      "message_count": 98
+      "message_count": 106
     },
     "5125017835": {
       "username": "a7md3bdullah",
@@ -86,7 +86,7 @@
       "first_name": "Ali",
       "full_name": "Ali emad",
       "multiplier": 1,
-      "message_count": 46
+      "message_count": 48
     },
     "7808578242": {
       "username": "Don_sul",
@@ -100,7 +100,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 53
+      "message_count": 58
     },
     "6552337666": {
       "username": null,
@@ -121,7 +121,7 @@
       "first_name": "Hashem",
       "full_name": "Hashem Al-Dwekat",
       "multiplier": 1,
-      "message_count": 62
+      "message_count": 67
     },
     "8713955315": {
       "username": null,
@@ -378,10 +378,6 @@
       "username": "نورا",
       "multiplier": 1
     },
-    "username_sali_fahhar": {
-      "username": "Sali_Fahhar",
-      "multiplier": 1
-    },
     "username_qamar": {
       "username": "QAMAR",
       "multiplier": 1
@@ -503,21 +499,21 @@
       "first_name": "Batool",
       "full_name": "Batool Alsawalha",
       "multiplier": 1,
-      "message_count": 8
+      "message_count": 11
     },
     "8032608968": {
       "username": "ra2nd",
       "first_name": "رَنــد",
       "full_name": "رَنــد",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 13
     },
     "8994163884": {
       "username": "mlokqandil",
       "first_name": "Malak Qandil || ملك قنديل 🤍",
       "full_name": "Malak Qandil || ملك قنديل 🤍",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 6
     },
     "5794749468": {
       "username": "Esraalhroub",
@@ -545,14 +541,14 @@
       "first_name": "Ola Rahhal",
       "full_name": "Ola Rahhal",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "6349146985": {
       "username": "Abdamdkd",
       "first_name": "Abdelrahman Alsalhot",
       "full_name": "Abdelrahman Alsalhot",
       "multiplier": 1,
-      "message_count": 49
+      "message_count": 60
     },
     "5605394680": {
       "username": "Fatheallak",
@@ -692,7 +688,15 @@
       "last_name": null,
       "full_name": "Sedra alawad",
       "username": "eulidd",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 9
+    },
+    "5381308511": {
+      "username": "Sali_Fahhar",
+      "first_name": "Sali",
+      "full_name": "Sali Fahhar",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1003997895530": {
