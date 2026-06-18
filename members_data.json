@@ -370,10 +370,6 @@
       "username": "البراء",
       "multiplier": 1
     },
-    "username_mahmooud_e36": {
-      "username": "mahmooud_e36",
-      "multiplier": 1
-    },
     "username_نورا": {
       "username": "نورا",
       "multiplier": 1
@@ -702,6 +698,13 @@
       "username": null,
       "first_name": "moayad",
       "full_name": "moayad",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "6025322713": {
+      "username": "mahmooud_e36",
+      "first_name": "Mahmoud",
+      "full_name": "Mahmoud Albadawi",
       "multiplier": 1,
       "message_count": 1
     }
