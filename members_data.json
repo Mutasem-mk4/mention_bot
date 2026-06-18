@@ -418,10 +418,6 @@
       "username": "qassasafa",
       "multiplier": 1
     },
-    "username_naghamalwreadat": {
-      "username": "Naghamalwreadat",
-      "multiplier": 1
-    },
     "username_heba_6": {
       "username": "heba_6",
       "multiplier": 1
@@ -705,6 +701,13 @@
       "username": "mahmooud_e36",
       "first_name": "Mahmoud",
       "full_name": "Mahmoud Albadawi",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "2025777822": {
+      "username": "Naghamalwreadat",
+      "first_name": "Nagham",
+      "full_name": "Nagham Alwreadat",
       "multiplier": 1,
       "message_count": 1
     }
