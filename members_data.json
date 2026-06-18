@@ -919,14 +919,18 @@
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "5821447675": {
       "username": null,
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 4
+    },
+    "username_ra2nd": {
+      "username": "ra2nd",
+      "multiplier": 1
     }
   }
 }
