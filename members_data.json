@@ -1402,10 +1402,6 @@
       "username": "Don_sul",
       "multiplier": 1
     },
-    "username_fatheallak": {
-      "username": "Fatheallak",
-      "multiplier": 1
-    },
     "username_شهد": {
       "username": "شهد",
       "multiplier": 1
@@ -1474,6 +1470,13 @@
       "username": null,
       "first_name": "Dania.mhmadd",
       "full_name": "Dania.mhmadd",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5605394680": {
+      "username": "Fatheallak",
+      "first_name": "Fathe allak",
+      "full_name": "Fathe allak",
       "multiplier": 1,
       "message_count": 1
     }
