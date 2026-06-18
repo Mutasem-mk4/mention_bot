@@ -840,10 +840,6 @@
       "multiplier": 1,
       "message_count": 1
     },
-    "username_ismaeel_almashaiekh": {
-      "username": "ismaeel_almashaiekh",
-      "multiplier": 1
-    },
     "username_fatheallak": {
       "username": "Fatheallak",
       "multiplier": 1
@@ -1019,6 +1015,13 @@
     "username_dania.mhmadd": {
       "username": "Dania.mhmadd",
       "multiplier": 1
+    },
+    "8470838884": {
+      "username": "ismaeel_almashaiekh",
+      "first_name": "ismaeel",
+      "full_name": "ismaeel almashaiekh",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1003840246080": {
