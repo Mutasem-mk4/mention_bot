@@ -1033,10 +1033,6 @@
       "username": "ra2nd",
       "multiplier": 1
     },
-    "username_fatheallak": {
-      "username": "Fatheallak",
-      "multiplier": 1
-    },
     "username_ola": {
       "username": "Ola",
       "multiplier": 1
@@ -1128,6 +1124,13 @@
     "username_naghamalwreadat": {
       "username": "Naghamalwreadat",
       "multiplier": 1
+    },
+    "5605394680": {
+      "username": "Fatheallak",
+      "first_name": "Fathe allak",
+      "full_name": "Fathe allak",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1003809633282": {
