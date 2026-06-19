@@ -58,7 +58,7 @@
       "username": "mk4lj",
       "first_name": "مـعـتـصـم",
       "full_name": "مـعـتـصـم خرما",
-      "message_count": 3
+      "message_count": 15
     },
     "1460123110": {
       "username": "youssefabukhalaf",
@@ -72,7 +72,7 @@
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
-      "message_count": 106
+      "message_count": 122
     },
     "5125017835": {
       "username": "a7md3bdullah",
@@ -100,7 +100,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 58
+      "message_count": 66
     },
     "6552337666": {
       "username": null,
@@ -114,21 +114,21 @@
       "first_name": "Maya",
       "full_name": "Maya Tayfour",
       "multiplier": 1,
-      "message_count": 19
+      "message_count": 23
     },
     "5592390194": {
       "username": "hashem_al_dwekat",
       "first_name": "Hashem",
       "full_name": "Hashem Al-Dwekat",
       "multiplier": 1,
-      "message_count": 67
+      "message_count": 70
     },
     "8713955315": {
       "username": null,
       "first_name": "Aya",
       "full_name": "Aya Alshahrouri",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 5
     },
     "username_maya": {
       "username": "Maya",
@@ -466,10 +466,6 @@
       "username": "الخريج🤍",
       "multiplier": 1
     },
-    "username_aishaiibrahiim": {
-      "username": "aishaiibrahiim",
-      "multiplier": 1
-    },
     "username_yazan": {
       "username": "Yazan",
       "multiplier": 1
@@ -491,7 +487,7 @@
       "first_name": "Batool",
       "full_name": "Batool Alsawalha",
       "multiplier": 1,
-      "message_count": 11
+      "message_count": 13
     },
     "8032608968": {
       "username": "ra2nd",
@@ -547,7 +543,7 @@
       "first_name": "Fathe allak",
       "full_name": "Fathe allak",
       "multiplier": 1,
-      "message_count": 9
+      "message_count": 32
     },
     "5935841253": {
       "username": "ibrahim_sabbah",
@@ -631,7 +627,7 @@
       "first_name": "malek",
       "full_name": "malek abuhijleh",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 5
     },
     "910490489": {
       "username": "maisam_2004",
@@ -666,7 +662,7 @@
       "first_name": "نورا",
       "full_name": "نورا ابومراد",
       "multiplier": 1,
-      "message_count": 17
+      "message_count": 20
     },
     "8218333676": {
       "first_name": "Rawan",
@@ -708,6 +704,13 @@
       "username": "Naghamalwreadat",
       "first_name": "Nagham",
       "full_name": "Nagham Alwreadat",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "1872682753": {
+      "username": "aishaiibrahiim",
+      "first_name": "عائشة",
+      "full_name": "عائشة",
       "multiplier": 1,
       "message_count": 1
     }
