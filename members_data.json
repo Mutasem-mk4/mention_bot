@@ -909,10 +909,6 @@
       "username": "Don_sul",
       "multiplier": 1
     },
-    "username_abdamdkd": {
-      "username": "Abdamdkd",
-      "multiplier": 1
-    },
     "username_youssefabukhalaf": {
       "username": "youssefabukhalaf",
       "multiplier": 1
@@ -1044,6 +1040,13 @@
       "username": null,
       "first_name": "Ali",
       "full_name": "Ali emad",
+      "multiplier": 1,
+      "message_count": 3
+    },
+    "6349146985": {
+      "username": "Abdamdkd",
+      "first_name": "Abdelrahman Alsalhot",
+      "full_name": "Abdelrahman Alsalhot",
       "multiplier": 1,
       "message_count": 1
     }
