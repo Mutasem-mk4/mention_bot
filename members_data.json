@@ -1499,12 +1499,19 @@
       "first_name": "Dania.mhmadd",
       "full_name": "Dania.mhmadd",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "5605394680": {
       "username": "Fatheallak",
       "first_name": "Fathe allak",
       "full_name": "Fathe allak",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5821447675": {
+      "username": null,
+      "first_name": "جُــود",
+      "full_name": "جُــود",
       "multiplier": 1,
       "message_count": 1
     }
