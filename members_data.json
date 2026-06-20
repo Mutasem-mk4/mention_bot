@@ -1040,7 +1040,7 @@
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "username_ola": {
       "username": "Ola",
@@ -1080,10 +1080,6 @@
     },
     "username_mk4lj": {
       "username": "mk4lj",
-      "multiplier": 1
-    },
-    "username_mlokqandil": {
-      "username": "mlokqandil",
       "multiplier": 1
     },
     "username_daniazeyad": {
@@ -1159,6 +1155,13 @@
       "username": null,
       "first_name": "Yazan",
       "full_name": "Yazan Nehad",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8994163884": {
+      "username": "mlokqandil",
+      "first_name": "Malak Qandil || ملك قنديل 🤍",
+      "full_name": "Malak Qandil || ملك قنديل 🤍",
       "multiplier": 1,
       "message_count": 1
     }
