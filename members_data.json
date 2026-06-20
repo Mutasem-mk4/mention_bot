@@ -1188,7 +1188,7 @@
       "first_name": "Ola Rahhal",
       "full_name": "Ola Rahhal",
       "multiplier": 1,
-      "message_count": 11
+      "message_count": 12
     },
     "2005587169": {
       "username": null,
@@ -1223,7 +1223,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "6020872234": {
       "username": null,
@@ -1250,6 +1250,13 @@
       "username": "aishaiibrahiim",
       "first_name": "عائشة",
       "full_name": "عائشة",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8439771115": {
+      "username": null,
+      "first_name": "Batool",
+      "full_name": "Batool Alsawalha",
       "multiplier": 1,
       "message_count": 1
     }
