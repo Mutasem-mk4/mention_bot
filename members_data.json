@@ -1189,7 +1189,7 @@
       "first_name": "Ola Rahhal",
       "full_name": "Ola Rahhal",
       "multiplier": 1,
-      "message_count": 7
+      "message_count": 8
     },
     "2005587169": {
       "username": null,
@@ -1237,6 +1237,13 @@
       "username": "ismaeel_almashaiekh",
       "first_name": "ismaeel",
       "full_name": "ismaeel almashaiekh",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "7994093511": {
+      "username": null,
+      "first_name": "Salma",
+      "full_name": "Salma Abu-alrub",
       "multiplier": 1,
       "message_count": 1
     }
