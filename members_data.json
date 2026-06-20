@@ -1013,10 +1013,6 @@
       "username": "Wasan",
       "multiplier": 1
     },
-    "username_aishaiibrahiim": {
-      "username": "aishaiibrahiim",
-      "multiplier": 1
-    },
     "username_arak_ah": {
       "username": "arak_ah",
       "multiplier": 1
@@ -1071,6 +1067,13 @@
       "username": null,
       "first_name": "Abdalkareem tareq",
       "full_name": "Abdalkareem tareq",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "1872682753": {
+      "username": "aishaiibrahiim",
+      "first_name": "عائشة",
+      "full_name": "عائشة",
       "multiplier": 1,
       "message_count": 1
     }
