@@ -1142,7 +1142,7 @@
       "first_name": "Fathe allak",
       "full_name": "Fathe allak",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "8032608968": {
       "username": "ra2nd",
@@ -1156,7 +1156,7 @@
       "first_name": "Ola Rahhal",
       "full_name": "Ola Rahhal",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "2005587169": {
       "username": null,
@@ -1176,6 +1176,13 @@
       "username": null,
       "first_name": "Aya",
       "full_name": "Aya Alshahrouri",
+      "multiplier": 1,
+      "message_count": 2
+    },
+    "1120491521": {
+      "username": null,
+      "first_name": "malek",
+      "full_name": "malek abuhijleh",
       "multiplier": 1,
       "message_count": 1
     }
