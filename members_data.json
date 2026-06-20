@@ -1163,12 +1163,19 @@
       "first_name": "Yazan",
       "full_name": "Yazan Nehad",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "8994163884": {
       "username": "mlokqandil",
       "first_name": "Malak Qandil || ملك قنديل 🤍",
       "full_name": "Malak Qandil || ملك قنديل 🤍",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8713955315": {
+      "username": null,
+      "first_name": "Aya",
+      "full_name": "Aya Alshahrouri",
       "multiplier": 1,
       "message_count": 1
     }
