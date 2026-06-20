@@ -913,10 +913,6 @@
       "username": "youssefabukhalaf",
       "multiplier": 1
     },
-    "username_mk4lj": {
-      "username": "mk4lj",
-      "multiplier": 1
-    },
     "username_ola": {
       "username": "Ola",
       "multiplier": 1
@@ -1041,12 +1037,19 @@
       "first_name": "Ali",
       "full_name": "Ali emad",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 4
     },
     "6349146985": {
       "username": "Abdamdkd",
       "first_name": "Abdelrahman Alsalhot",
       "full_name": "Abdelrahman Alsalhot",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "1616533142": {
+      "username": "mk4lj",
+      "first_name": "مـعـتـصـم",
+      "full_name": "مـعـتـصـم خرما",
       "multiplier": 1,
       "message_count": 1
     }
