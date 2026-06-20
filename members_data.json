@@ -1165,10 +1165,6 @@
       "username": "maisam_2004",
       "multiplier": 1
     },
-    "username_aishaiibrahiim": {
-      "username": "aishaiibrahiim",
-      "multiplier": 1
-    },
     "username_naghamalwreadat": {
       "username": "Naghamalwreadat",
       "multiplier": 1
@@ -1192,7 +1188,7 @@
       "first_name": "Ola Rahhal",
       "full_name": "Ola Rahhal",
       "multiplier": 1,
-      "message_count": 8
+      "message_count": 11
     },
     "2005587169": {
       "username": null,
@@ -1247,6 +1243,13 @@
       "username": null,
       "first_name": "Salma",
       "full_name": "Salma Abu-alrub",
+      "multiplier": 1,
+      "message_count": 2
+    },
+    "1872682753": {
+      "username": "aishaiibrahiim",
+      "first_name": "عائشة",
+      "full_name": "عائشة",
       "multiplier": 1,
       "message_count": 1
     }
