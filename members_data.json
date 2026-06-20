@@ -1118,10 +1118,6 @@
       "username": "F_km2006",
       "multiplier": 1
     },
-    "username_ismaeel_almashaiekh": {
-      "username": "ismaeel_almashaiekh",
-      "multiplier": 1
-    },
     "username_mk4lj": {
       "username": "mk4lj",
       "multiplier": 1
@@ -1234,6 +1230,13 @@
       "username": null,
       "first_name": "Baraa",
       "full_name": "Baraa",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8470838884": {
+      "username": "ismaeel_almashaiekh",
+      "first_name": "ismaeel",
+      "full_name": "ismaeel almashaiekh",
       "multiplier": 1,
       "message_count": 1
     }
