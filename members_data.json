@@ -1044,7 +1044,7 @@
       "first_name": "Abdelrahman Alsalhot",
       "full_name": "Abdelrahman Alsalhot",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "1616533142": {
       "username": "mk4lj",
@@ -1057,6 +1057,13 @@
       "username": null,
       "first_name": "Ola Rahhal",
       "full_name": "Ola Rahhal",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8713955315": {
+      "username": null,
+      "first_name": "Aya",
+      "full_name": "Aya Alshahrouri",
       "multiplier": 1,
       "message_count": 1
     }
