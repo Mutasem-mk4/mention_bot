@@ -1915,6 +1915,10 @@
     "username_rosol": {
       "username": "Rosol",
       "multiplier": 1
+    },
+    "username_دانا": {
+      "username": "دانا",
+      "multiplier": 1
     }
   }
 }
