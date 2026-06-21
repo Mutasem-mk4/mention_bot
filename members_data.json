@@ -1508,10 +1508,6 @@
       "username": "mlokqandil",
       "multiplier": 1
     },
-    "username_fatheallak": {
-      "username": "Fatheallak",
-      "multiplier": 1
-    },
     "username_rahaf": {
       "username": "Rahaf",
       "multiplier": 1
@@ -1583,6 +1579,13 @@
       "username": "eng_mlk_qndl",
       "first_name": "Malak Qandil || ملك قنديل 🤍",
       "full_name": "Malak Qandil || ملك قنديل 🤍",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5605394680": {
+      "username": "Fatheallak",
+      "first_name": "Fathe allak",
+      "full_name": "Fathe allak",
       "multiplier": 1,
       "message_count": 1
     }
