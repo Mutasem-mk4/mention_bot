@@ -2061,6 +2061,10 @@
     "username_شهد": {
       "username": "شهد",
       "multiplier": 1
+    },
+    "username_qassasafa": {
+      "username": "qassasafa",
+      "multiplier": 1
     }
   }
 }
