@@ -889,10 +889,6 @@
       "username": "Baraa",
       "multiplier": 1
     },
-    "username_hashem_al_dwekat": {
-      "username": "hashem_al_dwekat",
-      "multiplier": 1
-    },
     "username_yara": {
       "username": "Yara",
       "multiplier": 1
@@ -1029,7 +1025,7 @@
       "first_name": "Ali",
       "full_name": "Ali emad",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 8
     },
     "6349146985": {
       "username": "Abdamdkd",
@@ -1077,6 +1073,13 @@
       "username": "ra2nd",
       "first_name": "رَنــد",
       "full_name": "رَنــد",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5592390194": {
+      "username": "hashem_al_dwekat",
+      "first_name": "Hashem",
+      "full_name": "Hashem Al-Dwekat",
       "multiplier": 1,
       "message_count": 1
     }
