@@ -1513,10 +1513,6 @@
       "username": "MOHAMMED3MOUSH",
       "multiplier": 1
     },
-    "username_don_sul": {
-      "username": "Don_sul",
-      "multiplier": 1
-    },
     "username_شهد": {
       "username": "شهد",
       "multiplier": 1
@@ -1615,6 +1611,13 @@
       "username": "ra2nd",
       "first_name": "رَنــد",
       "full_name": "رَنــد",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "7808578242": {
+      "username": "Don_sul",
+      "first_name": "Don",
+      "full_name": "Don Sul",
       "multiplier": 1,
       "message_count": 1
     }
