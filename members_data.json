@@ -857,10 +857,6 @@
       "multiplier": 1,
       "message_count": 1
     },
-    "username_fatheallak": {
-      "username": "Fatheallak",
-      "multiplier": 1
-    },
     "username_ali": {
       "username": "Ali",
       "multiplier": 1
@@ -1025,7 +1021,7 @@
       "first_name": "Ali",
       "full_name": "Ali emad",
       "multiplier": 1,
-      "message_count": 13
+      "message_count": 14
     },
     "6349146985": {
       "username": "Abdamdkd",
@@ -1081,12 +1077,19 @@
       "first_name": "Hashem",
       "full_name": "Hashem Al-Dwekat",
       "multiplier": 1,
-      "message_count": 10
+      "message_count": 13
     },
     "6020872234": {
       "username": null,
       "first_name": "Baraa",
       "full_name": "Baraa",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5605394680": {
+      "username": "Fatheallak",
+      "first_name": "Fathe allak",
+      "full_name": "Fathe allak",
       "multiplier": 1,
       "message_count": 1
     }
