@@ -1564,10 +1564,6 @@
       "username": "Dania.mhmadd",
       "multiplier": 1
     },
-    "username_mohammed3moush": {
-      "username": "MOHAMMED3MOUSH",
-      "multiplier": 1
-    },
     "username_شهد": {
       "username": "شهد",
       "multiplier": 1
@@ -1697,6 +1693,13 @@
       "username": null,
       "first_name": "Wasan",
       "full_name": "Wasan Qaruty",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5397798571": {
+      "username": "MOHAMMED3MOUSH",
+      "first_name": "MOHAMMED",
+      "full_name": "MOHAMMED 3MOUSH",
       "multiplier": 1,
       "message_count": 1
     }
