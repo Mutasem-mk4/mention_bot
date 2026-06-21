@@ -1234,7 +1234,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 4
     },
     "6020872234": {
       "username": null,
@@ -1305,6 +1305,13 @@
       "full_name": "Dania Hajaya",
       "multiplier": 1,
       "message_count": 1
+    },
+    "5982572452": {
+      "first_name": "Yara",
+      "last_name": "Hammad",
+      "full_name": "Yara Hammad",
+      "username": null,
+      "multiplier": 1
     }
   },
   "-1003809633282": {
