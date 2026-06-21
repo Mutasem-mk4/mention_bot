@@ -2053,6 +2053,10 @@
     "username_maram": {
       "username": "Maram",
       "multiplier": 1
+    },
+    "username_amany": {
+      "username": "amany",
+      "multiplier": 1
     }
   }
 }
