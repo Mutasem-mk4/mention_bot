@@ -1025,14 +1025,14 @@
       "first_name": "Ali",
       "full_name": "Ali emad",
       "multiplier": 1,
-      "message_count": 8
+      "message_count": 13
     },
     "6349146985": {
       "username": "Abdamdkd",
       "first_name": "Abdelrahman Alsalhot",
       "full_name": "Abdelrahman Alsalhot",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 8
     },
     "1616533142": {
       "username": "mk4lj",
@@ -1080,6 +1080,13 @@
       "username": "hashem_al_dwekat",
       "first_name": "Hashem",
       "full_name": "Hashem Al-Dwekat",
+      "multiplier": 1,
+      "message_count": 10
+    },
+    "6020872234": {
+      "username": null,
+      "first_name": "Baraa",
+      "full_name": "Baraa",
       "multiplier": 1,
       "message_count": 1
     }
