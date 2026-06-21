@@ -1315,11 +1315,11 @@
       "multiplier": 1
     },
     "7665284096": {
-      "username": "heba_6",
       "first_name": "Heba",
+      "last_name": null,
       "full_name": "Heba",
-      "multiplier": 1,
-      "message_count": 1
+      "username": "heba_6",
+      "multiplier": 1
     }
   },
   "-1003809633282": {
