@@ -855,7 +855,7 @@
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 5
     },
     "username_ali": {
       "username": "Ali",
@@ -895,10 +895,6 @@
     },
     "username_maisam_2004": {
       "username": "maisam_2004",
-      "multiplier": 1
-    },
-    "username_don_sul": {
-      "username": "Don_sul",
       "multiplier": 1
     },
     "username_youssefabukhalaf": {
@@ -1021,7 +1017,7 @@
       "first_name": "Ali",
       "full_name": "Ali emad",
       "multiplier": 1,
-      "message_count": 14
+      "message_count": 22
     },
     "6349146985": {
       "username": "Abdamdkd",
@@ -1077,19 +1073,26 @@
       "first_name": "Hashem",
       "full_name": "Hashem Al-Dwekat",
       "multiplier": 1,
-      "message_count": 13
+      "message_count": 29
     },
     "6020872234": {
       "username": null,
       "first_name": "Baraa",
       "full_name": "Baraa",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 4
     },
     "5605394680": {
       "username": "Fatheallak",
       "first_name": "Fathe allak",
       "full_name": "Fathe allak",
+      "multiplier": 1,
+      "message_count": 14
+    },
+    "7808578242": {
+      "username": "Don_sul",
+      "first_name": "Don",
+      "full_name": "Don Sul",
       "multiplier": 1,
       "message_count": 1
     }
