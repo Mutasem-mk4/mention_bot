@@ -259,10 +259,15 @@ def is_telegram_admin(message, chat_id):
 
 def mention_text(uid, data):
     username = data.get("username")
-    if username:
-        return f"@{username}"
-    name = html.escape(data.get("full_name") or data.get("first_name") or "User")
-    return f'<a href="tg://user?id={uid}">{name}</a>'
+    uid_str = str(uid)
+    if uid_str.isdigit():
+        if username:
+            return f'<a href="tg://user?id={uid_str}">@{username}</a>'
+        name = html.escape(data.get("full_name") or data.get("first_name") or "User")
+        return f'<a href="tg://user?id={uid_str}">{name}</a>'
+    else:
+        uname = username or uid_str.replace("username_", "")
+        return f"@{uname}"
 
 
 def try_fast_mention_all(message, chat_id, text):

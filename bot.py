@@ -1351,11 +1351,16 @@ async def scheduled_mention_callback(context):
         mentions = []
         
         for uid, data in batch:
-            if data.get("username"):
-                mentions.append(f"@{data['username']}")
+            uid_str = str(uid)
+            if uid_str.isdigit():
+                if data.get("username"):
+                    mentions.append(f'<a href="tg://user?id={uid_str}">@{data["username"]}</a>')
+                else:
+                    name = html.escape(data.get('first_name') or data.get('full_name') or 'User')
+                    mentions.append(f'<a href="tg://user?id={uid_str}">{name}</a>')
             else:
-                name = html.escape(data.get('first_name', 'User'))
-                mentions.append(f'<a href="tg://user?id={uid}">{name}</a>')
+                uname = data.get("username") or uid_str.replace("username_", "")
+                mentions.append(f"@{uname}")
         
         batch_num = (i // batch_size) + 1
         total_batches = (total + batch_size - 1) // batch_size
@@ -1768,11 +1773,16 @@ async def mention_tag(update: Update, context: ContextTypes.DEFAULT_TYPE, tag_na
         batch = valid_members[i:i+batch_size]
         mentions = []
         for uid, data in batch:
-            name = data.get("full_name") or data.get("first_name") or "User"
-            if uid.isdigit():
-                mentions.append(f'<a href="tg://user?id={uid}">{html.escape(name)}</a>')
+            uid_str = str(uid)
+            if uid_str.isdigit():
+                username = data.get("username")
+                if username:
+                    mentions.append(f'<a href="tg://user?id={uid_str}">@{username}</a>')
+                else:
+                    name = html.escape(data.get("full_name") or data.get("first_name") or "User")
+                    mentions.append(f'<a href="tg://user?id={uid_str}">{name}</a>')
             else:
-                uname = data.get("username") or uid.replace("username_", "")
+                uname = data.get("username") or uid_str.replace("username_", "")
                 mentions.append(f"@{uname}")
         
         await update.message.reply_text(" ".join(mentions), parse_mode=ParseMode.HTML)
@@ -1917,11 +1927,16 @@ async def mention_all(update: Update, context: ContextTypes.DEFAULT_TYPE, total_
                 mentions = []
                 
                 for uid, data in batch:
-                    if data.get("username"):
-                        mentions.append(f"@{data['username']}")
+                    uid_str = str(uid)
+                    if uid_str.isdigit():
+                        if data.get("username"):
+                            mentions.append(f'<a href="tg://user?id={uid_str}">@{data["username"]}</a>')
+                        else:
+                            name = html.escape(data.get('first_name') or data.get('full_name') or 'User')
+                            mentions.append(f'<a href="tg://user?id={uid_str}">{name}</a>')
                     else:
-                        name = html.escape(data.get('first_name') or data.get('full_name') or 'User')
-                        mentions.append(f'<a href="tg://user?id={uid}">{name}</a>')
+                        uname = data.get("username") or uid_str.replace("username_", "")
+                        mentions.append(f"@{uname}")
                 
                 batch_num = (i // batch_size) + 1
                 progress = f"{round_prefix}[{batch_num}/{total_batches}]"
@@ -2094,14 +2109,32 @@ async def ping_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
         target_chat = replied_msg.sender_chat
         
         if target_user:
-            mention = f"@{target_user.username}" if target_user.username else f'<a href="tg://user?id={target_user.id}">{html.escape(target_user.full_name or "User")}</a>'
+            if target_user.username:
+                mention = f'<a href="tg://user?id={target_user.id}">@{target_user.username}</a>'
+            else:
+                mention = f'<a href="tg://user?id={target_user.id}">{html.escape(target_user.full_name or "User")}</a>'
         elif target_chat:
-            mention = f"@{target_chat.username}" if target_chat.username else f'<a href="tg://user?id={target_chat.id}">{html.escape(target_chat.title or "Anonymous Admin")}</a>'
+            if target_chat.username:
+                mention = f'<a href="tg://user?id={target_chat.id}">@{target_chat.username}</a>'
+            else:
+                mention = f'<a href="tg://user?id={target_chat.id}">{html.escape(target_chat.title or "Anonymous Admin")}</a>'
         else:
             await msg.reply_text("❌ لم يمكن تحديد صاحب الرسالة. (تأكد من صلاحيات البوت)")
             return
     elif context.args:
-        mention = f"@{context.args[0].replace('@','').strip()}"
+        username_target = context.args[0].replace('@','').strip().lower()
+        found_uid = None
+        chat_id = str(update.effective_chat.id)
+        init_data(chat_id)
+        if chat_id in group_members:
+            for uid, data in group_members[chat_id].items():
+                if data.get("username") and data["username"].lower() == username_target:
+                    found_uid = uid
+                    break
+        if found_uid and str(found_uid).isdigit():
+            mention = f'<a href="tg://user?id={found_uid}">@{context.args[0].replace("@","").strip()}</a>'
+        else:
+            mention = f"@{context.args[0].replace('@','').strip()}"
     else:
         await msg.reply_text("❌ الاستخدام: /ping @user رسالة\nأو رُد على رسالة شخص بـ /ping رسالة")
         return
