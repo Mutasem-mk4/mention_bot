@@ -389,7 +389,8 @@ def try_fast_mention_all(message, chat_id, text):
             "تحياتي لكل الأعزاء 💐"
         ]
         import random
-        batches.append(random.choice(completion_msgs))
+        if batches:
+            batches[-1] += f"\n\n{random.choice(completion_msgs)}"
 
     # Trigger the first batch asynchronously
     first_payload = {
