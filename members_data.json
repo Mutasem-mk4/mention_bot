@@ -1117,10 +1117,6 @@
       "username": "F_km2006",
       "multiplier": 1
     },
-    "username_mk4lj": {
-      "username": "mk4lj",
-      "multiplier": 1
-    },
     "username_daniazeyad": {
       "username": "Daniazeyad",
       "multiplier": 1
@@ -1219,7 +1215,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "6020872234": {
       "username": null,
@@ -1254,12 +1250,19 @@
       "first_name": "Batool",
       "full_name": "Batool Alsawalha",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "7808578242": {
       "username": "Don_sul",
       "first_name": "Don",
       "full_name": "Don Sul",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "1616533142": {
+      "username": "mk4lj",
+      "first_name": "مـعـتـصـم",
+      "full_name": "مـعـتـصـم خرما",
       "multiplier": 1,
       "message_count": 1
     }
