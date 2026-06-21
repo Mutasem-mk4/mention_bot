@@ -855,7 +855,7 @@
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
-      "message_count": 5
+      "message_count": 6
     },
     "username_ali": {
       "username": "Ali",
@@ -1095,6 +1095,13 @@
       "full_name": "Don Sul",
       "multiplier": 1,
       "message_count": 1
+    },
+    "5042630524": {
+      "first_name": "Ahmad",
+      "last_name": "Sarsak",
+      "full_name": "Ahmad Sarsak",
+      "username": null,
+      "multiplier": 1
     }
   },
   "-1003840246080": {
