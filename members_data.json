@@ -1903,7 +1903,7 @@
       "first_name": "Baraa",
       "full_name": "Baraa",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 4
     },
     "8032608968": {
       "username": "ra2nd",
@@ -1934,6 +1934,10 @@
     },
     "username_khtam": {
       "username": "khtam",
+      "multiplier": 1
+    },
+    "username_joodbasiil": {
+      "username": "joodbasiil",
       "multiplier": 1
     }
   }
