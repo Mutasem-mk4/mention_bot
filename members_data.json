@@ -1185,7 +1185,7 @@
       "first_name": "Fathe allak",
       "full_name": "Fathe allak",
       "multiplier": 1,
-      "message_count": 7
+      "message_count": 9
     },
     "8032608968": {
       "username": "ra2nd",
@@ -1213,7 +1213,7 @@
       "first_name": "Malak Qandil || ملك قنديل 🤍",
       "full_name": "Malak Qandil || ملك قنديل 🤍",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 5
     },
     "8713955315": {
       "username": null,
@@ -1297,7 +1297,8 @@
       "last_name": "Al-Dwekat",
       "full_name": "Hashem Al-Dwekat",
       "username": "hashem_al_dwekat",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 1
     },
     "8203807695": {
       "username": "Daniazeyad",
@@ -1312,6 +1313,13 @@
       "full_name": "Yara Hammad",
       "username": null,
       "multiplier": 1
+    },
+    "7665284096": {
+      "username": "heba_6",
+      "first_name": "Heba",
+      "full_name": "Heba",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1003809633282": {
