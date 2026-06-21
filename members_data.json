@@ -1795,10 +1795,6 @@
       "username": "Dania🩷",
       "multiplier": 1
     },
-    "username_esraalhroub": {
-      "username": "Esraalhroub",
-      "multiplier": 1
-    },
     "username_f_km2006": {
       "username": "F_km2006",
       "multiplier": 1
@@ -1812,12 +1808,19 @@
       "first_name": "Dania",
       "full_name": "Dania Hajaya",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "8994163884": {
       "username": "eng_mlk_qndl",
       "first_name": "Malak Qandil || ملك قنديل 🤍",
       "full_name": "Malak Qandil || ملك قنديل 🤍",
+      "multiplier": 1,
+      "message_count": 2
+    },
+    "5794749468": {
+      "username": "Esraalhroub",
+      "first_name": "Esra",
+      "full_name": "Esra Alhroub🦋",
       "multiplier": 1,
       "message_count": 1
     }
