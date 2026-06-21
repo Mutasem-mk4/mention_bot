@@ -1533,10 +1533,6 @@
       "username": "youssefabukhalaf",
       "multiplier": 1
     },
-    "username_ra2nd": {
-      "username": "ra2nd",
-      "multiplier": 1
-    },
     "username_layan": {
       "username": "Layan",
       "multiplier": 1
@@ -1612,6 +1608,13 @@
       "username": "Sali_Fahhar",
       "first_name": "Sali",
       "full_name": "Sali Fahhar",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8032608968": {
+      "username": "ra2nd",
+      "first_name": "رَنــد",
+      "full_name": "رَنــد",
       "multiplier": 1,
       "message_count": 1
     }
