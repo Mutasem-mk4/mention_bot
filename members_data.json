@@ -114,21 +114,21 @@
       "first_name": "Maya",
       "full_name": "Maya Tayfour",
       "multiplier": 1,
-      "message_count": 80
+      "message_count": 81
     },
     "5592390194": {
       "username": "hashem_al_dwekat",
       "first_name": "Hashem",
       "full_name": "Hashem Al-Dwekat",
       "multiplier": 1,
-      "message_count": 91
+      "message_count": 92
     },
     "8713955315": {
       "username": null,
       "first_name": "Aya",
       "full_name": "Aya Alshahrouri",
       "multiplier": 1,
-      "message_count": 10
+      "message_count": 14
     },
     "username_maya": {
       "username": "Maya",
@@ -728,6 +728,13 @@
       "full_name": "Braflex a7",
       "username": "Braflex_a0",
       "multiplier": 1
+    },
+    "6221768463": {
+      "username": null,
+      "first_name": "Rosol",
+      "full_name": "Rosol Maher",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1003997895530": {
