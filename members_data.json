@@ -1511,7 +1511,7 @@
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "username_/add": {
       "username": "/add",
@@ -1643,6 +1643,13 @@
       "full_name": "Batool Alsawalha",
       "multiplier": 1,
       "message_count": 1
+    },
+    "5042630524": {
+      "first_name": "Ahmad",
+      "last_name": "Sarsak",
+      "full_name": "Ahmad Sarsak",
+      "username": null,
+      "multiplier": 1
     }
   },
   "-1003562932569": {
