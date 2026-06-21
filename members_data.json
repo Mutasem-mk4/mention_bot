@@ -1576,10 +1576,6 @@
       "username": "malek",
       "multiplier": 1
     },
-    "username_raafatayyoub": {
-      "username": "RaafatAyyoub",
-      "multiplier": 1
-    },
     "username_youssefabukhalaf": {
       "username": "youssefabukhalaf",
       "multiplier": 1
@@ -1632,7 +1628,7 @@
       "first_name": "Fathe allak",
       "full_name": "Fathe allak",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "5821447675": {
       "username": null,
@@ -1689,6 +1685,13 @@
       "full_name": "Ahmad Sarsak",
       "username": null,
       "multiplier": 1
+    },
+    "5842181239": {
+      "username": "RaafatAyyoub",
+      "first_name": "Ra'afat",
+      "full_name": "Ra'afat Ayyoub",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1003562932569": {
