@@ -2057,6 +2057,10 @@
     "username_amany": {
       "username": "amany",
       "multiplier": 1
+    },
+    "username_شهد": {
+      "username": "شهد",
+      "multiplier": 1
     }
   }
 }
