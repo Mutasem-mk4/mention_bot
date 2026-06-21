@@ -1140,10 +1140,6 @@
       "username": "F_km2006",
       "multiplier": 1
     },
-    "username_daniazeyad": {
-      "username": "Daniazeyad",
-      "multiplier": 1
-    },
     "username_جُــود": {
       "username": "جُــود",
       "multiplier": 1
@@ -1217,7 +1213,7 @@
       "first_name": "Malak Qandil || ملك قنديل 🤍",
       "full_name": "Malak Qandil || ملك قنديل 🤍",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "8713955315": {
       "username": null,
@@ -1252,7 +1248,7 @@
       "first_name": "ismaeel",
       "full_name": "ismaeel almashaiekh",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "7994093511": {
       "username": null,
@@ -1302,6 +1298,13 @@
       "full_name": "Hashem Al-Dwekat",
       "username": "hashem_al_dwekat",
       "multiplier": 1
+    },
+    "8203807695": {
+      "username": "Daniazeyad",
+      "first_name": "Dania",
+      "full_name": "Dania Hajaya",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1003809633282": {
