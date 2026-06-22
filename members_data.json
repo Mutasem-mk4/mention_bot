@@ -942,10 +942,6 @@
       "username": "maisam_2004",
       "multiplier": 1
     },
-    "username_youssefabukhalaf": {
-      "username": "youssefabukhalaf",
-      "multiplier": 1
-    },
     "username_ola": {
       "username": "Ola",
       "multiplier": 1
@@ -1179,6 +1175,13 @@
       "username": "arak_ah",
       "first_name": "arak",
       "full_name": "arak",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "1460123110": {
+      "username": "youssefabukhalaf",
+      "first_name": "Yousef",
+      "full_name": "Yousef AK",
       "multiplier": 1,
       "message_count": 1
     }
