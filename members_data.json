@@ -967,10 +967,6 @@
       "username": "kw_aik",
       "multiplier": 1
     },
-    "username_mohammad_aljaafreh": {
-      "username": "Mohammad_Aljaafreh",
-      "multiplier": 1
-    },
     "username_mohjamous": {
       "username": "mohjamous",
       "multiplier": 1
@@ -1145,6 +1141,13 @@
       "username": "Daniazeyad",
       "first_name": "Dania",
       "full_name": "Dania Hajaya",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "7350495618": {
+      "username": "Mohammad_Aljaafreh",
+      "first_name": "Mohammad",
+      "full_name": "Mohammad Aljaafreh",
       "multiplier": 1,
       "message_count": 1
     }
