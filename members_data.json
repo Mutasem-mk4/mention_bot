@@ -121,7 +121,7 @@
       "first_name": "Hashem",
       "full_name": "Hashem Al-Dwekat",
       "multiplier": 1,
-      "message_count": 99
+      "message_count": 100
     },
     "8713955315": {
       "username": null,
@@ -490,7 +490,7 @@
       "first_name": "رَنــد",
       "full_name": "رَنــد",
       "multiplier": 1,
-      "message_count": 36
+      "message_count": 37
     },
     "8994163884": {
       "username": "eng_mlk_qndl",
@@ -744,12 +744,19 @@
       "first_name": "Abdalkareem tareq",
       "full_name": "Abdalkareem tareq",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "8203807695": {
       "username": "Daniazeyad",
       "first_name": "Dania",
       "full_name": "Dania Hajaya",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "7806275553": {
+      "username": null,
+      "first_name": "دلع",
+      "full_name": "دلع مبيضين",
       "multiplier": 1,
       "message_count": 1
     }
