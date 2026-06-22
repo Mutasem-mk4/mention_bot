@@ -1540,10 +1540,6 @@
       "username": "جُــود",
       "multiplier": 1
     },
-    "username_mk4lj": {
-      "username": "mk4lj",
-      "multiplier": 1
-    },
     "username_قُـصَـي": {
       "username": "قُـصَـي",
       "multiplier": 1
@@ -1613,6 +1609,13 @@
       "username": "Daniazeyad",
       "first_name": "Dania",
       "full_name": "Dania Hajaya",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "1616533142": {
+      "username": "mk4lj",
+      "first_name": "مـعـتـصـم",
+      "full_name": "مـعـتـصـم خرما",
       "multiplier": 1,
       "message_count": 1
     }
