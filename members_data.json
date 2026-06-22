@@ -470,10 +470,6 @@
       "username": "Yazan",
       "multiplier": 1
     },
-    "username_daniazeyad": {
-      "username": "Daniazeyad",
-      "multiplier": 1
-    },
     "username_ola": {
       "username": "Ola",
       "multiplier": 1
@@ -747,6 +743,13 @@
       "username": null,
       "first_name": "Abdalkareem tareq",
       "full_name": "Abdalkareem tareq",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8203807695": {
+      "username": "Daniazeyad",
+      "first_name": "Dania",
+      "full_name": "Dania Hajaya",
       "multiplier": 1,
       "message_count": 1
     }
