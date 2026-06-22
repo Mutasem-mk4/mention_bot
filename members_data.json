@@ -1034,10 +1034,6 @@
       "username": "Wasan",
       "multiplier": 1
     },
-    "username_arak_ah": {
-      "username": "arak_ah",
-      "multiplier": 1
-    },
     "username_dania.mhmadd": {
       "username": "Dania.mhmadd",
       "multiplier": 1
@@ -1176,6 +1172,13 @@
       "username": null,
       "first_name": "Dania.mhmadd",
       "full_name": "Dania.mhmadd",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "1455403644": {
+      "username": "arak_ah",
+      "first_name": "arak",
+      "full_name": "arak",
       "multiplier": 1,
       "message_count": 1
     }
