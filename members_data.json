@@ -2434,10 +2434,10 @@
     },
     "5592390194": {
       "username": "hashem_al_dwekat",
-      "first_name": "hashem",
-      "full_name": "hashem AL-Hussien",
+      "first_name": "Hashem",
+      "full_name": "Hashem Al-Dwekat",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "username_نورا": {
       "username": "نورا",
@@ -2564,12 +2564,6 @@
     },
     "username_naghamalwreadat": {
       "username": "Naghamalwreadat",
-      "multiplier": 1,
-      "first_name": null,
-      "full_name": null
-    },
-    "username_hashem_al_dwekat": {
-      "username": "hashem_al_dwekat",
       "multiplier": 1,
       "first_name": null,
       "full_name": null
