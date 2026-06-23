@@ -3209,10 +3209,10 @@
     },
     "1460123110": {
       "username": "youssefabukhalaf",
-      "first_name": "Yusef",
-      "full_name": "Yusef AK",
+      "first_name": "Yousef",
+      "full_name": "Yousef AK",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "5381308511": {
       "username": "Sali_Fahhar",
@@ -3223,12 +3223,6 @@
     },
     "username_/add": {
       "username": "/add",
-      "multiplier": 1,
-      "first_name": null,
-      "full_name": null
-    },
-    "username_youssefabukhalaf": {
-      "username": "youssefabukhalaf",
       "multiplier": 1,
       "first_name": null,
       "full_name": null
@@ -3316,7 +3310,7 @@
       "first_name": "Dania.mhmadd",
       "full_name": "Dania.mhmadd",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 7
     },
     "8032608968": {
       "username": "ra2nd",
