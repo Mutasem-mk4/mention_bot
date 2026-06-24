@@ -2973,10 +2973,6 @@
       "multiplier": 1,
       "message_count": 0
     },
-    "username_fatheallak": {
-      "username": "Fatheallak",
-      "multiplier": 1
-    },
     "username_rahaf": {
       "username": "Rahaf",
       "multiplier": 1,
@@ -3030,8 +3026,8 @@
     },
     "5605394680": {
       "username": "Fatheallak",
-      "first_name": "Fathe",
-      "full_name": "Fathe",
+      "first_name": "Fathe allak",
+      "full_name": "Fathe allak",
       "multiplier": 1,
       "message_count": 1
     },
