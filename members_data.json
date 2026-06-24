@@ -2640,7 +2640,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "2145547042": {
       "username": null,
@@ -2686,6 +2686,13 @@
       "full_name": "مَحمُود",
       "multiplier": 1,
       "message_count": 1
+    },
+    "7778842082": {
+      "first_name": "raya",
+      "last_name": "alenazi",
+      "full_name": "raya alenazi",
+      "username": null,
+      "multiplier": 1
     }
   },
   "-1003971292311": {
