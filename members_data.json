@@ -2860,12 +2860,6 @@
       "first_name": null,
       "full_name": null
     },
-    "username_abdamdkd": {
-      "username": "Abdamdkd",
-      "multiplier": 1,
-      "first_name": null,
-      "full_name": null
-    },
     "2145547042": {
       "username": null,
       "first_name": "Ola Rahhal",
@@ -3027,7 +3021,7 @@
       "first_name": "Abdelrahman Alsalhot",
       "full_name": "Abdelrahman Alsalhot",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "username_raneem": {
       "username": "Raneem",
