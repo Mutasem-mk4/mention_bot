@@ -2841,12 +2841,6 @@
       "first_name": null,
       "full_name": null
     },
-    "username_ra2nd": {
-      "username": "ra2nd",
-      "multiplier": 1,
-      "first_name": null,
-      "full_name": null
-    },
     "1872682753": {
       "username": "aishaiibrahiim",
       "first_name": "عائشة",
@@ -2969,7 +2963,7 @@
       "first_name": "رَنــد",
       "full_name": "رَنــد",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "1120491521": {
       "username": null,
