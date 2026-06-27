@@ -3008,7 +3008,7 @@
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "6349146985": {
       "username": "Abdamdkd",
@@ -3093,6 +3093,13 @@
       "last_name": "Fahhar",
       "full_name": "Sali Fahhar",
       "username": "Sali_Fahhar",
+      "multiplier": 1
+    },
+    "5125017835": {
+      "first_name": "أَحمَد",
+      "last_name": null,
+      "full_name": "أَحمَد",
+      "username": "a7md3bdullah",
       "multiplier": 1
     }
   },
