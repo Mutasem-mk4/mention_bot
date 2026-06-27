@@ -3537,10 +3537,6 @@
       "username": "Salsabeel🩵",
       "multiplier": 1
     },
-    "username_maisam_2004": {
-      "username": "maisam_2004",
-      "multiplier": 1
-    },
     "username_saleh🩵": {
       "username": "saleh🩵",
       "multiplier": 1
@@ -3725,6 +3721,13 @@
       "username": null,
       "first_name": "Aya",
       "full_name": "Aya Alshahrouri",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "910490489": {
+      "username": "maisam_2004",
+      "first_name": "Maisam",
+      "full_name": "Maisam",
       "multiplier": 1,
       "message_count": 1
     }
