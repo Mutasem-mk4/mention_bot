@@ -2721,7 +2721,7 @@
       "first_name": "Maisam",
       "full_name": "Maisam",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "6389363574": {
       "username": null,
@@ -2829,12 +2829,6 @@
       "full_name": "عائشة",
       "multiplier": 1,
       "message_count": 0
-    },
-    "username_maisam_2004": {
-      "username": "maisam_2004",
-      "multiplier": 1,
-      "first_name": null,
-      "full_name": null
     },
     "2145547042": {
       "username": null,
