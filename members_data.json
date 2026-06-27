@@ -1327,7 +1327,7 @@
       "first_name": "Eng.sobhe",
       "full_name": "Eng.sobhe Abu hayyeh",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "5502305785": {
       "username": "marya_rajeh",
@@ -1819,12 +1819,6 @@
     },
     "username_zain": {
       "username": "Zain",
-      "multiplier": 1,
-      "first_name": null,
-      "full_name": null
-    },
-    "username_sobhe_hayyeh": {
-      "username": "sobhe_hayyeh",
       "multiplier": 1,
       "first_name": null,
       "full_name": null
