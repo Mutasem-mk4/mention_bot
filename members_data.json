@@ -3435,10 +3435,6 @@
       "first_name": null,
       "full_name": null
     },
-    "username_sali_fahhar": {
-      "username": "Sali_Fahhar",
-      "multiplier": 1
-    },
     "8203807695": {
       "username": "Daniazeyad",
       "first_name": "Dania",
@@ -3766,6 +3762,13 @@
       "username": "arak_ah",
       "first_name": "arak",
       "full_name": "arak",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5381308511": {
+      "username": "Sali_Fahhar",
+      "first_name": "Sali",
+      "full_name": "Sali Fahhar",
       "multiplier": 1,
       "message_count": 1
     }
