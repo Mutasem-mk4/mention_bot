@@ -2828,7 +2828,7 @@
       "first_name": "عائشة",
       "full_name": "عائشة",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "2145547042": {
       "username": null,
@@ -3020,12 +3020,6 @@
     },
     "username_mlokqandil": {
       "username": "mlokqandil",
-      "multiplier": 1,
-      "first_name": null,
-      "full_name": null
-    },
-    "username_aishaiibrahiim": {
-      "username": "aishaiibrahiim",
       "multiplier": 1,
       "first_name": null,
       "full_name": null
