@@ -3489,7 +3489,7 @@
       "first_name": "Malak Qandil 🧚🏻‍♀️🩷🦄🎀.",
       "full_name": "Malak Qandil 🧚🏻‍♀️🩷🦄🎀.",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 4
     },
     "username_baraa🩷": {
       "username": "Baraa🩷",
@@ -3510,7 +3510,7 @@
       "first_name": "Esra",
       "full_name": "Esra Alhroub🦋",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "username_joodbasiil": {
       "username": "joodbasiil",
@@ -3635,7 +3635,7 @@
       "first_name": "رَنــد",
       "full_name": "رَنــد",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 4
     },
     "username_qassasafa": {
       "username": "qassasafa",
@@ -3718,6 +3718,13 @@
       "username": null,
       "first_name": "شهد",
       "full_name": "شهد سرطاوي",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8713955315": {
+      "username": null,
+      "first_name": "Aya",
+      "full_name": "Aya Alshahrouri",
       "multiplier": 1,
       "message_count": 1
     }
