@@ -3690,7 +3690,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 5
     },
     "7365157695": {
       "username": null,
@@ -3749,6 +3749,13 @@
       "username": null,
       "first_name": "Rosol",
       "full_name": "Rosol Maher",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8439771115": {
+      "username": null,
+      "first_name": "Batool",
+      "full_name": "Batool Alsawalha",
       "multiplier": 1,
       "message_count": 1
     }
