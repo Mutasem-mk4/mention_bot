@@ -2450,12 +2450,6 @@
       "first_name": null,
       "full_name": null
     },
-    "username_f_km2006": {
-      "username": "F_km2006",
-      "multiplier": 1,
-      "first_name": null,
-      "full_name": null
-    },
     "910490489": {
       "username": "maisam_2004",
       "first_name": "Maisam",
@@ -2553,7 +2547,7 @@
       "first_name": "Farah Al-khamaiseh",
       "full_name": "Farah Al-khamaiseh",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "username_heba_6": {
       "username": "heba_6",
