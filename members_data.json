@@ -3641,10 +3641,6 @@
       "username": "Rahaf",
       "multiplier": 1
     },
-    "username_heba_6": {
-      "username": "heba_6",
-      "multiplier": 1
-    },
     "username_salma💘🦋🩷": {
       "username": "Salma💘🦋🩷",
       "multiplier": 1
@@ -3756,6 +3752,13 @@
       "username": null,
       "first_name": "Batool",
       "full_name": "Batool Alsawalha",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "7665284096": {
+      "username": "heba_6",
+      "first_name": "Heba",
+      "full_name": "Heba",
       "multiplier": 1,
       "message_count": 1
     }
