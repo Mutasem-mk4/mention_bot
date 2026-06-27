@@ -3610,7 +3610,7 @@
       "first_name": "Dania.mhmadd",
       "full_name": "Dania.mhmadd",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "username_halajaber6": {
       "username": "HalaJaber6",
@@ -3756,6 +3756,13 @@
       "username": null,
       "first_name": "Maya",
       "full_name": "Maya Tayfour",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "7994093511": {
+      "username": null,
+      "first_name": "Salma",
+      "full_name": "Salma Abu-alrub",
       "multiplier": 1,
       "message_count": 1
     }
