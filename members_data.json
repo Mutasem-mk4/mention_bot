@@ -3587,10 +3587,6 @@
       "username": "lojain_mohammad",
       "multiplier": 1
     },
-    "username_arak_ah": {
-      "username": "arak_ah",
-      "multiplier": 1
-    },
     "username_maya🎀🤏🏼🩷": {
       "username": "Maya🎀🤏🏼🩷",
       "multiplier": 1
@@ -3763,6 +3759,13 @@
       "username": null,
       "first_name": "Salma",
       "full_name": "Salma Abu-alrub",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "1455403644": {
+      "username": "arak_ah",
+      "first_name": "arak",
+      "full_name": "arak",
       "multiplier": 1,
       "message_count": 1
     }
