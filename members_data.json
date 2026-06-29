@@ -180,10 +180,6 @@
       "multiplier": 1,
       "message_count": 0
     },
-    "username_daniazeyad": {
-      "username": "Daniazeyad",
-      "multiplier": 1
-    },
     "username_mohjamous": {
       "username": "mohjamous",
       "multiplier": 1,
@@ -474,7 +470,7 @@
       "first_name": "Fathe allak",
       "full_name": "Fathe allak",
       "multiplier": 1,
-      "message_count": 15
+      "message_count": 16
     },
     "username_tareq": {
       "username": "tareq",
@@ -561,7 +557,8 @@
       "last_name": "Almshagbah",
       "full_name": "Reem Almshagbah",
       "username": null,
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1003997895530": {
