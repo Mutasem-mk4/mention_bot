@@ -896,7 +896,7 @@
       "first_name": "Hashem",
       "full_name": "Hashem Al-Dwekat",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 4
     },
     "username_ibrahim_sabbah": {
       "username": "ibrahim_sabbah",
@@ -1036,7 +1036,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 5
     },
     "username_ola": {
       "username": "Ola",
@@ -1057,6 +1057,13 @@
       "full_name": "Baraa Orabi",
       "multiplier": 1,
       "message_count": 1
+    },
+    "6418937634": {
+      "first_name": "Sajida",
+      "last_name": "Ghazall🇵🇸🦌",
+      "full_name": "Sajida Ghazall🇵🇸🦌",
+      "username": null,
+      "multiplier": 1
     }
   },
   "-5525097226": {
