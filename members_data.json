@@ -1199,7 +1199,7 @@
       "first_name": "Malak Qandil 🧚🏻‍♀️🩷🦄🎀.",
       "full_name": "Malak Qandil 🧚🏻‍♀️🩷🦄🎀.",
       "multiplier": 1,
-      "message_count": 173
+      "message_count": 175
     },
     "8466200242": {
       "username": "ranim_nazzal",
@@ -1504,7 +1504,7 @@
       "first_name": "Yazan",
       "full_name": "Yazan Nehad",
       "multiplier": 1,
-      "message_count": 70
+      "message_count": 72
     },
     "5791502881": {
       "username": null,
@@ -1653,7 +1653,7 @@
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
-      "message_count": 389
+      "message_count": 390
     },
     "username_دانا": {
       "username": "دانا",
@@ -1672,7 +1672,7 @@
       "first_name": "Abdelrahman Alsalhot",
       "full_name": "Abdelrahman Alsalhot",
       "multiplier": 1,
-      "message_count": 81
+      "message_count": 85
     },
     "username_raneem": {
       "username": "Raneem",
@@ -1706,7 +1706,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 343
+      "message_count": 351
     },
     "1333248443": {
       "username": "i_bullet",
@@ -1726,7 +1726,7 @@
       "first_name": "نورا",
       "full_name": "نورا ابومراد",
       "multiplier": 1,
-      "message_count": 116
+      "message_count": 117
     },
     "7420321523": {
       "username": null,
@@ -1747,7 +1747,7 @@
       "first_name": "Nagham",
       "full_name": "Nagham Alwreadat",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "6025322713": {
       "username": "mahmooud_e36",
@@ -1834,7 +1834,7 @@
       "first_name": "أَحمَد",
       "full_name": "أَحمَد",
       "multiplier": 1,
-      "message_count": 5
+      "message_count": 13
     },
     "2058476842": {
       "username": null,
@@ -2195,7 +2195,7 @@
       "first_name": "Esra",
       "full_name": "Esra Alhroub🦋",
       "multiplier": 1,
-      "message_count": 40
+      "message_count": 45
     },
     "username_joodbasiil": {
       "username": "joodbasiil",
@@ -2274,7 +2274,7 @@
       "first_name": "Hashem",
       "full_name": "Hashem Al-Dwekat",
       "multiplier": 1,
-      "message_count": 254
+      "message_count": 271
     },
     "7350495618": {
       "username": "Mohammad_Aljaafreh",
@@ -2438,6 +2438,13 @@
       "first_name": "Reem",
       "last_name": "Almshagbah",
       "full_name": "Reem Almshagbah",
+      "username": null,
+      "multiplier": 1
+    },
+    "7994117047": {
+      "first_name": "Laila",
+      "last_name": "jarrar",
+      "full_name": "Laila jarrar",
       "username": null,
       "multiplier": 1
     }
