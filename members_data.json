@@ -3547,10 +3547,6 @@
       "username": "Hala🩷",
       "multiplier": 1
     },
-    "username_yaqin_samah": {
-      "username": "Yaqin_samah",
-      "multiplier": 1
-    },
     "5794749468": {
       "username": "Esraalhroub",
       "first_name": "Esra",
@@ -3853,6 +3849,13 @@
       "username": "marya_rajeh",
       "first_name": "Marya",
       "full_name": "Marya Rajeh🍯✨",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "1278573437": {
+      "username": "Yaqin_samah",
+      "first_name": "yaqin",
+      "full_name": "yaqin",
       "multiplier": 1,
       "message_count": 1
     }
