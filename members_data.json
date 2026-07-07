@@ -3878,7 +3878,7 @@
       "first_name": "Amira",
       "full_name": "Amira",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "8154725986": {
       "username": null,
@@ -3905,6 +3905,13 @@
       "username": null,
       "first_name": "Telegram",
       "full_name": "Telegram",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "7651191630": {
+      "username": null,
+      "first_name": ".",
+      "full_name": ". تالين بندر بازهير 🌷🎓",
       "multiplier": 1,
       "message_count": 1
     }
