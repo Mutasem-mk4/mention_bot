@@ -3019,7 +3019,7 @@
       "first_name": "Awsmalaysheh.",
       "full_name": "Awsmalaysheh.",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "6349146985": {
       "username": "Abdamdkd",
@@ -3127,6 +3127,13 @@
       "last_name": "Mohamad",
       "full_name": "Raneem Mohamad",
       "username": null,
+      "multiplier": 1
+    },
+    "5592390194": {
+      "first_name": "Hashem",
+      "last_name": "Al-Dwekat",
+      "full_name": "Hashem Al-Dwekat",
+      "username": "hashem_al_dwekat",
       "multiplier": 1
     }
   },
