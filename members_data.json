@@ -774,7 +774,7 @@
       "first_name": "Maisam",
       "full_name": "Maisam",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "6389363574": {
       "username": null,
@@ -868,18 +868,12 @@
       "username": "heba_6",
       "multiplier": 1
     },
-    "username_maisam_2004": {
-      "username": "maisam_2004",
-      "multiplier": 1,
-      "first_name": null,
-      "full_name": null
-    },
     "2145547042": {
       "username": null,
       "first_name": "Ola Rahhal",
       "full_name": "Ola Rahhal",
       "multiplier": 1,
-      "message_count": 15
+      "message_count": 17
     },
     "username_baraa": {
       "username": "Baraa",
