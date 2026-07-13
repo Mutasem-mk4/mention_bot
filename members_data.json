@@ -595,7 +595,7 @@
       "first_name": "رَنــد",
       "full_name": "رَنــد",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "2145547042": {
       "username": null,
@@ -615,6 +615,13 @@
       "username": "maisam_2004",
       "first_name": "Maisam",
       "full_name": "Maisam",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "7013515340": {
+      "username": null,
+      "first_name": "Ali",
+      "full_name": "Ali emad",
       "multiplier": 1,
       "message_count": 1
     }
