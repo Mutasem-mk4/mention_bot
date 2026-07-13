@@ -1497,12 +1497,6 @@
       "multiplier": 1,
       "message_count": 0
     },
-    "username_saharalshboul": {
-      "username": "SaharAlshboul",
-      "multiplier": 1,
-      "first_name": null,
-      "full_name": null
-    },
     "username_oalsurakhi": {
       "username": "oAlsurakhi",
       "multiplier": 1,
@@ -2121,7 +2115,7 @@
       "first_name": "Sahar",
       "full_name": "Sahar Alshboul",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "7420065094": {
       "username": "abbrrq",
