@@ -244,12 +244,6 @@
       "multiplier": 1,
       "message_count": 0
     },
-    "username_kw_aik": {
-      "username": "kw_aik",
-      "multiplier": 1,
-      "first_name": null,
-      "full_name": null
-    },
     "username_aya": {
       "username": "Aya",
       "multiplier": 1,
@@ -299,7 +293,7 @@
       "first_name": "Mohammed",
       "full_name": "Mohammed",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "7013515340": {
       "username": null,
