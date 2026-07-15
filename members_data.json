@@ -2668,7 +2668,7 @@
       "first_name": "مـعـتـصـم",
       "full_name": "مـعـتـصـم خرما",
       "multiplier": 1,
-      "message_count": 20
+      "message_count": 21
     },
     "6025322713": {
       "username": "mahmooud_e36",
@@ -3036,11 +3036,12 @@
       "multiplier": 1
     },
     "5125017835": {
-      "first_name": "أَحمَد",
+      "first_name": "أَحمَدْ",
       "last_name": null,
-      "full_name": "أَحمَد",
+      "full_name": "أَحمَدْ",
       "username": "a7md3bdullah",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 1
     },
     "8919576223": {
       "first_name": "Reem",
