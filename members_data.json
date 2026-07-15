@@ -517,7 +517,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 5
+      "message_count": 6
     },
     "username_ola": {
       "username": "Ola",
@@ -586,6 +586,13 @@
       "last_name": null,
       "full_name": "أَحمَدْ",
       "username": "a7md3bdullah",
+      "multiplier": 1
+    },
+    "7165602809": {
+      "first_name": "صَـفـاء",
+      "last_name": null,
+      "full_name": "صَـفـاء",
+      "username": "qassasafa",
       "multiplier": 1
     }
   },
