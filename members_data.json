@@ -3928,14 +3928,14 @@
       "first_name": "ِ",
       "full_name": "ِ",
       "multiplier": 1,
-      "message_count": 24
+      "message_count": 26
     },
     "777000": {
       "username": null,
       "first_name": "Telegram",
       "full_name": "Telegram",
       "multiplier": 1,
-      "message_count": 6
+      "message_count": 7
     },
     "8498780917": {
       "username": "sulimanq",
@@ -3986,7 +3986,15 @@
       "last_name": null,
       "full_name": "𝕍",
       "username": "kasrt_7",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8423307261": {
+      "username": "S_h_S_h3",
+      "first_name": "𝙆𝙄𝙇𝙇𝙐𝘼〆𝙎𝙔𝙎",
+      "full_name": "𝙆𝙄𝙇𝙇𝙐𝘼〆𝙎𝙔𝙎",
+      "multiplier": 1,
+      "message_count": 1
     }
   }
 }
