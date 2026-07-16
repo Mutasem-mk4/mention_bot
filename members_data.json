@@ -3925,17 +3925,17 @@
     },
     "8804057099": {
       "username": "DeDa_8",
-      "first_name": "D e D a 🍭",
-      "full_name": "D e D a 🍭",
+      "first_name": "ِ",
+      "full_name": "ِ",
       "multiplier": 1,
-      "message_count": 22
+      "message_count": 24
     },
     "777000": {
       "username": null,
       "first_name": "Telegram",
       "full_name": "Telegram",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 6
     },
     "8498780917": {
       "username": "sulimanq",
@@ -3978,7 +3978,8 @@
       "last_name": null,
       "full_name": "𝟑 𝐦 𝐨 𝐎 𝐫..!",
       "username": "ma3o_amin",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 2
     }
   }
 }
