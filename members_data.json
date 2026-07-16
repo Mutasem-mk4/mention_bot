@@ -3928,7 +3928,7 @@
       "first_name": "ِ",
       "full_name": "ِ",
       "multiplier": 1,
-      "message_count": 26
+      "message_count": 51
     },
     "777000": {
       "username": null,
@@ -3987,14 +3987,22 @@
       "full_name": "𝕍",
       "username": "kasrt_7",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 3
     },
     "8423307261": {
       "first_name": "𝙆𝙄𝙇𝙇𝙐𝘼〆𝙎𝙔𝙎",
       "last_name": null,
       "full_name": "𝙆𝙄𝙇𝙇𝙐𝘼〆𝙎𝙔𝙎",
       "username": "S_h_S_h3",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 3
+    },
+    "8169128978": {
+      "username": "QN_T4",
+      "first_name": "𓏺 َِ𝗡َِ𝗢َِ𝗨َِ𝗥 َِ𝗦َِ𝗢َِ𝗙َِ𝗧َِ𝗪َِ𝗔َِ𝗥َِ𝗘 .¹",
+      "full_name": "𓏺 َِ𝗡َِ𝗢َِ𝗨َِ𝗥 َِ𝗦َِ𝗢َِ𝗙َِ𝗧َِ𝗪َِ𝗔َِ𝗥َِ𝗘 .¹",
+      "multiplier": 1,
+      "message_count": 1
     }
   }
 }
