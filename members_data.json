@@ -3982,11 +3982,11 @@
       "message_count": 2
     },
     "8640025673": {
-      "username": "kasrt_7",
       "first_name": "𝕍",
+      "last_name": null,
       "full_name": "𝕍",
-      "multiplier": 1,
-      "message_count": 1
+      "username": "kasrt_7",
+      "multiplier": 1
     }
   }
 }
