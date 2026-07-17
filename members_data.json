@@ -1014,7 +1014,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 6
+      "message_count": 7
     },
     "username_ola": {
       "username": "Ola",
@@ -1062,6 +1062,13 @@
       "last_name": null,
       "full_name": "أَحمَدْ",
       "username": "a7md3bdullah",
+      "multiplier": 1
+    },
+    "8127165444": {
+      "first_name": "MO NA|| 𓂆",
+      "last_name": null,
+      "full_name": "MO NA|| 𓂆",
+      "username": "monaomar3",
       "multiplier": 1
     }
   },
