@@ -2424,7 +2424,7 @@
       "first_name": "Nagham",
       "full_name": "Nagham Alwreadat",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "5592390194": {
       "username": "hashem_al_dwekat",
@@ -2537,12 +2537,6 @@
       "full_name": "Farah Al-khamaiseh",
       "multiplier": 1,
       "message_count": 1
-    },
-    "username_naghamalwreadat": {
-      "username": "Naghamalwreadat",
-      "multiplier": 1,
-      "first_name": null,
-      "full_name": null
     },
     "6739220189": {
       "username": null,
