@@ -1665,7 +1665,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 754
+      "message_count": 755
     },
     "1333248443": {
       "username": "i_bullet",
@@ -2408,6 +2408,13 @@
       "last_name": "Nidal",
       "full_name": "I'tidal Nidal",
       "username": null,
+      "multiplier": 1
+    },
+    "8127165444": {
+      "first_name": "MO NA|| 𓂆",
+      "last_name": null,
+      "full_name": "MO NA|| 𓂆",
+      "username": "monaomar3",
       "multiplier": 1
     }
   },
