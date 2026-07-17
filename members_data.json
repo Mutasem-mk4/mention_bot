@@ -3022,7 +3022,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 6
+      "message_count": 7
     },
     "8713955315": {
       "username": null,
@@ -3080,6 +3080,13 @@
       "last_name": "Al-Dwekat",
       "full_name": "Hashem Al-Dwekat",
       "username": "hashem_al_dwekat",
+      "multiplier": 1
+    },
+    "8404991483": {
+      "first_name": "I'tidal",
+      "last_name": "Nidal",
+      "full_name": "I'tidal Nidal",
+      "username": null,
       "multiplier": 1
     }
   },
