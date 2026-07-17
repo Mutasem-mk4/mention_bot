@@ -3693,7 +3693,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 10
+      "message_count": 11
     },
     "7365157695": {
       "username": null,
@@ -3858,6 +3858,13 @@
       "last_name": "Alnatour",
       "full_name": "Lamar Alnatour",
       "username": null,
+      "multiplier": 1
+    },
+    "8127165444": {
+      "first_name": "MO NA|| 𓂆",
+      "last_name": null,
+      "full_name": "MO NA|| 𓂆",
+      "username": "monaomar3",
       "multiplier": 1
     }
   },
