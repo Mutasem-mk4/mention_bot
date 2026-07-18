@@ -831,11 +831,11 @@
       "message_count": 1
     },
     "7665284096": {
-      "first_name": "Heba",
-      "last_name": null,
-      "full_name": "Heba",
       "username": "heba_6",
-      "multiplier": 1
+      "first_name": "Heba",
+      "full_name": "Heba",
+      "multiplier": 1,
+      "message_count": 1
     },
     "2145547042": {
       "username": null,
@@ -944,10 +944,6 @@
     },
     "username_ahmad": {
       "username": "Ahmad",
-      "multiplier": 1
-    },
-    "username_heba_6": {
-      "username": "heba_6",
       "multiplier": 1
     },
     "804841826": {
