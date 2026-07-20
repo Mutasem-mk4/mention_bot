@@ -2463,7 +2463,7 @@
       "first_name": "Hashem",
       "full_name": "Hashem Al-Dwekat",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 6
     },
     "username_نورا": {
       "username": "نورا",
@@ -2496,7 +2496,7 @@
       "first_name": "Batool",
       "full_name": "Batool Alsawalha",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 5
     },
     "username_raneem🦋💜": {
       "username": "Raneem🦋💜",
@@ -2602,7 +2602,7 @@
       "first_name": "Fathe allak",
       "full_name": "Fathe allak",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "username_ali": {
       "username": "Ali",
@@ -2622,7 +2622,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 4
     },
     "2145547042": {
       "username": null,
@@ -2681,6 +2681,13 @@
       "last_name": "jarrar",
       "full_name": "Laila jarrar",
       "username": null,
+      "multiplier": 1
+    },
+    "5794749468": {
+      "first_name": "Esra",
+      "last_name": "Alhroub🦋",
+      "full_name": "Esra Alhroub🦋",
+      "username": "Esraalhroub",
       "multiplier": 1
     }
   },
