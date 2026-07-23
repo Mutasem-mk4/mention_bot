@@ -4142,12 +4142,19 @@
       "first_name": "Maro",
       "full_name": "Maro Mohsen",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 5
     },
     "6503908600": {
       "username": "Movmen_uwk",
       "first_name": "Mo'men",
       "full_name": "Mo'men Uwk",
+      "multiplier": 1,
+      "message_count": 3
+    },
+    "7090989294": {
+      "username": "B7BKn",
+      "first_name": "Abdo🌍",
+      "full_name": "Abdo🌍",
       "multiplier": 1,
       "message_count": 1
     }
