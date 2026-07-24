@@ -3015,7 +3015,7 @@
       "first_name": "Awsmalaysheh",
       "full_name": "Awsmalaysheh",
       "multiplier": 1,
-      "message_count": 6
+      "message_count": 7
     },
     "6349146985": {
       "username": "Abdamdkd",
@@ -3152,6 +3152,13 @@
       "last_name": "Dabash",
       "full_name": "Mohammad Dabash",
       "username": "modabash",
+      "multiplier": 1
+    },
+    "6753133388": {
+      "first_name": "Obadah Ahmad",
+      "last_name": null,
+      "full_name": "Obadah Ahmad",
+      "username": "DR1VVER",
       "multiplier": 1
     }
   },
