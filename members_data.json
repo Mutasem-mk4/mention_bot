@@ -992,7 +992,7 @@
       "first_name": "Awsmalaysheh",
       "full_name": "Awsmalaysheh",
       "multiplier": 1,
-      "message_count": 8
+      "message_count": 9
     },
     "5605394680": {
       "username": "Fatheallak",
@@ -1087,6 +1087,13 @@
       "last_name": "eJ",
       "full_name": "Mahmoud eJ",
       "username": null,
+      "multiplier": 1
+    },
+    "6753133388": {
+      "first_name": "Obadah Ahmad",
+      "last_name": null,
+      "full_name": "Obadah Ahmad",
+      "username": "DR1VVER",
       "multiplier": 1
     }
   },
