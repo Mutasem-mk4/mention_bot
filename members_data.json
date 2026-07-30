@@ -3500,7 +3500,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "username_ola": {
       "username": "Ola",
@@ -3536,6 +3536,13 @@
       "username": "Abdamdkd",
       "multiplier": 1,
       "message_count": 7
+    },
+    "8404991483": {
+      "first_name": "I'tidal",
+      "last_name": "Shilbayeh",
+      "full_name": "I'tidal Shilbayeh",
+      "username": null,
+      "multiplier": 1
     }
   },
   "-1003867665004": {
