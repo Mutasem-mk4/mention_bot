@@ -834,10 +834,10 @@
     },
     "8470838884": {
       "username": "ismaeel_almashaiekh",
-      "first_name": "هرم نزال 🤍",
-      "full_name": "هرم نزال 🤍",
+      "first_name": "ismaeel",
+      "full_name": "ismaeel almashaiekh",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "7994093511": {
       "username": null,
@@ -1007,7 +1007,8 @@
       "last_name": "Sarsak",
       "full_name": "Ahmad Sarsak",
       "username": null,
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 1
     },
     "username_salma": {
       "username": "Salma",
