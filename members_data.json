@@ -3052,7 +3052,7 @@
       "first_name": "Abdelrahman Alsalhot",
       "full_name": "Abdelrahman Alsalhot",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 17
     },
     "username_raneem": {
       "username": "Raneem",
@@ -3103,7 +3103,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 7
+      "message_count": 8
     },
     "8713955315": {
       "username": null,
@@ -3168,7 +3168,8 @@
       "last_name": "Nidal",
       "full_name": "I'tidal Nidal",
       "username": null,
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 6
     },
     "7420321523": {
       "first_name": "Mahmoud",
@@ -3189,6 +3190,13 @@
       "last_name": null,
       "full_name": "Obadah Ahmad",
       "username": "DR1VVER",
+      "multiplier": 1
+    },
+    "7166819901": {
+      "first_name": "Nagham",
+      "last_name": "Barghash",
+      "full_name": "Nagham Barghash",
+      "username": null,
       "multiplier": 1
     }
   },
