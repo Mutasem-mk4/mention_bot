@@ -1719,7 +1719,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 1216
+      "message_count": 1217
     },
     "1333248443": {
       "username": "i_bullet",
@@ -2488,6 +2488,13 @@
       "last_name": null,
       "full_name": "Leen💗",
       "username": "leenmohdd",
+      "multiplier": 1
+    },
+    "7166819901": {
+      "first_name": "Nagham",
+      "last_name": "Barghash",
+      "full_name": "Nagham Barghash",
+      "username": null,
       "multiplier": 1
     }
   },
