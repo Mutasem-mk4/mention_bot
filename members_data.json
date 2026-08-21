@@ -4305,7 +4305,7 @@
       "first_name": "سيف العطاوي",
       "full_name": "سيف العطاوي",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 6
     },
     "866161705": {
       "username": "grpawy",
@@ -4318,6 +4318,13 @@
       "username": null,
       "first_name": "ً",
       "full_name": "ً",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "7464066173": {
+      "username": null,
+      "first_name": "Abdullah",
+      "full_name": "Abdullah",
       "multiplier": 1,
       "message_count": 1
     }
