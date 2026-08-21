@@ -4431,7 +4431,7 @@
       "first_name": "bobo",
       "full_name": "bobo",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "8764849624": {
       "username": null,
@@ -4472,6 +4472,13 @@
       "username": null,
       "first_name": "•᷄‎ࡇ•᷅",
       "full_name": "•᷄‎ࡇ•᷅",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8816556338": {
+      "username": "llsloi",
+      "first_name": "ra",
+      "full_name": "ra",
       "multiplier": 1,
       "message_count": 1
     }
