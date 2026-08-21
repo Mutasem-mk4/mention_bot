@@ -4305,7 +4305,7 @@
       "first_name": "سيف العطاوي",
       "full_name": "سيف العطاوي",
       "multiplier": 1,
-      "message_count": 43
+      "message_count": 51
     },
     "866161705": {
       "username": "grpawy",
@@ -4340,7 +4340,7 @@
       "first_name": "جود الشيباني",
       "full_name": "جود الشيباني",
       "multiplier": 1,
-      "message_count": 16
+      "message_count": 17
     },
     "5160939466": {
       "username": "suucrr",
@@ -4361,12 +4361,19 @@
       "first_name": "Rwr",
       "full_name": "Rwr",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 8
     },
     "6098619506": {
       "username": null,
       "first_name": "- مبارك",
       "full_name": "- مبارك",
+      "multiplier": 1,
+      "message_count": 7
+    },
+    "8491028194": {
+      "username": null,
+      "first_name": "١",
+      "full_name": "١",
       "multiplier": 1,
       "message_count": 1
     }
