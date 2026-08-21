@@ -4361,7 +4361,7 @@
       "first_name": "Rwr",
       "full_name": "Rwr",
       "multiplier": 1,
-      "message_count": 35
+      "message_count": 36
     },
     "6098619506": {
       "username": null,
@@ -4395,6 +4395,13 @@
       "username": null,
       "first_name": "u",
       "full_name": "u",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "7481577414": {
+      "username": null,
+      "first_name": "ً",
+      "full_name": "ً سرهيد",
       "multiplier": 1,
       "message_count": 1
     }
