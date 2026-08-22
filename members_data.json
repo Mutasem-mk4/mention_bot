@@ -4417,7 +4417,7 @@
       "first_name": "ً",
       "full_name": "ً",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 5
     },
     "6880968564": {
       "username": null,
@@ -4605,6 +4605,13 @@
       "username": null,
       "first_name": "📯 & مزوني",
       "full_name": "📯 & مزوني",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8848586326": {
+      "username": null,
+      "first_name": "ًً",
+      "full_name": "ًً",
       "multiplier": 1,
       "message_count": 1
     }
