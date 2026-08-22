@@ -4417,7 +4417,7 @@
       "first_name": "ً",
       "full_name": "ً",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 4
     },
     "6880968564": {
       "username": null,
@@ -4593,6 +4593,13 @@
       "full_name": "Metaub",
       "multiplier": 1,
       "message_count": 5
+    },
+    "8965420798": {
+      "username": null,
+      "first_name": "M",
+      "full_name": "M",
+      "multiplier": 1,
+      "message_count": 1
     }
   }
 }
