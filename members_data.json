@@ -4312,7 +4312,7 @@
       "first_name": "سيف",
       "full_name": "سيف",
       "multiplier": 1,
-      "message_count": 80
+      "message_count": 81
     },
     "866161705": {
       "username": "grpawy",
@@ -4598,6 +4598,13 @@
       "username": null,
       "first_name": "M",
       "full_name": "M",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "7342694851": {
+      "username": null,
+      "first_name": "📯 & مزوني",
+      "full_name": "📯 & مزوني",
       "multiplier": 1,
       "message_count": 1
     }
