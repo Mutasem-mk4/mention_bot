@@ -4312,7 +4312,7 @@
       "first_name": "مهذري بك",
       "full_name": "مهذري بك",
       "multiplier": 1,
-      "message_count": 76
+      "message_count": 77
     },
     "866161705": {
       "username": "grpawy",
@@ -4570,6 +4570,13 @@
       "username": null,
       "first_name": "sul",
       "full_name": "sul",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8241972665": {
+      "username": null,
+      "first_name": "Wasayef",
+      "full_name": "Wasayef",
       "multiplier": 1,
       "message_count": 1
     }
