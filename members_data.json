@@ -4628,6 +4628,13 @@
       "full_name": "Chaos",
       "multiplier": 1,
       "message_count": 1
+    },
+    "1004035522": {
+      "username": null,
+      "first_name": "g",
+      "full_name": "g",
+      "multiplier": 1,
+      "message_count": 1
     }
   }
 }
