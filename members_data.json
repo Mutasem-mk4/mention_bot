@@ -1028,7 +1028,7 @@
       "first_name": "Awsmalaysheh",
       "full_name": "Awsmalaysheh",
       "multiplier": 1,
-      "message_count": 9
+      "message_count": 10
     },
     "5605394680": {
       "username": "Fatheallak",
@@ -1136,6 +1136,13 @@
       "first_name": "Nagham",
       "last_name": "Barghash",
       "full_name": "Nagham Barghash",
+      "username": null,
+      "multiplier": 1
+    },
+    "8316072555": {
+      "first_name": "Moha",
+      "last_name": null,
+      "full_name": "Moha",
       "username": null,
       "multiplier": 1
     }
