@@ -1740,7 +1740,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 1363
+      "message_count": 1364
     },
     "1333248443": {
       "username": "i_bullet",
@@ -2530,6 +2530,13 @@
       "last_name": "Nafees",
       "full_name": "Omar Nafees",
       "username": "omarnafees",
+      "multiplier": 1
+    },
+    "8087758336": {
+      "first_name": "razan",
+      "last_name": "hussein",
+      "full_name": "razan hussein",
+      "username": null,
       "multiplier": 1
     }
   },
