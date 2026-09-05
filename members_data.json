@@ -1028,7 +1028,7 @@
       "first_name": "Awsmalaysheh",
       "full_name": "Awsmalaysheh",
       "multiplier": 1,
-      "message_count": 10
+      "message_count": 11
     },
     "5605394680": {
       "username": "Fatheallak",
@@ -1061,7 +1061,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 8
+      "message_count": 9
     },
     "username_ola": {
       "username": "Ola",
@@ -1143,6 +1143,20 @@
       "first_name": "Moha",
       "last_name": null,
       "full_name": "Moha",
+      "username": null,
+      "multiplier": 1
+    },
+    "7640617231": {
+      "first_name": "Omar",
+      "last_name": "Nafees",
+      "full_name": "Omar Nafees",
+      "username": "omarnafees",
+      "multiplier": 1
+    },
+    "8087758336": {
+      "first_name": "razan",
+      "last_name": "hussein",
+      "full_name": "razan hussein",
       "username": null,
       "multiplier": 1
     }
