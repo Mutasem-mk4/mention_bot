@@ -1687,7 +1687,7 @@
       "first_name": "Awsmalaysheh",
       "full_name": "Awsmalaysheh",
       "multiplier": 1,
-      "message_count": 1629
+      "message_count": 1630
     },
     "username_دانا": {
       "username": "دانا",
@@ -2523,6 +2523,13 @@
       "last_name": null,
       "full_name": "Moha",
       "username": null,
+      "multiplier": 1
+    },
+    "7640617231": {
+      "first_name": "Omar",
+      "last_name": "Nafees",
+      "full_name": "Omar Nafees",
+      "username": "omarnafees",
       "multiplier": 1
     }
   },
