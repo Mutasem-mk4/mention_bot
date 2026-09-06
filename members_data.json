@@ -128,7 +128,7 @@
       "first_name": "Maisam",
       "full_name": "Maisam",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 29
     },
     "6389363574": {
       "username": null,
@@ -148,7 +148,7 @@
       "first_name": "Batool",
       "full_name": "Batool Alsawalha",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 10
     },
     "5384410093": {
       "username": null,
@@ -188,14 +188,14 @@
       "first_name": "Yara",
       "full_name": "Yara Hammad",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 4
     },
     "8470838884": {
       "username": "ismaeel_almashaiekh",
       "first_name": "ismaeel",
       "full_name": "ismaeel almashaiekh",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 16
     },
     "7994093511": {
       "username": null,
@@ -273,7 +273,7 @@
       "first_name": "هاشِم",
       "full_name": "هاشِم الْدُويكات",
       "multiplier": 1,
-      "message_count": 46
+      "message_count": 64
     },
     "7350495618": {
       "username": "Mohammad_Aljaafreh",
@@ -300,28 +300,28 @@
       "first_name": "Don",
       "full_name": "Don Sul",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 27
     },
     "1888601586": {
       "username": "kw_aik",
       "first_name": "Mohammed",
       "full_name": "Mohammed",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 6
     },
     "7013515340": {
       "username": null,
       "first_name": "Ali",
       "full_name": "Ali emad",
       "multiplier": 1,
-      "message_count": 45
+      "message_count": 80
     },
     "6552337666": {
       "username": null,
       "first_name": "Sedal",
       "full_name": "Sedal Al Manaseer",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "username_arak_ah": {
       "username": "arak_ah",
@@ -370,7 +370,7 @@
       "first_name": "Dania.mhmadd",
       "full_name": "Dania.mhmadd",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "username_malek": {
       "username": "malek",
@@ -389,7 +389,7 @@
       "first_name": "رَنــد",
       "full_name": "رَنــد",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 10
     },
     "1120491521": {
       "username": null,
@@ -525,7 +525,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 8
+      "message_count": 23
     },
     "username_ola": {
       "username": "Ola",
@@ -545,7 +545,7 @@
       "first_name": "Aya",
       "full_name": "Aya Alshahrouri",
       "multiplier": 1,
-      "message_count": 7
+      "message_count": 19
     },
     "username_d3a2": {
       "username": "D3A2",
@@ -596,7 +596,7 @@
       "full_name": "أَحمَدْ",
       "username": "a7md3bdullah",
       "multiplier": 1,
-      "message_count": 5
+      "message_count": 42
     },
     "7165602809": {
       "first_name": "صَـفـاء",
@@ -645,6 +645,13 @@
       "first_name": "Moha",
       "last_name": null,
       "full_name": "Moha",
+      "username": null,
+      "multiplier": 1
+    },
+    "1861746768": {
+      "first_name": "Hala",
+      "last_name": "Abukhalaf",
+      "full_name": "Hala Abukhalaf",
       "username": null,
       "multiplier": 1
     }
