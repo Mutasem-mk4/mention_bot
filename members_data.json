@@ -2631,7 +2631,7 @@
       "first_name": "Batool",
       "full_name": "Batool Alsawalha",
       "multiplier": 1,
-      "message_count": 12
+      "message_count": 13
     },
     "username_raneem🦋💜": {
       "username": "Raneem🦋💜",
@@ -2757,7 +2757,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 6
+      "message_count": 8
     },
     "2145547042": {
       "username": null,
@@ -2832,20 +2832,28 @@
       "full_name": "I'tidal Shilbayeh",
       "username": "ad0ol7",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "6389363574": {
       "first_name": "Maya",
       "last_name": "Tayfour",
       "full_name": "Maya Tayfour",
       "username": null,
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 1
     },
     "7640617231": {
       "first_name": "Omar",
       "last_name": "Nafees",
       "full_name": "Omar Nafees",
       "username": "omarnafees",
+      "multiplier": 1
+    },
+    "6074600745": {
+      "first_name": "Rahaf",
+      "last_name": "Tayeh",
+      "full_name": "Rahaf Tayeh",
+      "username": null,
       "multiplier": 1
     }
   },
