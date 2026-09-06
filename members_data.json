@@ -3214,7 +3214,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 11
+      "message_count": 12
     },
     "8713955315": {
       "username": null,
@@ -3336,6 +3336,14 @@
       "last_name": "Nafees",
       "full_name": "Omar Nafees",
       "username": "omarnafees",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "1861746768": {
+      "first_name": "Hala",
+      "last_name": "Abukhalaf",
+      "full_name": "Hala Abukhalaf",
+      "username": null,
       "multiplier": 1
     }
   },
