@@ -3238,7 +3238,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 12
+      "message_count": 13
     },
     "8713955315": {
       "username": null,
@@ -3368,6 +3368,13 @@
       "last_name": "Abukhalaf",
       "full_name": "Hala Abukhalaf",
       "username": null,
+      "multiplier": 1
+    },
+    "7047375221": {
+      "first_name": "Dana Emad",
+      "last_name": null,
+      "full_name": "Dana Emad",
+      "username": "dana_emad679",
       "multiplier": 1
     }
   },
