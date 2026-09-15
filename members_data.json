@@ -1479,7 +1479,7 @@
       "first_name": "رَنــد",
       "full_name": "رَنــد",
       "multiplier": 1,
-      "message_count": 241
+      "message_count": 243
     },
     "5619563010": {
       "username": null,
@@ -1740,7 +1740,7 @@
       "first_name": "Awsmalaysheh",
       "full_name": "Awsmalaysheh",
       "multiplier": 1,
-      "message_count": 1893
+      "message_count": 1895
     },
     "username_دانا": {
       "username": "دانا",
@@ -1759,7 +1759,7 @@
       "first_name": "Abdelrahman Alsalhot",
       "full_name": "Abdelrahman Alsalhot",
       "multiplier": 1,
-      "message_count": 741
+      "message_count": 746
     },
     "username_raneem": {
       "username": "Raneem",
@@ -1855,7 +1855,7 @@
       "first_name": "Yousef",
       "full_name": "Yousef AK",
       "multiplier": 1,
-      "message_count": 102
+      "message_count": 107
     },
     "5265845788": {
       "username": null,
@@ -1911,11 +1911,11 @@
       "full_name": null
     },
     "5125017835": {
-      "username": "a7md3bdullah",
       "first_name": "أَحمَدْ",
+      "last_name": null,
       "full_name": "أَحمَدْ",
-      "multiplier": 1,
-      "message_count": 660
+      "username": "a7md3bdullah",
+      "multiplier": 1
     },
     "2058476842": {
       "username": null,
@@ -2140,7 +2140,7 @@
       "first_name": "arak",
       "full_name": "arak",
       "multiplier": 1,
-      "message_count": 269
+      "message_count": 270
     },
     "5935841253": {
       "username": "ibrahim_sabbah",
@@ -2350,7 +2350,8 @@
       "last_name": "الْدُويكات",
       "full_name": "هاشِم الْدُويكات",
       "username": "hashem_al_dwekat",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 3
     },
     "7350495618": {
       "username": "Mohammad_Aljaafreh",
