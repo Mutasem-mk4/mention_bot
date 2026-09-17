@@ -453,7 +453,7 @@
       "first_name": "Awsmalaysheh",
       "full_name": "Awsmalaysheh",
       "multiplier": 1,
-      "message_count": 24
+      "message_count": 25
     },
     "username_salma": {
       "username": "Salma",
@@ -665,6 +665,13 @@
       "username": "mo_yones7",
       "multiplier": 1,
       "message_count": 3
+    },
+    "1487048807": {
+      "first_name": "محمد",
+      "last_name": null,
+      "full_name": "محمد",
+      "username": null,
+      "multiplier": 1
     }
   },
   "-1003997895530": {
