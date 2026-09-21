@@ -4083,7 +4083,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 28
+      "message_count": 29
     },
     "7365157695": {
       "username": null,
@@ -4300,6 +4300,13 @@
       "last_name": "Anabtawi",
       "full_name": "Layan Anabtawi",
       "username": null,
+      "multiplier": 1
+    },
+    "7047375221": {
+      "first_name": "Dana Emad",
+      "last_name": null,
+      "full_name": "Dana Emad",
+      "username": "dana_emad679",
       "multiplier": 1
     }
   },
