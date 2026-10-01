@@ -1456,7 +1456,7 @@
       "first_name": "Dania.mhmadd",
       "full_name": "Dania.mhmadd",
       "multiplier": 1,
-      "message_count": 389
+      "message_count": 391
     },
     "username_halajaber6": {
       "username": "HalaJaber6",
@@ -1757,7 +1757,7 @@
       "first_name": "Awsmalaysheh",
       "full_name": "Awsmalaysheh",
       "multiplier": 1,
-      "message_count": 2314
+      "message_count": 2327
     },
     "username_دانا": {
       "username": "دانا",
@@ -1810,7 +1810,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 1759
+      "message_count": 1777
     },
     "1333248443": {
       "username": "i_bullet",
@@ -1906,7 +1906,7 @@
       "first_name": "Batool",
       "full_name": "Batool Alsawalha",
       "multiplier": 1,
-      "message_count": 760
+      "message_count": 761
     },
     "username_raneem🦋💜": {
       "username": "Raneem🦋💜",
@@ -2179,7 +2179,7 @@
       "first_name": "Aya",
       "full_name": "Aya Alshahrouri",
       "multiplier": 1,
-      "message_count": 732
+      "message_count": 740
     },
     "username_sundus": {
       "username": "Sundus",
@@ -2262,7 +2262,7 @@
       "first_name": "Braflex",
       "full_name": "Braflex a7",
       "multiplier": 1,
-      "message_count": 378
+      "message_count": 384
     },
     "6667560657": {
       "username": null,
@@ -2369,7 +2369,7 @@
       "full_name": "هاشِم الْدُويكات",
       "username": "hashem_al_dwekat",
       "multiplier": 1,
-      "message_count": 267
+      "message_count": 285
     },
     "7350495618": {
       "username": "Mohammad_Aljaafreh",
@@ -2550,7 +2550,7 @@
       "full_name": "I'tidal Shilbayeh",
       "username": "ad0ol7",
       "multiplier": 1,
-      "message_count": 509
+      "message_count": 519
     },
     "8127165444": {
       "first_name": "MO NA|| 𓂆",
@@ -2588,7 +2588,8 @@
       "last_name": "Barghash",
       "full_name": "Nagham Barghash",
       "username": null,
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 2
     },
     "8316072555": {
       "first_name": "Moha",
@@ -2662,6 +2663,13 @@
       "last_name": null,
       "full_name": "رَاما",
       "username": "rm_an0",
+      "multiplier": 1
+    },
+    "8804821625": {
+      "first_name": "arees al Sowi",
+      "last_name": null,
+      "full_name": "arees al Sowi",
+      "username": null,
       "multiplier": 1
     }
   },
