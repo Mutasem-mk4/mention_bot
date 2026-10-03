@@ -1094,7 +1094,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 10
+      "message_count": 11
     },
     "username_ola": {
       "username": "Ola",
@@ -1200,6 +1200,13 @@
       "last_name": null,
       "full_name": "Dana Emad",
       "username": "dana_emad679",
+      "multiplier": 1
+    },
+    "8804821625": {
+      "first_name": "arees al Sowi",
+      "last_name": null,
+      "full_name": "arees al Sowi",
+      "username": null,
       "multiplier": 1
     }
   },
