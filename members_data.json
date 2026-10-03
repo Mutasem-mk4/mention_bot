@@ -925,7 +925,7 @@
       "first_name": "Ola Rahhal",
       "full_name": "Ola Rahhal",
       "multiplier": 1,
-      "message_count": 35
+      "message_count": 36
     },
     "username_baraa": {
       "username": "Baraa",
@@ -1094,7 +1094,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 11
+      "message_count": 12
     },
     "username_ola": {
       "username": "Ola",
@@ -1207,6 +1207,13 @@
       "last_name": null,
       "full_name": "arees al Sowi",
       "username": null,
+      "multiplier": 1
+    },
+    "8252534109": {
+      "first_name": "رَاما",
+      "last_name": null,
+      "full_name": "رَاما",
+      "username": "rm_an0",
       "multiplier": 1
     }
   },
