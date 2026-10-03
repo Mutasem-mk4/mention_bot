@@ -3310,7 +3310,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 20
+      "message_count": 21
     },
     "8713955315": {
       "username": null,
@@ -3492,6 +3492,13 @@
       "last_name": null,
       "full_name": "arees al Sowi",
       "username": null,
+      "multiplier": 1
+    },
+    "8252534109": {
+      "first_name": "رَاما",
+      "last_name": null,
+      "full_name": "رَاما",
+      "username": "rm_an0",
       "multiplier": 1
     }
   },
