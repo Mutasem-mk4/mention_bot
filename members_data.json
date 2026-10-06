@@ -1246,12 +1246,6 @@
     }
   },
   "-1001704810004": {
-    "username_zaid_zaid10": {
-      "username": "zaid_zaid10",
-      "multiplier": 1,
-      "first_name": null,
-      "full_name": null
-    },
     "username_wasan": {
       "username": "Wasan",
       "multiplier": 1,
@@ -1671,7 +1665,7 @@
       "first_name": "Zaid",
       "full_name": "Zaid",
       "multiplier": 1,
-      "message_count": 0
+      "message_count": 1
     },
     "5700790351": {
       "username": null,
@@ -1872,7 +1866,7 @@
       "first_name": "Nagham 𓂆",
       "full_name": "Nagham 𓂆",
       "multiplier": 1,
-      "message_count": 46
+      "message_count": 47
     },
     "6025322713": {
       "username": "mahmooud_e36",
