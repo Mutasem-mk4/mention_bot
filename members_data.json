@@ -5252,7 +5252,7 @@
       "first_name": "آلاء",
       "full_name": "آلاء",
       "multiplier": 1,
-      "message_count": 40
+      "message_count": 44
     },
     "8961784734": {
       "username": "RawanJabbar",
@@ -5266,7 +5266,7 @@
       "first_name": "روميساء",
       "full_name": "روميساء",
       "multiplier": 1,
-      "message_count": 14
+      "message_count": 15
     },
     "8729352003": {
       "username": null,
@@ -5280,7 +5280,15 @@
       "last_name": null,
       "full_name": "Mina",
       "username": "Umt_7",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8958962583": {
+      "username": "yalogos3",
+      "first_name": "Y.A [ Logos ]",
+      "full_name": "Y.A [ Logos ]",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1004499622799": {
