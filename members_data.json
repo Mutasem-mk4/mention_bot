@@ -5238,7 +5238,7 @@
       "first_name": "يـاسـر .",
       "full_name": "يـاسـر .",
       "multiplier": 1,
-      "message_count": 26
+      "message_count": 27
     },
     "1928664082": {
       "username": "bqx16",
@@ -5312,6 +5312,10 @@
     },
     "username_nars_15": {
       "username": "nars_15",
+      "multiplier": 1
+    },
+    "username_cr7_17m": {
+      "username": "Cr7_17m",
       "multiplier": 1
     }
   },
