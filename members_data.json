@@ -5310,10 +5310,6 @@
       "username": "afrfll",
       "multiplier": 1
     },
-    "username_nars_15": {
-      "username": "nars_15",
-      "multiplier": 1
-    },
     "username_cr7_17m": {
       "username": "Cr7_17m",
       "multiplier": 1
@@ -5329,6 +5325,13 @@
     "username_suniitk": {
       "username": "Suniitk",
       "multiplier": 1
+    },
+    "1968405145": {
+      "username": "nars_15",
+      "first_name": "نرجس 𐦖 .",
+      "full_name": "نرجس 𐦖 .",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1004499622799": {
