@@ -5314,10 +5314,6 @@
       "username": "Cr7_17m",
       "multiplier": 1
     },
-    "username_opuasf": {
-      "username": "opuasf",
-      "multiplier": 1
-    },
     "username_xesi0": {
       "username": "xesi0",
       "multiplier": 1
@@ -5337,6 +5333,13 @@
       "username": "fati19mk",
       "first_name": "فاطمة 🪻",
       "full_name": "فاطمة 🪻",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "7370962830": {
+      "username": "opuasf",
+      "first_name": "𝚁𝙴.",
+      "full_name": "𝚁𝙴.",
       "multiplier": 1,
       "message_count": 1
     }
