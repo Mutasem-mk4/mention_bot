@@ -5313,6 +5313,10 @@
       "full_name": ".",
       "username": "op_po77",
       "multiplier": 1
+    },
+    "username_d7bot": {
+      "username": "D7Bot",
+      "multiplier": 1
     }
   }
 }
