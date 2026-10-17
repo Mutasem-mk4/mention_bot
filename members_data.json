@@ -1868,7 +1868,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 2118
+      "message_count": 2119
     },
     "1333248443": {
       "username": "i_bullet",
@@ -2761,6 +2761,13 @@
       "last_name": "🏹🌫️",
       "full_name": "joud 🏹🌫️",
       "username": "joud_in6",
+      "multiplier": 1
+    },
+    "7726721630": {
+      "first_name": "Yara",
+      "last_name": "Altalleh",
+      "full_name": "Yara Altalleh",
+      "username": null,
       "multiplier": 1
     }
   },
