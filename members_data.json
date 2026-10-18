@@ -4336,7 +4336,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 141
+      "message_count": 142
     },
     "7365157695": {
       "username": null,
@@ -4639,6 +4639,13 @@
       "last_name": "Altalleh",
       "full_name": "Yara Altalleh",
       "username": null,
+      "multiplier": 1
+    },
+    "8370544541": {
+      "first_name": "layan",
+      "last_name": "Al_alwan",
+      "full_name": "layan Al_alwan",
+      "username": "layanalalwan",
       "multiplier": 1
     }
   },
