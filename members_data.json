@@ -1130,7 +1130,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 13
+      "message_count": 14
     },
     "username_ola": {
       "username": "Ola",
@@ -1264,6 +1264,13 @@
       "last_name": "alarda",
       "full_name": "ibrahim alarda",
       "username": "ibrahimalarda",
+      "multiplier": 1
+    },
+    "1755981547": {
+      "first_name": "joud",
+      "last_name": "🏹🌫️",
+      "full_name": "joud 🏹🌫️",
+      "username": "joud_in6",
       "multiplier": 1
     }
   },
