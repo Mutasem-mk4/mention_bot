@@ -5542,7 +5542,7 @@
       "first_name": "🩻",
       "full_name": "🩻",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "8459324551": {
       "username": "teba0f",
@@ -5555,6 +5555,13 @@
       "username": "ma0ox",
       "first_name": "مريم",
       "full_name": "مريم",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "2018889712": {
+      "username": "fatema_ayad",
+      "first_name": "fatema",
+      "full_name": "fatema ayad",
       "multiplier": 1,
       "message_count": 1
     }
