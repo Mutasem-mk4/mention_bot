@@ -534,7 +534,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 40
+      "message_count": 41
     },
     "username_ola": {
       "username": "Ola",
@@ -721,6 +721,13 @@
       "last_name": "🏹🌫️",
       "full_name": "joud 🏹🌫️",
       "username": "joud_in6",
+      "multiplier": 1
+    },
+    "8370544541": {
+      "first_name": "layan",
+      "last_name": "Al_alwan",
+      "full_name": "layan Al_alwan",
+      "username": "layanalalwan",
       "multiplier": 1
     }
   },
