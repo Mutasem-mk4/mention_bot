@@ -3459,7 +3459,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 24
+      "message_count": 25
     },
     "8713955315": {
       "username": null,
@@ -3669,6 +3669,13 @@
       "last_name": "Al_alwan",
       "full_name": "layan Al_alwan",
       "username": "layanalalwan",
+      "multiplier": 1
+    },
+    "7726721630": {
+      "first_name": "Yara",
+      "last_name": "Altalleh",
+      "full_name": "Yara Altalleh",
+      "username": null,
       "multiplier": 1
     }
   },
