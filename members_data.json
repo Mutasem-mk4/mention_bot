@@ -1151,7 +1151,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 16
+      "message_count": 17
     },
     "username_ola": {
       "username": "Ola",
@@ -1306,6 +1306,13 @@
       "last_name": "Altalleh",
       "full_name": "Yara Altalleh",
       "username": null,
+      "multiplier": 1
+    },
+    "5413060796": {
+      "first_name": "𝓝𝓪𝓽𝓪𝓵𝔂🌷",
+      "last_name": null,
+      "full_name": "𝓝𝓪𝓽𝓪𝓵𝔂🌷",
+      "username": "Naty_768",
       "multiplier": 1
     }
   },
