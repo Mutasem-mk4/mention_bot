@@ -1924,7 +1924,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 2125
+      "message_count": 2126
     },
     "1333248443": {
       "username": "i_bullet",
@@ -2483,7 +2483,7 @@
       "full_name": "هاشِم الْدُويكات",
       "username": "hashem_al_dwekat",
       "multiplier": 1,
-      "message_count": 573
+      "message_count": 574
     },
     "7350495618": {
       "username": "Mohammad_Aljaafreh",
@@ -2845,6 +2845,13 @@
       "first_name": "Kl.",
       "last_name": "Om",
       "full_name": "Kl. Om",
+      "username": null,
+      "multiplier": 1
+    },
+    "8436896475": {
+      "first_name": "Mayar",
+      "last_name": "Mohd",
+      "full_name": "Mayar Mohd",
       "username": null,
       "multiplier": 1
     }
