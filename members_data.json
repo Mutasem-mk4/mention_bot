@@ -19,7 +19,7 @@
       "first_name": "Maisam",
       "full_name": "Maisam",
       "multiplier": 1,
-      "message_count": 5
+      "message_count": 6
     },
     "7806275553": {
       "username": null,
@@ -61,6 +61,13 @@
       "last_name": null,
       "full_name": "صَـفـاء",
       "username": "qassasafa",
+      "multiplier": 1
+    },
+    "7047375221": {
+      "first_name": "Dana Emad",
+      "last_name": null,
+      "full_name": "Dana Emad",
+      "username": "dana_emad679",
       "multiplier": 1
     }
   },
