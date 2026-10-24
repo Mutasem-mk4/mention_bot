@@ -3870,7 +3870,7 @@
       "first_name": "Yousef",
       "full_name": "Yousef AK",
       "multiplier": 1,
-      "message_count": 610
+      "message_count": 627
     },
     "5381308511": {
       "username": "Sali_Fahhar",
@@ -3904,7 +3904,7 @@
       "first_name": "Ali",
       "full_name": "Ali emad",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 7
     },
     "8439771115": {
       "username": null,
@@ -3962,7 +3962,7 @@
       "first_name": "Dania.mhmadd",
       "full_name": "Dania.mhmadd",
       "multiplier": 1,
-      "message_count": 398
+      "message_count": 405
     },
     "8032608968": {
       "username": "ra2nd",
@@ -4014,7 +4014,7 @@
       "first_name": "Awsmalaysheh",
       "full_name": "Awsmalaysheh",
       "multiplier": 1,
-      "message_count": 176
+      "message_count": 177
     },
     "5605394680": {
       "username": "Fatheallak",
@@ -4055,7 +4055,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 13
+      "message_count": 15
     },
     "username_ola": {
       "username": "Ola",
@@ -4082,7 +4082,7 @@
       "full_name": "أَحمَدْ",
       "username": "a7md3bdullah",
       "multiplier": 1,
-      "message_count": 183
+      "message_count": 190
     },
     "6349146985": {
       "first_name": "Abdelrahman Alsalhot",
@@ -4098,7 +4098,7 @@
       "full_name": "I'tidal Shilbayeh",
       "username": "ad0ol7",
       "multiplier": 1,
-      "message_count": 105
+      "message_count": 106
     },
     "5592390194": {
       "first_name": "هاشِم",
@@ -4106,7 +4106,7 @@
       "full_name": "هاشِم الْدُويكات",
       "username": "hashem_al_dwekat",
       "multiplier": 1,
-      "message_count": 71
+      "message_count": 74
     },
     "8316072555": {
       "first_name": "Moha",
@@ -4128,6 +4128,13 @@
       "last_name": "Altalleh",
       "full_name": "Yara Altalleh",
       "username": null,
+      "multiplier": 1
+    },
+    "8370544541": {
+      "first_name": "layan",
+      "last_name": "Al_alwan",
+      "full_name": "layan Al_alwan",
+      "username": "layanalalwan",
       "multiplier": 1
     }
   },
