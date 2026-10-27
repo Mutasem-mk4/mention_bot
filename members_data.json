@@ -5652,18 +5652,19 @@
   },
   "-1004499622799": {
     "6434249974": {
-      "username": "y_as3",
+      "username": null,
       "first_name": "يـاسـر .",
       "full_name": "يـاسـر .",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "7932681862": {
       "first_name": ".",
       "last_name": null,
       "full_name": ".",
       "username": "op_po77",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 1
     },
     "username_d7bot": {
       "username": "D7Bot",
