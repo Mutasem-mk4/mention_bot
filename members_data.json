@@ -5615,10 +5615,6 @@
       "username": "Mar_ienA",
       "multiplier": 1
     },
-    "username_q_dr15": {
-      "username": "Q_dr15",
-      "multiplier": 1
-    },
     "8648304417": {
       "first_name": "أفراح",
       "last_name": null,
@@ -5637,6 +5633,13 @@
       "username": null,
       "first_name": "ÇÆßÀR",
       "full_name": "ÇÆßÀR",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8042834529": {
+      "username": "Q_dr15",
+      "first_name": "𝕲𝖍𝖆𝖉𝖊𝖊𝖗ꨄ",
+      "full_name": "𝕲𝖍𝖆𝖉𝖊𝖊𝖗ꨄ",
       "multiplier": 1,
       "message_count": 1
     }
