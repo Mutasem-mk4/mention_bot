@@ -5536,14 +5536,14 @@
       "first_name": "يـاسـر .",
       "full_name": "يـاسـر .",
       "multiplier": 1,
-      "message_count": 148
+      "message_count": 154
     },
     "1928664082": {
       "username": "bqx16",
       "first_name": "Hosseinel",
       "full_name": "Hosseinel",
       "multiplier": 1,
-      "message_count": 20
+      "message_count": 22
     },
     "8474821323": {
       "username": "A_7ioe",
@@ -5600,10 +5600,6 @@
       "username": "narssc",
       "multiplier": 1
     },
-    "username_pedri_6": {
-      "username": "Pedri_6",
-      "multiplier": 1
-    },
     "username_mar_iena": {
       "username": "Mar_ienA",
       "multiplier": 1
@@ -5634,7 +5630,7 @@
       "first_name": "𝕲𝖍𝖆𝖉𝖊𝖊𝖗ꨄ",
       "full_name": "𝕲𝖍𝖆𝖉𝖊𝖊𝖗ꨄ",
       "multiplier": 1,
-      "message_count": 5
+      "message_count": 19
     },
     "username_afrfll": {
       "username": "afrfll",
@@ -5645,12 +5641,19 @@
       "first_name": "مصطفى",
       "full_name": "مصطفى علي عباس",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 3
     },
     "8726891490": {
       "username": "iexnnxe",
       "first_name": "DeAn | I DeAd .",
       "full_name": "DeAn | I DeAd .",
+      "multiplier": 1,
+      "message_count": 4
+    },
+    "5782987334": {
+      "username": "Pedri_6",
+      "first_name": "𝑭𝒕𝒎 🇮🇹",
+      "full_name": "𝑭𝒕𝒎 🇮🇹",
       "multiplier": 1,
       "message_count": 1
     }
