@@ -5544,7 +5544,7 @@
       "first_name": "Hosseinel",
       "full_name": "Hosseinel",
       "multiplier": 1,
-      "message_count": 33
+      "message_count": 34
     },
     "8474821323": {
       "username": "A_7ioe",
@@ -5558,7 +5558,7 @@
       "first_name": "‌‏ ‏￶",
       "full_name": "‌‏ ‏￶",
       "multiplier": 1,
-      "message_count": 246
+      "message_count": 248
     },
     "2143666262": {
       "username": "Cr7ji2",
@@ -5583,7 +5583,7 @@
       "first_name": "Hassaneen Ahmed.",
       "full_name": "Hassaneen Ahmed.",
       "multiplier": 1,
-      "message_count": 60
+      "message_count": 64
     },
     "username_jane28p": {
       "username": "jane28p",
@@ -5602,18 +5602,18 @@
       "multiplier": 1
     },
     "8648304417": {
-      "first_name": "أفراح",
-      "last_name": null,
-      "full_name": "أفراح",
       "username": "afrfll",
-      "multiplier": 1
+      "first_name": "أفراح",
+      "full_name": "أفراح",
+      "multiplier": 1,
+      "message_count": 1
     },
     "8326758688": {
       "username": "maro_sf",
       "first_name": "مَاري",
       "full_name": "مَاري",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "8601790357": {
       "username": null,
@@ -5628,10 +5628,6 @@
       "full_name": "𝕲𝖍𝖆𝖉𝖊𝖊𝖗ꨄ",
       "multiplier": 1,
       "message_count": 60
-    },
-    "username_afrfll": {
-      "username": "afrfll",
-      "multiplier": 1
     },
     "1318983026": {
       "username": "m30bc",
