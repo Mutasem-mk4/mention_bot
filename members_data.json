@@ -5536,7 +5536,7 @@
       "first_name": "يـاسـر .",
       "full_name": "يـاسـر .",
       "multiplier": 1,
-      "message_count": 145
+      "message_count": 148
     },
     "1928664082": {
       "username": "bqx16",
@@ -5596,10 +5596,6 @@
       "username": "iexnnxe",
       "multiplier": 1
     },
-    "username_m30bc": {
-      "username": "m30bc",
-      "multiplier": 1
-    },
     "username_aimonl": {
       "username": "aimonl",
       "multiplier": 1
@@ -5642,11 +5638,18 @@
       "first_name": "𝕲𝖍𝖆𝖉𝖊𝖊𝖗ꨄ",
       "full_name": "𝕲𝖍𝖆𝖉𝖊𝖊𝖗ꨄ",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 2
     },
     "username_afrfll": {
       "username": "afrfll",
       "multiplier": 1
+    },
+    "1318983026": {
+      "username": "m30bc",
+      "first_name": "مصطفى",
+      "full_name": "مصطفى علي عباس",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1004499622799": {
