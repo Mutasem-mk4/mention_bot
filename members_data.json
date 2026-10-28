@@ -5592,10 +5592,6 @@
       "username": "Lo4hhs",
       "multiplier": 1
     },
-    "username_iexnnxe": {
-      "username": "iexnnxe",
-      "multiplier": 1
-    },
     "username_aimonl": {
       "username": "aimonl",
       "multiplier": 1
@@ -5638,7 +5634,7 @@
       "first_name": "𝕲𝖍𝖆𝖉𝖊𝖊𝖗ꨄ",
       "full_name": "𝕲𝖍𝖆𝖉𝖊𝖊𝖗ꨄ",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 5
     },
     "username_afrfll": {
       "username": "afrfll",
@@ -5648,6 +5644,13 @@
       "username": "m30bc",
       "first_name": "مصطفى",
       "full_name": "مصطفى علي عباس",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8726891490": {
+      "username": "iexnnxe",
+      "first_name": "DeAn | I DeAd .",
+      "full_name": "DeAn | I DeAd .",
       "multiplier": 1,
       "message_count": 1
     }
