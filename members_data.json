@@ -4467,7 +4467,7 @@
       "first_name": "Batool",
       "full_name": "Batool Alsawalha",
       "multiplier": 1,
-      "message_count": 171
+      "message_count": 172
     },
     "7665284096": {
       "username": "heba_6",
@@ -4716,8 +4716,9 @@
       "first_name": "𝓝𝓪𝓽𝓪𝓵𝔂🌷",
       "last_name": null,
       "full_name": "𝓝𝓪𝓽𝓪𝓵𝔂🌷",
-      "username": "Naty_768",
-      "multiplier": 1
+      "username": null,
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1003927792725": {
