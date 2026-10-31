@@ -6161,11 +6161,11 @@
       "message_count": 63
     },
     "7643784465": {
-      "username": null,
       "first_name": "ً",
+      "last_name": null,
       "full_name": "ً",
-      "multiplier": 1,
-      "message_count": 1
+      "username": null,
+      "multiplier": 1
     }
   }
 }
