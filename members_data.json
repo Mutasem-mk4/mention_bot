@@ -5951,7 +5951,7 @@
       "first_name": "ᕼᗩᗰᘔᗩ",
       "full_name": "ᕼᗩᗰᘔᗩ",
       "multiplier": 1,
-      "message_count": 408
+      "message_count": 412
     },
     "7679058216": {
       "username": "omer432009",
@@ -5993,14 +5993,14 @@
       "first_name": "~Ammar~",
       "full_name": "~Ammar~",
       "multiplier": 1,
-      "message_count": 154
+      "message_count": 157
     },
     "5842295247": {
-      "username": "D_eyadd",
       "first_name": "Eyad",
+      "last_name": null,
       "full_name": "Eyad",
-      "multiplier": 1,
-      "message_count": 79
+      "username": "D_eyadd",
+      "multiplier": 1
     },
     "8259165413": {
       "username": "Ahmed8hz",
@@ -6266,7 +6266,8 @@
       "last_name": "shams",
       "full_name": "omar shams",
       "username": "OMARSHAMS2010",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 5
     },
     "6147938269": {
       "first_name": "𝑺𝒂𝒓𝒂 ♡ 🎀",
