@@ -5927,7 +5927,7 @@
       "first_name": "MOHAMMED",
       "full_name": "MOHAMMED",
       "multiplier": 1,
-      "message_count": 110
+      "message_count": 111
     },
     "1821459326": {
       "username": "ham236za",
@@ -5948,7 +5948,7 @@
       "first_name": "𝐉𝐀𝐍𝐀 .𐙚",
       "full_name": "𝐉𝐀𝐍𝐀 .𐙚",
       "multiplier": 1,
-      "message_count": 237
+      "message_count": 244
     },
     "7502792655": {
       "username": "laved_17",
@@ -6021,11 +6021,11 @@
       "message_count": 2
     },
     "6868820029": {
-      "username": "Amrosaber123",
       "first_name": "Amr",
+      "last_name": "Saber",
       "full_name": "Amr Saber",
-      "multiplier": 1,
-      "message_count": 62
+      "username": "Amrosaber123",
+      "multiplier": 1
     },
     "8972732814": {
       "username": "N00RX_2010",
@@ -6230,7 +6230,8 @@
       "last_name": null,
       "full_name": "♡ 𝓙𝓪𝓷𝓪 ♡",
       "username": "ja_na1_15",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 2
     }
   }
 }
