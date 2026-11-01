@@ -6259,11 +6259,11 @@
       "message_count": 172
     },
     "8522518010": {
-      "username": null,
       "first_name": "Ok",
+      "last_name": null,
       "full_name": "Ok",
-      "multiplier": 1,
-      "message_count": 1
+      "username": null,
+      "multiplier": 1
     }
   }
 }
