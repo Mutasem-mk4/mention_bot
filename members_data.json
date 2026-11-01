@@ -5927,7 +5927,7 @@
       "first_name": "MOHAMMED",
       "full_name": "MOHAMMED",
       "multiplier": 1,
-      "message_count": 111
+      "message_count": 117
     },
     "1821459326": {
       "username": "ham236za",
@@ -5941,14 +5941,14 @@
       "first_name": "ɹǝɯo",
       "full_name": "ɹǝɯo",
       "multiplier": 1,
-      "message_count": 407
+      "message_count": 418
     },
     "8919450226": {
       "username": "idk8872",
       "first_name": "𝐉𝐀𝐍𝐀 .𐙚",
       "full_name": "𝐉𝐀𝐍𝐀 .𐙚",
       "multiplier": 1,
-      "message_count": 251
+      "message_count": 253
     },
     "7502792655": {
       "username": "laved_17",
@@ -5962,7 +5962,7 @@
       "first_name": "Hossam",
       "full_name": "Hossam",
       "multiplier": 1,
-      "message_count": 22
+      "message_count": 34
     },
     "5460688266": {
       "username": "Ahmedhany555",
@@ -6026,14 +6026,15 @@
       "full_name": "Amr Saber",
       "username": "Amrosaber123",
       "multiplier": 1,
-      "message_count": 32
+      "message_count": 51
     },
     "8972732814": {
       "first_name": "N",
       "last_name": null,
       "full_name": "N",
       "username": "N00RX_2010",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 21
     },
     "6892686721": {
       "username": "M7mdHsn",
@@ -6202,7 +6203,7 @@
       "first_name": "يوسف يحيى",
       "full_name": "يوسف يحيى",
       "multiplier": 1,
-      "message_count": 7
+      "message_count": 15
     },
     "8214848336": {
       "username": "i498r",
@@ -6232,14 +6233,22 @@
       "full_name": "♡ 𝓙𝓪𝓷𝓪 ♡",
       "username": "ja_na1_15",
       "multiplier": 1,
-      "message_count": 39
+      "message_count": 40
     },
     "8825643247": {
       "first_name": "Ahmed",
       "last_name": "Alaa",
       "full_name": "Ahmed Alaa",
       "username": "knightwing3",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 41
+    },
+    "8467686889": {
+      "username": "OMARSHAMS2010",
+      "first_name": "omar",
+      "full_name": "omar shams",
+      "multiplier": 1,
+      "message_count": 1
     }
   }
 }
