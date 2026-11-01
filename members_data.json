@@ -6186,7 +6186,8 @@
       "last_name": null,
       "full_name": "'",
       "username": "Mondyy_123",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 3
     },
     "8758807090": {
       "username": "PRIME_MOGHAZY",
@@ -6200,12 +6201,19 @@
       "first_name": "يوسف يحيى",
       "full_name": "يوسف يحيى",
       "multiplier": 1,
-      "message_count": 6
+      "message_count": 7
     },
     "8214848336": {
       "username": "i498r",
       "first_name": "-",
       "full_name": "-",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8979335214": {
+      "username": "Jevara1924",
+      "first_name": "جيفارا",
+      "full_name": "جيفارا",
       "multiplier": 1,
       "message_count": 1
     }
