@@ -6032,7 +6032,8 @@
       "last_name": "Hussein",
       "full_name": "Ahmed Hussein",
       "username": "Ahmed8hz",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 2
     },
     "8825160033": {
       "username": "Ahmed243995",
@@ -6428,6 +6429,13 @@
       "full_name": "𝕾𝖆𝖗𝖆",
       "multiplier": 1,
       "message_count": 6
+    },
+    "8363459068": {
+      "username": "A_67_y",
+      "first_name": "عاصم",
+      "full_name": "عاصم",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1002035539585": {
