@@ -6047,7 +6047,7 @@
       "full_name": "Hossam",
       "username": "hossam_109",
       "multiplier": 1,
-      "message_count": 61
+      "message_count": 62
     },
     "5460688266": {
       "username": "Ahmedhany555",
@@ -6084,7 +6084,7 @@
       "first_name": "ŠØVΞRΞÏǤ₦",
       "full_name": "ŠØVΞRΞÏǤ₦",
       "multiplier": 1,
-      "message_count": 491
+      "message_count": 492
     },
     "6519189171": {
       "first_name": "F.A.R.O.U.N .",
@@ -6129,7 +6129,7 @@
       "first_name": "مستر",
       "full_name": "مستر حمامه",
       "multiplier": 1,
-      "message_count": 171
+      "message_count": 172
     },
     "8859025162": {
       "first_name": "Mal وحش الكنافه🔥",
@@ -6137,7 +6137,7 @@
       "full_name": "Mal وحش الكنافه🔥",
       "username": "mxl1by",
       "multiplier": 1,
-      "message_count": 932
+      "message_count": 933
     },
     "8227129692": {
       "username": "Mika_Mahmoud",
@@ -6233,11 +6233,11 @@
       "message_count": 9
     },
     "5464598795": {
-      "username": "no2ta6767",
       "first_name": "نوءطه",
+      "last_name": null,
       "full_name": "نوءطه",
-      "multiplier": 1,
-      "message_count": 23
+      "username": "no2ta6767",
+      "multiplier": 1
     },
     "7949137349": {
       "username": "zeyadamrali",
@@ -6354,7 +6354,8 @@
       "last_name": null,
       "full_name": "Ok",
       "username": "Okayok111",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 2
     },
     "5235994571": {
       "username": "maro1f",
