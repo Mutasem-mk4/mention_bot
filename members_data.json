@@ -6018,14 +6018,14 @@
       "first_name": "MOHAMMED",
       "full_name": "MOHAMMED",
       "multiplier": 1,
-      "message_count": 770
+      "message_count": 768
     },
     "1821459326": {
       "username": "ham236za",
       "first_name": "ᕼᗩᗰᘔᗩ",
       "full_name": "ᕼᗩᗰᘔᗩ",
       "multiplier": 1,
-      "message_count": 1146
+      "message_count": 1147
     },
     "7679058216": {
       "username": "omer432009",
@@ -6054,7 +6054,7 @@
       "full_name": "Hossam",
       "username": "hossam_109",
       "multiplier": 1,
-      "message_count": 507
+      "message_count": 508
     },
     "5460688266": {
       "username": "Ahmedhany555",
@@ -6068,7 +6068,7 @@
       "first_name": "~Ammar~",
       "full_name": "~Ammar~",
       "multiplier": 1,
-      "message_count": 821
+      "message_count": 820
     },
     "5842295247": {
       "first_name": "Eyad",
@@ -6649,11 +6649,11 @@
       "message_count": 16
     },
     "8569827331": {
-      "first_name": "دكتور",
-      "last_name": "حمامه",
-      "full_name": "دكتور حمامه",
       "username": null,
-      "multiplier": 1
+      "first_name": "دكتور",
+      "full_name": "دكتور حمامه",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1002035539585": {
