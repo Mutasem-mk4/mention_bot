@@ -5807,11 +5807,11 @@
       "message_count": 6
     },
     "8589477928": {
-      "username": "mary_muhd",
       "first_name": "مَرْيَم مُحَمَّد",
+      "last_name": null,
       "full_name": "مَرْيَم مُحَمَّد",
-      "multiplier": 1,
-      "message_count": 1
+      "username": "mary_muhd",
+      "multiplier": 1
     }
   },
   "-1004499622799": {
