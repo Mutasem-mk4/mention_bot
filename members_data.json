@@ -5734,7 +5734,7 @@
       "first_name": "آلاء",
       "full_name": "آلاء",
       "multiplier": 1,
-      "message_count": 81
+      "message_count": 82
     },
     "7276985828": {
       "first_name": "Fatima",
@@ -5829,11 +5829,11 @@
       "message_count": 1
     },
     "8326758688": {
-      "username": "maro_sf",
       "first_name": "مَاري",
+      "last_name": null,
       "full_name": "مَاري",
-      "multiplier": 1,
-      "message_count": 1
+      "username": "maro_sf",
+      "multiplier": 1
     },
     "5807141346": {
       "first_name": "Youssif",
