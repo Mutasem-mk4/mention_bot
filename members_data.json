@@ -1952,7 +1952,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 2268
+      "message_count": 2269
     },
     "1333248443": {
       "username": "i_bullet",
@@ -2928,6 +2928,13 @@
       "last_name": null,
       "full_name": "off",
       "username": "hz_hzzx",
+      "multiplier": 1
+    },
+    "7832003013": {
+      "first_name": "لُجين",
+      "last_name": null,
+      "full_name": "لُجين",
+      "username": "lujenawadi",
       "multiplier": 1
     }
   },
