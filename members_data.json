@@ -1179,7 +1179,7 @@
       "first_name": "جُــود",
       "full_name": "جُــود",
       "multiplier": 1,
-      "message_count": 20
+      "message_count": 21
     },
     "username_ola": {
       "username": "Ola",
@@ -1362,6 +1362,13 @@
       "last_name": "Aqil",
       "full_name": "Sadeen Aqil",
       "username": null,
+      "multiplier": 1
+    },
+    "7832003013": {
+      "first_name": "لُجَين",
+      "last_name": null,
+      "full_name": "لُجَين",
+      "username": "lujen_awadi",
       "multiplier": 1
     }
   },
