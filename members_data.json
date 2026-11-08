@@ -7253,7 +7253,7 @@
       "first_name": "سَــيــف",
       "full_name": "سَــيــف",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 8
     },
     "8612086221": {
       "first_name": "𝐍𝐚𝐝𝐚 𐙚 𝐉𝐚𝐧𝐚",
@@ -7296,6 +7296,13 @@
       "full_name": "M",
       "username": "meme32124",
       "multiplier": 1
+    },
+    "7527825482": {
+      "username": null,
+      "first_name": "Hoor",
+      "full_name": "Hoor Elafifi",
+      "multiplier": 1,
+      "message_count": 1
     }
   }
 }
