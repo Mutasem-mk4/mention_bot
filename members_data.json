@@ -5678,10 +5678,6 @@
       "multiplier": 1,
       "message_count": 800
     },
-    "username_narssc": {
-      "username": "narssc",
-      "multiplier": 1
-    },
     "8648304417": {
       "username": "afrfll",
       "first_name": "أفراح",
@@ -5878,7 +5874,7 @@
       "full_name": "нα𝚒∂αяү",
       "username": "rvrtx",
       "multiplier": 1,
-      "message_count": 138
+      "message_count": 139
     },
     "8230434173": {
       "first_name": "𝓁𝒶𝓎𝓁𝒶🎀",
@@ -5893,6 +5889,13 @@
       "full_name": "إسْرَاء إلاعِرچي'",
       "username": "esraa8l",
       "multiplier": 1
+    },
+    "7948997144": {
+      "username": "narssc",
+      "first_name": "رمح الاستوري",
+      "full_name": "رمح الاستوري",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1004499622799": {
