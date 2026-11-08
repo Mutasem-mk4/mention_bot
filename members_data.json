@@ -7253,7 +7253,7 @@
       "first_name": "سَــيــف",
       "full_name": "سَــيــف",
       "multiplier": 1,
-      "message_count": 8
+      "message_count": 17
     },
     "8612086221": {
       "first_name": "𝐍𝐚𝐝𝐚 𐙚 𝐉𝐚𝐧𝐚",
@@ -7303,6 +7303,13 @@
       "full_name": "Hoor Elafifi",
       "username": null,
       "multiplier": 1
+    },
+    "8461339209": {
+      "username": null,
+      "first_name": "𝓳𝓪𝓷𝓪🥀",
+      "full_name": "𝓳𝓪𝓷𝓪🥀",
+      "multiplier": 1,
+      "message_count": 1
     }
   }
 }
