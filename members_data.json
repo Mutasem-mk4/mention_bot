@@ -7254,7 +7254,7 @@
       "first_name": "سَــيــف",
       "full_name": "سَــيــف",
       "multiplier": 1,
-      "message_count": 17
+      "message_count": 18
     },
     "8612086221": {
       "first_name": "𝐍𝐚𝐝𝐚 𐙚 𝐉𝐚𝐧𝐚",
@@ -7311,6 +7311,13 @@
       "full_name": "𝓳𝓪𝓷𝓪🥀",
       "username": null,
       "multiplier": 1
+    },
+    "8919450226": {
+      "username": null,
+      "first_name": ".",
+      "full_name": ".",
+      "multiplier": 1,
+      "message_count": 1
     }
   }
 }
