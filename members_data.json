@@ -6116,7 +6116,7 @@
       "first_name": "MOHAMMED",
       "full_name": "MOHAMMED",
       "multiplier": 1,
-      "message_count": 2575
+      "message_count": 2587
     },
     "1821459326": {
       "first_name": "ℍ𝕒𝕞𝕫𝕒",
@@ -6148,7 +6148,7 @@
       "full_name": "دعواتكم بال💯",
       "username": "laved_17",
       "multiplier": 1,
-      "message_count": 90
+      "message_count": 94
     },
     "5162952228": {
       "first_name": "Hossam",
@@ -6178,7 +6178,8 @@
       "last_name": null,
       "full_name": "Eyad",
       "username": "D_eyadd",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 3
     },
     "8259165413": {
       "first_name": "Ahmed",
@@ -6224,7 +6225,7 @@
       "full_name": "Amr Saber",
       "username": "Amrosaber123",
       "multiplier": 1,
-      "message_count": 14
+      "message_count": 24
     },
     "8972732814": {
       "first_name": "N",
@@ -6467,7 +6468,7 @@
       "full_name": "𝑺𝒂𝒓𝒂 ♡ 💗",
       "username": "Dr_Sara_2027",
       "multiplier": 1,
-      "message_count": 47
+      "message_count": 60
     },
     "8522518010": {
       "first_name": "Ok",
@@ -6623,7 +6624,7 @@
       "full_name": "𝑴𝒐𝒉𝒂𝒎𝒆𝒅𓋹",
       "username": "miiv70",
       "multiplier": 1,
-      "message_count": 640
+      "message_count": 643
     },
     "7872533579": {
       "username": "Braziliaee",
@@ -6675,7 +6676,7 @@
       "full_name": "𝒜",
       "username": "A7799o",
       "multiplier": 1,
-      "message_count": 777
+      "message_count": 791
     },
     "8534623450": {
       "username": "j12_dr",
@@ -6765,7 +6766,7 @@
       "full_name": "مستر حمامه",
       "username": "Bnhvjjgbj",
       "multiplier": 1,
-      "message_count": 21
+      "message_count": 23
     },
     "1707891792": {
       "first_name": "ًًًًً",
@@ -7160,6 +7161,13 @@
       "last_name": "Tamer",
       "full_name": "Zyad Tamer",
       "username": null,
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8799906061": {
+      "username": null,
+      "first_name": "Dr🩺",
+      "full_name": "Dr🩺",
       "multiplier": 1,
       "message_count": 1
     }
