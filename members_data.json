@@ -7351,7 +7351,7 @@
       "first_name": "سَــيــف",
       "full_name": "سَــيــف",
       "multiplier": 1,
-      "message_count": 18
+      "message_count": 21
     },
     "8612086221": {
       "first_name": "𝐍𝐚𝐝𝐚 𐙚 𝐉𝐚𝐧𝐚",
@@ -7421,7 +7421,7 @@
       "first_name": "Lara",
       "full_name": "Lara",
       "multiplier": 1,
-      "message_count": 31
+      "message_count": 33
     },
     "6076617778": {
       "first_name": "🤍..",
@@ -7435,7 +7435,8 @@
       "last_name": "Almhna",
       "full_name": "Bader Almhna",
       "username": "u8r_80",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 1
     },
     "534221059": {
       "first_name": "ahmad alotibi",
@@ -7577,7 +7578,8 @@
       "last_name": null,
       "full_name": "Yazeed",
       "username": null,
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 2
     },
     "8264236964": {
       "first_name": "''",
@@ -7626,7 +7628,7 @@
       "first_name": "عثمان العنزي",
       "full_name": "عثمان العنزي",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 4
     },
     "5963144023": {
       "first_name": "Renad",
@@ -7634,6 +7636,13 @@
       "full_name": "Renad",
       "username": "liiilxxli",
       "multiplier": 1
+    },
+    "6183962177": {
+      "username": null,
+      "first_name": "Moaz",
+      "full_name": "Moaz Salem",
+      "multiplier": 1,
+      "message_count": 1
     }
   }
 }
