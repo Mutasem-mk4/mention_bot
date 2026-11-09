@@ -7422,7 +7422,7 @@
       "first_name": "Lara",
       "full_name": "Lara",
       "multiplier": 1,
-      "message_count": 10
+      "message_count": 11
     },
     "6076617778": {
       "first_name": "🤍..",
@@ -7487,6 +7487,13 @@
       "full_name": "L",
       "multiplier": 1,
       "message_count": 1
+    },
+    "7869592325": {
+      "first_name": "Habiba Mohammed",
+      "last_name": null,
+      "full_name": "Habiba Mohammed",
+      "username": null,
+      "multiplier": 1
     }
   }
 }
