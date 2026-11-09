@@ -6151,7 +6151,7 @@
       "first_name": "MOHAMMED",
       "full_name": "MOHAMMED",
       "multiplier": 1,
-      "message_count": 2708
+      "message_count": 2712
     },
     "1821459326": {
       "first_name": "ℍ𝕒𝕞𝕫𝕒",
@@ -6763,7 +6763,7 @@
       "full_name": "Mustafa",
       "username": "Mstafasuil",
       "multiplier": 1,
-      "message_count": 87
+      "message_count": 90
     },
     "8848663108": {
       "first_name": "𝙀𝙡 3𝙖𝙬𝙖𝙙𝙮",
@@ -7227,6 +7227,13 @@
       "last_name": null,
       "full_name": "𓂀 𝓜𝓸𝓱𝓪𝓶𝓶𝓮𝓭 𓂀",
       "username": "moh_11s",
+      "multiplier": 1
+    },
+    "1890825415": {
+      "first_name": "عمرو",
+      "last_name": "حسنين",
+      "full_name": "عمرو حسنين",
+      "username": null,
       "multiplier": 1
     }
   },
