@@ -7420,7 +7420,7 @@
       "first_name": "Lara",
       "full_name": "Lara",
       "multiplier": 1,
-      "message_count": 8
+      "message_count": 10
     },
     "6076617778": {
       "first_name": "🤍..",
@@ -7455,7 +7455,8 @@
       "last_name": "🇯🇴☝️",
       "full_name": "shahed jar🌻 🇯🇴☝️",
       "username": "shoshojar",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 2
     },
     "7631065501": {
       "first_name": "✧Fatima⁦ AL_Khalifah*⁠♡✧⁩",
@@ -7477,6 +7478,13 @@
       "full_name": "أثير",
       "username": "onlyberlyyy",
       "multiplier": 1
+    },
+    "6819813551": {
+      "username": "laammaarrrr",
+      "first_name": "L",
+      "full_name": "L",
+      "multiplier": 1,
+      "message_count": 1
     }
   }
 }
