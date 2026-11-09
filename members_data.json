@@ -7420,7 +7420,7 @@
       "first_name": "Lara",
       "full_name": "Lara",
       "multiplier": 1,
-      "message_count": 7
+      "message_count": 8
     },
     "6076617778": {
       "first_name": "🤍..",
@@ -7469,6 +7469,13 @@
       "last_name": null,
       "full_name": "Siba",
       "username": null,
+      "multiplier": 1
+    },
+    "6784324609": {
+      "first_name": "أثير",
+      "last_name": null,
+      "full_name": "أثير",
+      "username": "onlyberlyyy",
       "multiplier": 1
     }
   }
