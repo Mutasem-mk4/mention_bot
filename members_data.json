@@ -7421,7 +7421,7 @@
       "first_name": "Lara",
       "full_name": "Lara",
       "multiplier": 1,
-      "message_count": 11
+      "message_count": 12
     },
     "6076617778": {
       "first_name": "🤍..",
@@ -7499,6 +7499,13 @@
       "last_name": "حمادنه",
       "full_name": "سـاره حمادنه",
       "username": "Silr_h4",
+      "multiplier": 1
+    },
+    "5039284247": {
+      "first_name": "Dema",
+      "last_name": null,
+      "full_name": "Dema",
+      "username": null,
       "multiplier": 1
     }
   }
