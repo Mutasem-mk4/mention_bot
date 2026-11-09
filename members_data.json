@@ -7726,14 +7726,14 @@
       "first_name": "~Ammar~",
       "full_name": "~Ammar~",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "9297146376": {
       "username": "sherlockholmes1712",
       "first_name": "Sherlock",
       "full_name": "Sherlock Holmes🇪🇬",
       "multiplier": 1,
-      "message_count": 27
+      "message_count": 34
     },
     "8082231145": {
       "username": null,
@@ -7781,6 +7781,13 @@
       "username": "rahaff1_1",
       "first_name": "رَهَفْ",
       "full_name": "رَهَفْ",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8290180293": {
+      "username": "MYllty",
+      "first_name": "مُحَمَّدْ",
+      "full_name": "مُحَمَّدْ",
       "multiplier": 1,
       "message_count": 1
     }
