@@ -7421,7 +7421,7 @@
       "first_name": "Lara",
       "full_name": "Lara",
       "multiplier": 1,
-      "message_count": 13
+      "message_count": 14
     },
     "6076617778": {
       "first_name": "🤍..",
@@ -7512,6 +7512,13 @@
       "first_name": "Moha",
       "last_name": "A",
       "full_name": "Moha A",
+      "username": null,
+      "multiplier": 1
+    },
+    "1168944381": {
+      "first_name": "أم يزن",
+      "last_name": null,
+      "full_name": "أم يزن",
       "username": null,
       "multiplier": 1
     }
