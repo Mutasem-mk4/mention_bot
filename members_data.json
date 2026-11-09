@@ -6151,7 +6151,7 @@
       "first_name": "MOHAMMED",
       "full_name": "MOHAMMED",
       "multiplier": 1,
-      "message_count": 2712
+      "message_count": 2713
     },
     "1821459326": {
       "first_name": "ℍ𝕒𝕞𝕫𝕒",
@@ -7234,6 +7234,13 @@
       "last_name": "حسنين",
       "full_name": "عمرو حسنين",
       "username": null,
+      "multiplier": 1
+    },
+    "7128622762": {
+      "first_name": "فنجان",
+      "last_name": null,
+      "full_name": "فنجان",
+      "username": "ibr10him",
       "multiplier": 1
     }
   },
