@@ -7420,7 +7420,7 @@
       "first_name": "Lara",
       "full_name": "Lara",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 5
     },
     "6076617778": {
       "first_name": "🤍..",
@@ -7448,6 +7448,13 @@
       "last_name": null,
       "full_name": "D",
       "username": "iovtlyy",
+      "multiplier": 1
+    },
+    "8312554445": {
+      "first_name": "shahed jar🌻",
+      "last_name": "🇯🇴☝️",
+      "full_name": "shahed jar🌻 🇯🇴☝️",
+      "username": "shoshojar",
       "multiplier": 1
     }
   }
