@@ -6151,7 +6151,7 @@
       "first_name": "MOHAMMED",
       "full_name": "MOHAMMED",
       "multiplier": 1,
-      "message_count": 2716
+      "message_count": 2718
     },
     "1821459326": {
       "first_name": "ℍ𝕒𝕞𝕫𝕒",
@@ -6321,7 +6321,7 @@
       "full_name": "lina",
       "username": "Lil_1212",
       "multiplier": 1,
-      "message_count": 171
+      "message_count": 172
     },
     "7745924650": {
       "first_name": "الهئ🌹",
@@ -6344,7 +6344,7 @@
       "full_name": "𝓜𝓸𝓱𝓪𝓶𝓮𝓭 ¹⁰⁰ 🩺",
       "username": "Dr_Mmmm",
       "multiplier": 1,
-      "message_count": 65
+      "message_count": 67
     },
     "6635244788": {
       "first_name": "المئ🌹",
@@ -7261,6 +7261,13 @@
       "first_name": "K",
       "last_name": null,
       "full_name": "K",
+      "username": null,
+      "multiplier": 1
+    },
+    "1981433252": {
+      "first_name": "Sh",
+      "last_name": null,
+      "full_name": "Sh",
       "username": null,
       "multiplier": 1
     }
