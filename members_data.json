@@ -1167,7 +1167,7 @@
       "first_name": "Awsmalaysheh",
       "full_name": "Awsmalaysheh",
       "multiplier": 1,
-      "message_count": 14
+      "message_count": 15
     },
     "5605394680": {
       "username": "Fatheallak",
@@ -1390,6 +1390,13 @@
       "last_name": null,
       "full_name": "لُجَين",
       "username": "lujen_awadi",
+      "multiplier": 1
+    },
+    "8788127133": {
+      "first_name": "J",
+      "last_name": ".khaled",
+      "full_name": "J .khaled",
+      "username": null,
       "multiplier": 1
     }
   },
