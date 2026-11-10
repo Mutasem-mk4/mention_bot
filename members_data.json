@@ -7230,7 +7230,7 @@
       "first_name": "Lara",
       "full_name": "Lara",
       "multiplier": 1,
-      "message_count": 126
+      "message_count": 127
     },
     "6076617778": {
       "first_name": "🤍..",
@@ -7602,6 +7602,13 @@
       "username": "Dr_M016",
       "first_name": "𝐃𝐫",
       "full_name": "𝐃𝐫",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5133236858": {
+      "username": null,
+      "first_name": "غنى",
+      "full_name": "غنى",
       "multiplier": 1,
       "message_count": 1
     }
