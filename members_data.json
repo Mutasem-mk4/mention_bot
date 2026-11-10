@@ -7885,7 +7885,7 @@
       "first_name": "_O-M-A-R_",
       "full_name": "_O-M-A-R_",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 5
     },
     "7178680180": {
       "first_name": "𝒜",
@@ -7963,6 +7963,13 @@
       "last_name": null,
       "full_name": "𝑨bdelrahman",
       "username": "abdo_dvd",
+      "multiplier": 1
+    },
+    "6161085219": {
+      "first_name": "MOAAZ",
+      "last_name": null,
+      "full_name": "MOAAZ",
+      "username": "moaaz23_23",
       "multiplier": 1
     }
   }
