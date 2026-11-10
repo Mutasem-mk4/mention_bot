@@ -7684,7 +7684,8 @@
       "last_name": null,
       "full_name": "Fares",
       "username": "jhxxjknv",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 1
     },
     "6246377720": {
       "first_name": "slash971",
@@ -7818,6 +7819,13 @@
       "full_name": "Abdulrhman",
       "multiplier": 1,
       "message_count": 1
+    },
+    "8951552873": {
+      "first_name": "3bod",
+      "last_name": null,
+      "full_name": "3bod",
+      "username": null,
+      "multiplier": 1
     }
   },
   "-1002809673929": {
