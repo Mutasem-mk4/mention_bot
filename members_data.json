@@ -7898,7 +7898,8 @@
       "last_name": null,
       "full_name": "Fares",
       "username": "jhxxjknv",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 1
     },
     "6246377720": {
       "first_name": "slash971",
@@ -7933,6 +7934,13 @@
       "last_name": null,
       "full_name": "𝐀𝐡𝐦𝐞𝐝",
       "username": "Ahmed202777",
+      "multiplier": 1
+    },
+    "8313851857": {
+      "first_name": "Fares",
+      "last_name": null,
+      "full_name": "Fares",
+      "username": "Faris10018",
       "multiplier": 1
     }
   }
