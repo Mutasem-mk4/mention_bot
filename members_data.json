@@ -7706,7 +7706,7 @@
       "first_name": "MOHAMMED",
       "full_name": "MOHAMMED",
       "multiplier": 1,
-      "message_count": 6
+      "message_count": 7
     },
     "6954472314": {
       "first_name": "Fares",
@@ -7819,7 +7819,8 @@
       "last_name": null,
       "full_name": "مستر حمامه",
       "username": "Bnhvjjgbj",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 1
     },
     "6159681126": {
       "first_name": "ادعولي اقفل.",
@@ -7952,6 +7953,13 @@
       "last_name": null,
       "full_name": "𝑱𝒖𝒍𝒊𝒂 𝑴𝒖𝒔𝒊𝒄 ♪",
       "username": "Solsoll1",
+      "multiplier": 1
+    },
+    "6892686721": {
+      "first_name": "محمد",
+      "last_name": "حسن",
+      "full_name": "محمد حسن",
+      "username": "M7mdHsn",
       "multiplier": 1
     }
   },
