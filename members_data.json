@@ -3001,7 +3001,7 @@
       "first_name": "Eng.Razan",
       "full_name": "Eng.Razan Nimer",
       "multiplier": 1,
-      "message_count": 5
+      "message_count": 8
     },
     "5592390194": {
       "username": "hashem_al_dwekat",
@@ -3015,7 +3015,7 @@
       "first_name": "Batool",
       "full_name": "Batool Alsawalha",
       "multiplier": 1,
-      "message_count": 9
+      "message_count": 11
     },
     "6389363574": {
       "username": null,
@@ -3028,6 +3028,13 @@
       "username": "maisam_2004",
       "first_name": "Maisam",
       "full_name": "Maisam",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5821447675": {
+      "username": "joodk3",
+      "first_name": "جُــود",
+      "full_name": "جُــود",
       "multiplier": 1,
       "message_count": 1
     }
