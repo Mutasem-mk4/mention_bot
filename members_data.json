@@ -7686,7 +7686,7 @@
       "first_name": "MOHAMMED",
       "full_name": "MOHAMMED",
       "multiplier": 1,
-      "message_count": 4
+      "message_count": 5
     },
     "6954472314": {
       "first_name": "Fares",
@@ -7876,6 +7876,13 @@
       "last_name": null,
       "full_name": "Maro",
       "username": "maro1f",
+      "multiplier": 1
+    },
+    "7124357802": {
+      "first_name": "Ammar",
+      "last_name": null,
+      "full_name": "Ammar",
+      "username": null,
       "multiplier": 1
     }
   },
