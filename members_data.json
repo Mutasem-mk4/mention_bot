@@ -5700,7 +5700,7 @@
       "full_name": "مَرْيَم مُحَمَّد",
       "username": "mary_muhd",
       "multiplier": 1,
-      "message_count": 89
+      "message_count": 91
     },
     "8326758688": {
       "first_name": "مَاري",
@@ -5798,7 +5798,15 @@
       "last_name": "Nīng",
       "full_name": "Líng Nīng",
       "username": "concxxn",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "7734107880": {
+      "username": null,
+      "first_name": "yasser",
+      "full_name": "yasser yasser",
+      "multiplier": 1,
+      "message_count": 1
     }
   },
   "-1004499622799": {
