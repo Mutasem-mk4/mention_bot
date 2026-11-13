@@ -8338,7 +8338,7 @@
       "first_name": "مُحَــمَّد بـَـكْــر",
       "full_name": "مُحَــمَّد بـَـكْــر ︎سَــحْـلُــوْل",
       "multiplier": 1,
-      "message_count": 11
+      "message_count": 13
     },
     "8753100681": {
       "username": "NjM0077",
@@ -8366,12 +8366,26 @@
       "first_name": "𝐒𝐀𝐑𝐀",
       "full_name": "𝐒𝐀𝐑𝐀",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "5625448640": {
       "username": "K_Q184",
       "first_name": "Karam",
       "full_name": "Karam Qassem",
+      "multiplier": 1,
+      "message_count": 2
+    },
+    "5038924206": {
+      "username": "BaraaShakko",
+      "first_name": "Baraa",
+      "full_name": "Baraa Shakko",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "1081870083": {
+      "username": "rama_mokdad",
+      "first_name": "Rama Almokdad",
+      "full_name": "Rama Almokdad",
       "multiplier": 1,
       "message_count": 1
     }
