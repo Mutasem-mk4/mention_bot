@@ -7400,7 +7400,8 @@
       "last_name": null,
       "full_name": "M",
       "username": "meme32124",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 1
     },
     "7527825482": {
       "first_name": "Hoor",
@@ -7746,7 +7747,7 @@
       "first_name": "رَهَفْ",
       "full_name": "رَهَفْ",
       "multiplier": 1,
-      "message_count": 363
+      "message_count": 365
     },
     "8290180293": {
       "username": "MYllty",
@@ -7767,7 +7768,7 @@
       "first_name": "🌷",
       "full_name": "🌷",
       "multiplier": 1,
-      "message_count": 78
+      "message_count": 80
     },
     "7232206438": {
       "username": null,
@@ -8018,6 +8019,13 @@
       "username": "Jevara1924",
       "first_name": "جيفارا",
       "full_name": "جيفارا",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "8893765435": {
+      "username": "i3dnan_34",
+      "first_name": "عدنان",
+      "full_name": "عدنان",
       "multiplier": 1,
       "message_count": 1
     }
