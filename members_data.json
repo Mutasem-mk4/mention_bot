@@ -8373,7 +8373,7 @@
       "first_name": "Karam",
       "full_name": "Karam Qassem",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 4
     },
     "5038924206": {
       "username": "BaraaShakko",
@@ -8407,6 +8407,13 @@
       "username": "Sarah_alshammat",
       "first_name": "𝑆𝑎𝑟𝑎ℎ 𝐴𝑙𝑠ℎ𝑎𝑚𝑚𝑎𝑡",
       "full_name": "𝑆𝑎𝑟𝑎ℎ 𝐴𝑙𝑠ℎ𝑎𝑚𝑚𝑎𝑡",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5660464377": {
+      "username": "Adnanbe0801",
+      "first_name": "Adnan Albendakji",
+      "full_name": "Adnan Albendakji",
       "multiplier": 1,
       "message_count": 1
     }
