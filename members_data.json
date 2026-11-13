@@ -3015,14 +3015,14 @@
       "first_name": "Batool",
       "full_name": "Batool Alsawalha",
       "multiplier": 1,
-      "message_count": 65
+      "message_count": 84
     },
     "6389363574": {
       "username": null,
       "first_name": "Maya",
       "full_name": "Maya Tayfour",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 4
     },
     "910490489": {
       "username": "maisam_2004",
@@ -3043,7 +3043,7 @@
       "first_name": "layan",
       "full_name": "layan Al_alwan",
       "multiplier": 1,
-      "message_count": 32
+      "message_count": 44
     },
     "1872682753": {
       "username": "aishaiibrahiim",
@@ -3077,6 +3077,13 @@
       "username": null,
       "first_name": "Yara",
       "full_name": "Yara Hammad",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "6552337666": {
+      "username": null,
+      "first_name": "Sedal",
+      "full_name": "Sedal Al Manaseer",
       "multiplier": 1,
       "message_count": 1
     }
