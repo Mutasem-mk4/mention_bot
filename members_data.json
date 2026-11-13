@@ -2980,7 +2980,7 @@
       "first_name": "Awsmalaysheh",
       "full_name": "Awsmalaysheh",
       "multiplier": 1,
-      "message_count": 20
+      "message_count": 21
     },
     "5125017835": {
       "username": "a7md3bdullah",
@@ -3008,7 +3008,7 @@
       "first_name": "هاشِم",
       "full_name": "هاشِم الْدُويكات",
       "multiplier": 1,
-      "message_count": 18
+      "message_count": 23
     },
     "8439771115": {
       "username": null,
@@ -3043,7 +3043,7 @@
       "first_name": "layan",
       "full_name": "layan Al_alwan",
       "multiplier": 1,
-      "message_count": 31
+      "message_count": 32
     },
     "1872682753": {
       "username": "aishaiibrahiim",
@@ -3056,6 +3056,13 @@
       "username": null,
       "first_name": "malek",
       "full_name": "malek abuhijleh",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "7726721630": {
+      "username": null,
+      "first_name": "Yara",
+      "full_name": "Yara Altalleh",
       "multiplier": 1,
       "message_count": 1
     }
