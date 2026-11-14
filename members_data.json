@@ -1031,7 +1031,7 @@
       "first_name": "Ola Rahhal",
       "full_name": "Ola Rahhal",
       "multiplier": 1,
-      "message_count": 36
+      "message_count": 40
     },
     "username_baraa": {
       "username": "Baraa",
@@ -1063,7 +1063,7 @@
       "first_name": "هاشِم",
       "full_name": "هاشِم الْدُويكات",
       "multiplier": 1,
-      "message_count": 9
+      "message_count": 10
     },
     "username_ibrahim_sabbah": {
       "username": "ibrahim_sabbah",
@@ -1234,7 +1234,7 @@
       "first_name": "Sedal",
       "full_name": "Sedal Al Manaseer",
       "multiplier": 1,
-      "message_count": 2
+      "message_count": 3
     },
     "7994117047": {
       "first_name": "Laila",
@@ -1361,8 +1361,9 @@
       "first_name": "𝓝𝓪𝓽𝓪𝓵𝔂🌷",
       "last_name": null,
       "full_name": "𝓝𝓪𝓽𝓪𝓵𝔂🌷",
-      "username": "Naty_768",
-      "multiplier": 1
+      "username": null,
+      "multiplier": 1,
+      "message_count": 1
     },
     "8436896475": {
       "first_name": "Mayar",
