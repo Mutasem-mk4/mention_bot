@@ -8765,14 +8765,14 @@
       "first_name": "﴿ مُحَمد عَلي ﴾",
       "full_name": "﴿ مُحَمد عَلي ﴾",
       "multiplier": 1,
-      "message_count": 72
+      "message_count": 122
     },
     "1608166083": {
       "username": "hs1_k0",
       "first_name": "𝐻𝐔𝑆𝑆𝐸𝐼𝑁.",
       "full_name": "𝐻𝐔𝑆𝑆𝐸𝐼𝑁.",
       "multiplier": 1,
-      "message_count": 42
+      "message_count": 53
     },
     "5452659755": {
       "username": "z16rr",
@@ -8786,7 +8786,8 @@
       "last_name": null,
       "full_name": "𝐇𝐅",
       "username": "xyyaas",
-      "multiplier": 1
+      "multiplier": 1,
+      "message_count": 9
     }
   }
 }
