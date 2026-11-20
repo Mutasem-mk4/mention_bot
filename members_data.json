@@ -5056,7 +5056,7 @@
       "first_name": "الزهراء قاسة",
       "full_name": "الزهراء قاسة",
       "multiplier": 1,
-      "message_count": 1
+      "message_count": 3
     },
     "8390521544": {
       "username": null,
@@ -5083,6 +5083,13 @@
       "username": null,
       "first_name": "Bougerra",
       "full_name": "Bougerra Assil 57",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "6885552497": {
+      "username": null,
+      "first_name": "Souzi",
+      "full_name": "Souzi Souzi",
       "multiplier": 1,
       "message_count": 1
     }
