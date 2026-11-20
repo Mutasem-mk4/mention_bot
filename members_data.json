@@ -5049,7 +5049,7 @@
       "first_name": "Habiba",
       "full_name": "Habiba Bouguerra",
       "multiplier": 1,
-      "message_count": 3
+      "message_count": 4
     },
     "6102735903": {
       "username": null,
@@ -5090,6 +5090,13 @@
       "username": null,
       "first_name": "Souzi",
       "full_name": "Souzi Souzi",
+      "multiplier": 1,
+      "message_count": 1
+    },
+    "5721024849": {
+      "username": "Fghhjkc",
+      "first_name": "وداد",
+      "full_name": "وداد بوقرة",
       "multiplier": 1,
       "message_count": 1
     }
