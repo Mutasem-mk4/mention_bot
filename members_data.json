@@ -8600,11 +8600,11 @@
       "multiplier": 1
     },
     "2107270856": {
-      "username": "u_nada",
       "first_name": "نَدَىٰ",
+      "last_name": null,
       "full_name": "نَدَىٰ",
-      "multiplier": 1,
-      "message_count": 1
+      "username": "u_nada",
+      "multiplier": 1
     }
   },
   "-1002809673929": {
